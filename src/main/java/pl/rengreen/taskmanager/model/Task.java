@@ -39,10 +39,10 @@ public class Task {
     }
 
     public Task(@NotEmpty String name,
-                @NotEmpty @Size(max = 1200) String description,
-                @NotNull LocalDate date,
-                boolean isCompleted,
-                String creatorName) {
+            @NotEmpty @Size(max = 1200) String description,
+            @NotNull LocalDate date,
+            boolean isCompleted,
+            String creatorName) {
         this.name = name;
         this.description = description;
         this.date = date;
@@ -51,11 +51,11 @@ public class Task {
     }
 
     public Task(@NotEmpty String name,
-                @NotEmpty @Size(max = 1200) String description,
-                @NotNull LocalDate date,
-                boolean isCompleted,
-                String creatorName,
-                User owner) {
+            @NotEmpty @Size(max = 1200) String description,
+            @NotNull LocalDate date,
+            boolean isCompleted,
+            String creatorName,
+            User owner) {
         this.name = name;
         this.description = description;
         this.date = date;
@@ -122,8 +122,10 @@ public class Task {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Task task = (Task) o;
         return isCompleted == task.isCompleted &&
                 Objects.equals(id, task.id) &&

@@ -31,9 +31,7 @@ public class User {
     private List<Task> tasksOwned;
 
     @ManyToMany(cascade = CascadeType.MERGE)
-    @JoinTable(name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles;
 
     public List<Task> getTasksCompleted() {
@@ -57,9 +55,9 @@ public class User {
     }
 
     public User(@Email @NotEmpty String email,
-                @NotEmpty String name,
-                @NotEmpty @Length(min = 5) String password,
-                String photo) {
+            @NotEmpty String name,
+            @NotEmpty @Length(min = 5) String password,
+            String photo) {
         this.email = email;
         this.name = name;
         this.password = password;
@@ -67,11 +65,11 @@ public class User {
     }
 
     public User(@Email @NotEmpty String email,
-                @NotEmpty String name,
-                @NotEmpty @Length(min = 5) String password,
-                String photo,
-                List<Task> tasksOwned,
-                List<Role> roles) {
+            @NotEmpty String name,
+            @NotEmpty @Length(min = 5) String password,
+            String photo,
+            List<Task> tasksOwned,
+            List<Role> roles) {
         this.email = email;
         this.name = name;
         this.password = password;
@@ -138,8 +136,10 @@ public class User {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         User user = (User) o;
         return Objects.equals(id, user.id) &&
                 email.equals(user.email) &&
