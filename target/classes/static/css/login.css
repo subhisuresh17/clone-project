@@ -1,8 +1,9 @@
 body {
-    background-image: linear-gradient(to top right, #3f51b5, #e91e63);
-    min-height: 100vh;
+    background-color: white;
+    height: 100vh;
     margin: 0;
     font-family: 'Secular One', sans-serif;
+    overflow: hidden;
   }
   h1{
     margin: 0;
@@ -17,14 +18,16 @@ body {
   }
   
   .main-container {
+    /* margin-top:100px; */
     display: flex;
     width: 70%;
-    height: 700px;
+    height: 600px;
     min-height: 80vh;
     background-color: white;
-    margin: 10vh auto;
+    margin: 7vh auto;
     border-radius: 12px;
     box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.5);
+    /* margin-top: 10px; */
   }
   
   .main-container .hidden{
@@ -195,3 +198,5 @@ body {
       left: 5%;
     }
   }
+
+ 

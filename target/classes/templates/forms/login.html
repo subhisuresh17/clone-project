@@ -3,28 +3,47 @@
   <head>
     <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
     <title>Login</title>
-    <link rel="stylesheet" th:href="@{/css/login.css}">
+    <link rel="stylesheet" th:href="@{/css/login.css}" />
   </head>
   <body>
     <div class="alert alert-danger" th:if="${param.error}">
       <h2>Invalid Email or Password</h2>
     </div>
     <div class="main-container">
-        <div id="log-in" class="left-container log-in">
-          <h1>So let's log in</h1>
-          <div style="width: 100%;">
-            <form th:action="@{/login}" method="post" class="signup-form">
-              <input type="email" id="email" placeholder="E-mail" name="username">
-              <input type="password" id="password" placeholder="Password" name="password">
-              <button type="submit" value="Submit" id="submit" class="button log-in-btn">Login</button>
-            </form>
-          </div>
-          <div class="login-link-container">
-            <p class="login-link"><a href="/register">Don't have an account? Click here!</a></p>
-          </div>
+      <div id="log-in" class="left-container log-in">
+        <h1>So let's log in</h1>
+        <div style="width: 100%">
+          <form th:action="@{/login}" method="post" class="signup-form">
+            <input
+              type="email"
+              id="email"
+              placeholder="E-mail"
+              name="username"
+            />
+            <input
+              type="password"
+              id="password"
+              placeholder="Password"
+              name="password"
+            />
+            <button
+              type="submit"
+              value="Submit"
+              id="submit"
+              class="button log-in-btn"
+            >
+              Login
+            </button>
+          </form>
         </div>
-  
-        <div class="right-container"></div>
+        <div class="login-link-container">
+          <p class="login-link">
+            <a href="/register">Don't have an account? Click here!</a>
+          </p>
+        </div>
       </div>
+
+      <div class="right-container"></div>
+    </div>
   </body>
 </html>
