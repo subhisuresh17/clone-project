@@ -1,54 +1,67 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      lang="en">
+<html lang="en" xmlns:th="http://www.thymeLeaf.org">
 <head>
-    <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
-    <title>Task Manager</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/landing.css}">
+    <title>Document</title>
 </head>
-
+    <script th:src="@{/js/landing.js}"></script>
 <body>
-<header>
-    <!--/*/ <th:block th:include="fragments/header :: header('home')"></th:block> /*/-->
-</header>
+    
+    <section class="home">
+       
+      <div class="description">
+        <span class="Signup button"><a href="/register">Sign Up</a></span>
+        <span class="login button"><a href="/login">Login</a></span>
 
-<main class="container">
-    <h1 class="display-4">Welcome to Task Manager</h1>
-    <p class="lead">This application will help you get stuff done</p>
+        <h1 class="title">
+          <span class="gradient-text">Welcome to ProCollab: Elevate Your Project Experience</span>
+        </h1>
+        <p class="paragraph">
+            Experience the power of unified project planning and execution.
+            Join a community of professionals and elevate your project management game with ProCollab.
+        </p>
+        <form id="form">
+          <button  type="submit" class="btn" aria-label="submit">
+            <a href="/register">Register</a>
+            <ion-icon name="arrow-forward-outline"></ion-icon>
+          </button>
+          <button  type="submit" class="btn" aria-label="submit">
+            <a href="/login">Login</a>
+            <ion-icon name="arrow-forward-outline"></ion-icon>
+          </button>
+        </form>
+      </div>
 
-    <hr class="my-4">
-    <p>Most features require logging in. Not authorized users have access to the welcome screen and login or registration panel.</p>
+      <div class="users-color-container">
+        <span class="item" style="--i: 1"></span>
+        <img
+          class="item"
+          src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/274f29ce-0d3f-4ac2-a2aa-f9b7bd188b2a"
+          style="--i: 2"
+          alt="" />
+        <span class="item" style="--i: 3"></span>
+        <img
+          class="item"
+          src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/b8a14493-3d9f-4b9b-b93a-56d0bc7243e9"
+          style="--i: 4"
+          alt="" />
 
-    <p>Admin (manager) can:</p>
-    <ul>
-        <li>Create task and assign task to any user</li>
-        <li>View list of all users with possibility to delete user</li>
-        <li>View list of all tasks with editing or deleting task</li>
-    </ul>
-        <p>Common user (employee) can:</p>
-    <ul>
-        <li>Create task only for himself</li>
-        <li>View list of all users with no action allowed</li>
-        <li>View list of all tasks but edit or delete only tasks for which he is responsible</li>
-    </ul>
+        <img
+          class="item"
+          src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/03e51e1e-9750-45a5-b75e-a1e341d4562a"
+          style="--i: 10"
+          alt="" />
+        <span class="item" style="--i: 11"></span>
+        <img class="item" src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/5eb50f89-3e5a-480e-860c-8d40d3ba9ffe" style="--i: 12" alt="" />
+        <span class="item" style="--i: 5"></span>
 
-    <p>Every authorized user can:</p>
-    <ul>
-        <li>View his own profile</li>
-        <li>Switch task as completed/uncompleted</li>
-
-    </ul>
-
-    <h2 class="my-second-header">Test users:</h2>
-    <ul>
-        <li>manager@mail.com, password: 112233</li>
-        <li>ann@mail.com, password: 112233</li>
-        <li>mark@mail.com, password: 112233</li>
-    </ul>
-</main>
-
-<footer class="footer">
-    <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
-</footer>
-
-</body>
+        <span class="item" style="--i: 9"></span>
+        <img class="item" src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/86c71a79-2efe-4567-8665-b1e5a1fd9735" style="--i: 8" alt="" />
+        <span class="item" style="--i: 7"></span>
+        <img class="item" src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/97ef9643-5202-41aa-80f0-ceeabccdd099" style="--i: 6" alt="" />
+      </div>
+    </section>
+  </body>
 </html>

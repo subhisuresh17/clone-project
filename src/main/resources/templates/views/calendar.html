@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang='en' xmlns:th="http://www.thymeLeaf.org">
+  <head>
+        <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+    <meta charset='utf-8' />
+    <link rel="stylesheet" th:href="@{/css/calendar.css}">
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                
+                editable: true,
+                selectable: true,
+                select: function (info) {
+                    var title = prompt('Enter a task:');
+                    if (title) {
+                        calendar.addEvent({
+                            title: title,
+                            start: info.startStr,
+                            end: info.endStr,
+                            allDay: info.allDay
+                        });
+                    }
+                    calendar.unselect();
+                },
+                eventMouseEnter: function (info) {
+                    console.log('Mouse entered event:', info.event);
+                    info.el.classList.add('hover');
+                },
+                eventMouseLeave: function (info) {
+                    console.log('Mouse left event:', info.event);
+                    info.el.classList.remove('hover');
+                },
+                events: [
+                    {
+                        title: 'Meeting',
+                        start: '2024-02-15T10:00:00',
+                        end: '2024-02-15T11:00:00'
+                    },
+                    {
+                        title: 'Conference',
+                        start: '2024-02-17',
+                        end: '2024-02-18'
+                    }
+                    // Add more events as needed
+                ],
+                contentHeight: 'auto', // Adjust height automatically based on available space
+            });
+            
+            // Render the calendar
+            calendar.render();
+        
+            // Set a margin-top for the calendar to create space between the navbar and the calendar
+            // Adjust the value according to the height of your navbar
+            // For example, if your navbar has a height of 50px, you can set margin-top to 60px
+            calendarEl.style.marginTop = '75px';
+        });
+        
+    </script>
+  </head>
+  <body>
+    <header>
+        <!--/*/ <th:block th:include="fragments/header :: header('profile')"></th:block> /*/-->
+    </header>
+    <div id='calendar' class="calendar"></div>
+  </body>
+</html>

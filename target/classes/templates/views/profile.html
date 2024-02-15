@@ -10,23 +10,9 @@
   </head>
   <link rel="stylesheet" th:href="@{/css/profile.css}" />
   <body>
-    <div class="navbar-top">
-      <div class="title">
-        <h1>Profile</h1>
-      </div>
-
-      <!-- Navbar -->
-      <ul>
-        <li>
-          <a href="">
-            <i class="fa fa-sign-out-alt fa-2x"></i>
-          </a>
-        </li>
-      </ul>
-      <!-- End -->
-    </div>
-    <!-- End -->
-
+    <header>
+      <!--/*/ <th:block th:include="fragments/header :: header('profile')"></th:block> /*/-->
+  </header>
     <!-- Sidenav -->
     <div class="sidenav">
       <div class="profile">
@@ -92,31 +78,6 @@
           </table>
         </div>
       </div>
-
-      <!-- Modal -->
-      <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">
-                &times;
-              </button>
-              <h4 class="modal-title">Row information</h4>
-            </div>
-            <div class="modal-body"></div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-default"
-                data-dismiss="modal"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
     <div class="my-container">
       <h5 class="heading" th:text="${user.name}+' Task List:'">T</h5>
@@ -163,7 +124,7 @@
             </td>
 
             <td>
-              <button type="button" class="btn btn-primary btn-xs dt-edit" style="margin-right:16px;">
+              <button class="info-button"><img class="infoimg" src="/images/icons8-info.svg" alt=""></button>
             </td>
           </tr>
 

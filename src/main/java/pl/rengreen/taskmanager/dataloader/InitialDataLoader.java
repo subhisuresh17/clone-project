@@ -19,7 +19,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @Component
-// @ConditionalOnProperty(name = "load.initial.data", havingValue = "true")
+@ConditionalOnProperty(name = "load.initial.data", havingValue = "true")
 public class InitialDataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
         private UserService userService;

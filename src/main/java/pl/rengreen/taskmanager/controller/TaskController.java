@@ -36,13 +36,15 @@ public class TaskController {
     }
 
     @GetMapping("/tasks/in-progress")
-    public String listTasksInProgress(Model model, Principal principal, SecurityContextHolderAwareRequestWrapper request) {
+    public String listTasksInProgress(Model model, Principal principal,
+            SecurityContextHolderAwareRequestWrapper request) {
         prepareTasksListModel(model, principal, request);
         model.addAttribute("onlyInProgress", true);
         return "views/tasks";
     }
 
-    private void prepareTasksListModel(Model model, Principal principal, SecurityContextHolderAwareRequestWrapper request) {
+    private void prepareTasksListModel(Model model, Principal principal,
+            SecurityContextHolderAwareRequestWrapper request) {
         String email = principal.getName();
         User signedUser = userService.getUserByEmail(email);
         boolean isAdminSigned = request.isUserInRole("ROLE_ADMIN");
@@ -55,7 +57,8 @@ public class TaskController {
     }
 
     @GetMapping("/task/create")
-    public String showEmptyTaskForm(Model model, Principal principal, SecurityContextHolderAwareRequestWrapper request) {
+    public String showEmptyTaskForm(Model model, Principal principal,
+            SecurityContextHolderAwareRequestWrapper request) {
         String email = principal.getName();
         User user = userService.getUserByEmail(email);
 
