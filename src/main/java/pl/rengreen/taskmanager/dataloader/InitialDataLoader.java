@@ -19,7 +19,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @Component
-@ConditionalOnProperty(name = "load.initial.data", havingValue = "true")
+// @ConditionalOnProperty(name = "load.initial.data", havingValue = "true")
 public class InitialDataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
         private UserService userService;
@@ -44,8 +44,20 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
                 this.roleService = roleService;
         }
 
+        private boolean dataAlreadyLoaded() {
+                return userService.countUsers() > 0 || taskService.countTasks() > 0 || roleService.countRole() > 0;
+        }
+
         @Override
         public void onApplicationEvent(ContextRefreshedEvent event) {
+                if (!dataAlreadyLoaded()) {
+                        loadInitialData();
+                } else {
+                        logger.info("Initial data has already been loaded.");
+                }
+        }
+
+        public void loadInitialData() {
 
                 // ROLES
                 // --------------------------------------------------------------------------------------------------------

@@ -2,6 +2,23 @@
     margin-top: 150px;
 }
 .hover {
-    background-color: #ae4545;
+    background-color: #11813c;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+.fc-daygrid-event-harness{
+    /* width: 200%; */
+    height: 75px;
+    
+}
+.fc-content{
+    /* width: 200%; */
+    height: 75px;
+    display: flexbox;
+    align-items: center;
+    justify-content: center;
+}
+.fc-title{
+    display: flexbox;
+    align-items: center;
+    justify-content: center;
 }

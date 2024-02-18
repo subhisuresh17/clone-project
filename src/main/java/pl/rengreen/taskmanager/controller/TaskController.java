@@ -8,6 +8,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import pl.rengreen.taskmanager.model.Task;
 import pl.rengreen.taskmanager.model.User;
 import pl.rengreen.taskmanager.service.TaskService;

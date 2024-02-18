@@ -87,6 +87,26 @@ body {
     width: 300px;
     z-index: 1;
     border-radius: 5%;
+    overflow: hidden;
+}
+
+.sidenav::-webkit-scrollbar {
+    width: 0.5px; /* Set the width of the scrollbar */
+}
+
+/* Track */
+.sidenav::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Set the color of the track */
+}
+
+/* Handle */
+.sidenav::-webkit-scrollbar-thumb {
+    background: #fffcfc; /* Set the color of the scrollbar handle */
+}
+
+/* Handle on hover */
+.sidenav::-webkit-scrollbar-thumb:hover {
+    background: #fffafa; /* Set the color of the scrollbar handle on hover */
 }
 
 .profile {

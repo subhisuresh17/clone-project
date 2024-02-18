@@ -87,4 +87,7 @@ public class TaskServiceImpl implements TaskService {
         taskRepository.save(task);
     }
 
+    public long countTasks() {
+        return taskRepository.count();
+    }
 }

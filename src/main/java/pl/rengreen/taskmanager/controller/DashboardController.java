@@ -11,8 +11,4 @@ public class DashboardController {
         return "views/dashboard";
     }
 
-    @GetMapping("/calendar")
-    public String calendarView() {
-        return "views/calendar";
-    }
 }

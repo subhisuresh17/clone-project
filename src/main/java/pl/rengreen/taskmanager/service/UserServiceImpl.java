@@ -14,20 +14,19 @@ import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService {
-    private static final String ADMIN="ADMIN";
-    private static final String USER="USER";
+    private static final String ADMIN = "ADMIN";
+    private static final String USER = "USER";
 
     private UserRepository userRepository;
     private TaskRepository taskRepository;
     private RoleRepository roleRepository;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-
     @Autowired
     public UserServiceImpl(UserRepository userRepository,
-                           TaskRepository taskRepository,
-                           RoleRepository roleRepository,
-                           BCryptPasswordEncoder bCryptPasswordEncoder) {
+            TaskRepository taskRepository,
+            RoleRepository roleRepository,
+            BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
         this.taskRepository = taskRepository;
         this.roleRepository = roleRepository;
@@ -76,5 +75,8 @@ public class UserServiceImpl implements UserService {
         userRepository.delete(user);
     }
 
-}
+    public long countUsers() {
+        return userRepository.count();
+    }
 
+}
