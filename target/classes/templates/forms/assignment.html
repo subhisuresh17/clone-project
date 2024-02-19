@@ -5,6 +5,41 @@
 <head>
     <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
     <title>Assign Tasks</title>
+     <style>
+        /* Style for search bar */
+        #searchInput {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: white;
+            background-image: url('search-icon.png');
+            background-position: 10px 10px;
+            background-repeat: no-repeat;
+            padding-left: 40px;
+        }
+        
+    </style>
+    <script>
+        function filterUsers() {
+            var input, filter, users, user, name;
+            input = document.getElementById('searchInput');
+            filter = input.value.toUpperCase();
+            users = document.getElementsByClassName('user');
+            for (var i = 0; i < users.length; i++) {
+                user = users[i];
+                name = user.getElementsByClassName('card-title')[0];
+                if (name.innerText.toUpperCase().indexOf(filter) > -1) {
+                    user.style.display = '';
+                } else {
+                    user.style.display = 'none';
+                }
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -14,11 +49,6 @@
 </header>
 
 <main class="container">
-    <div class="row search-bar">
-        <div class="col-md-6 offset-md-3">
-            <input class="form-control" type="search" placeholder="Search users by name" aria-label="Search" id="search-input" onkeyup="searchUsers()">
-        </div>
-    </div>
     
     <div class="card mb-3">
         <div class="card-header">
@@ -28,9 +58,13 @@
         <div class="card-body">
 
             <h2 class="my-second-header">Choose user</h2>
+            
+            <!-- Add the search input field -->
+            <input type="text" id="searchInput" onkeyup="filterUsers()" placeholder="Search for user..">
 
             <div class="card-deck">
-                <div th:each="user: ${users}" class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+                <!-- Add class 'user' to each user element -->
+                <div th:each="user: ${users}" class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 user">
                     <a th:href="'/assignment/' + ${user.id}" class="text-decoration-none text-dark">
                         <div class="card h-100">
                             <div class="row no-gutters">
@@ -52,7 +86,7 @@
                 </div>
             </div>
             
-            
+            <!-- Rest of your HTML -->
             <hr class="my-4">
 
             <h2 class="my-second-header" th:if="${selectedUser==null}">No user is selected</h2>
@@ -167,7 +201,6 @@
                 </div>
 
             </div>
-
         </div>
     </div>
 </main>
@@ -177,24 +210,5 @@
 
 <!--remain scroll position after redirect-->
 <script src="js/main.js"></script>
-<script>
-    function searchUsers() {
-        var input, filter, cards, card, userName, i, txtValue;
-        input = document.getElementById('search-input');
-        filter = input.value.toUpperCase();
-        cards = document.getElementsByClassName('card');
-
-        for (i = 0; i < cards.length; i++) {
-            card = cards[i];
-            userName = card.getElementsByClassName('card-title')[0];
-            txtValue = userName.textContent || userName.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                card.style.display = "";
-            } else {
-                card.style.display = "none";
-            }
-        }
-    }
-</script>
 </body>
 </html>

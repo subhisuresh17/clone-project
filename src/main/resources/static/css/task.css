@@ -8,8 +8,8 @@
     font-size: 16px;
     font-family: 'Poppins', sans-serif;
     font-weight: 400;
-    color: #5684ee;
-    background: linear-gradient(0deg, rgba(176, 195, 234, .2) 0%, #ffffff 100%);
+    /* color: #5684ee; */
+    /* background: linear-gradient(0deg, rgba(176, 195, 234, .2) 0%, #ffffff 100%); */
     /* background-color: blue; */
   }
   
@@ -26,23 +26,27 @@
     border-radius: 3px;
     transition: border .3s linear;
     display: block;
-    width: 100%;
+    width: 10%;
   }
   
   input:focus {
     border-color: rgba(86, 132, 238, .7);
   }
 
-  
+  .button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   
   h1 {
     font-size: 1rem;
-    color: #5684ee;
+    color: white;
     font-weight: 600;
     text-align: center;
   }
   .task-title{
-    background: linear-gradient(0deg, rgba(176, 195, 234, .2) 0%, #ffffff 100%);
+    background: rgb(86, 80, 80);
   
   }
   .title-container{
@@ -54,5 +58,4 @@
     background-color: white;
     box-shadow: 1px 1px 25px rgba(86, 132, 238, .3);
     /* border-radius: 5%; */
-    
   }

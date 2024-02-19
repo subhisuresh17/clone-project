@@ -20,4 +20,6 @@ public interface UserService {
     void deleteUser(Long id);
 
     long countUsers();
+
+    void updateProfilePic(User user, String picUrl);
 }

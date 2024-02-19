@@ -79,4 +79,10 @@ public class UserServiceImpl implements UserService {
         return userRepository.count();
     }
 
+    @Override
+    public void updateProfilePic(User user, String picUrl) {
+        user.setPhoto(picUrl);
+        userRepository.save(user);
+    }
+
 }
