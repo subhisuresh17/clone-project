@@ -62,6 +62,7 @@ public class ProfileController {
     public ResponseEntity<String> updateProfilePicture(Principal principal, @RequestBody String picUrl) {
         String email = principal.getName();
         User user = userService.getUserByEmail(email);
+        picUrl = picUrl.replace("\"", ""); // Replace quotes with an empty string
         userService.updateProfilePic(user, picUrl);
         return ResponseEntity.ok("Profile picture updated successfully");
     }
