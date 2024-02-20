@@ -139,3 +139,104 @@ $(document).ready(function () {
     $(".modal .modal-body").empty();
   });
 });
+
+function openModal() {
+  var modal = document.getElementById("avatarModal");
+  modal.style.display = "block";
+}
+
+// Function to close the modal
+function closeModal() {
+  var modal = document.getElementById("avatarModal");
+  modal.style.display = "none";
+}
+
+var selectedAvatarUrl = "";
+
+// Function to select an avatar
+function selectAvatar(avatarUrl) {
+  // Update the selectedAvatarUrl variable
+  selectedAvatarUrl = avatarUrl;
+  var images = document.getElementsByClassName("avatar");
+  // Remove 'active' class from all images
+  for (var i = 0; i < images.length; i++) {
+    images[i].classList.remove("active");
+  }
+  event.target.classList.add("active");
+  console.log(selectedAvatarUrl);
+}
+function updateProfilePic(picUrl) {
+  var csrfToken = $("meta[name='_csrf']").attr("content");
+  var csrfHeader = $("meta[name='_csrf_header']").attr("content");
+  $.ajax({
+    url: "/profile/profilePicUpdate",
+    type: "POST",
+    contentType: "application/json",
+    beforeSend: function (xhr) {
+      xhr.setRequestHeader(csrfHeader, csrfToken);
+    },
+    data: JSON.stringify(picUrl),
+    success: function (response) {
+      console.log(response);
+      // Handle success, such as displaying a success message
+    },
+    error: function (xhr, status, error) {
+      console.error(xhr.responseText);
+      // Handle error, such as displaying an error message
+    },
+  });
+}
+
+function confirmAvatar() {
+  var modal = document.getElementById("avatarModal");
+  modal.style.display = "none";
+
+  // Check if an avatar is selected
+  if (selectedAvatarUrl) {
+    // Update the profile picture with the selected avatar URL
+    document.getElementById("profilePic").src = selectedAvatarUrl;
+
+    // Call the function to update profile picture in the database
+    updateProfilePic(selectedAvatarUrl);
+
+    // Reset the selectedAvatarUrl variable
+    selectedAvatarUrl = "";
+
+    // Here you can send the selected avatar URL to your backend to update the user's profile picture in the database
+    // For now, let's just log the selected avatar URL
+    console.log("Selected profile picture:", selectedAvatarUrl);
+    // window.location.reload();
+  } else {
+    console.log("No avatar selected.");
+  }
+}
+
+function showModal(button) {
+  var taskId = button.getAttribute("data-taskid");
+  console.log(taskId);
+  // AJAX call to fetch all tasks
+  $.ajax({
+    url: "/calendartasks", // Update the URL to match your endpoint
+    type: "GET",
+    success: function (tasks) {
+      // Filter the tasks based on the provided task ID
+      var task = tasks.find((t) => t.id == taskId);
+      if (task) {
+        // Populate modal with task details
+        $("#taskTitle").text(task.name);
+        $("#taskDescription").text(task.description);
+        $("#taskDate").text(task.date);
+        $("#taskCreator").text(task.creatorName);
+        $("#taskCompleted").text(task.completed ? "Completed" : "In Progress");
+
+        // Show the modal
+        $("#taskModal").modal("show");
+      } else {
+        alert("Task not found");
+      }
+    },
+    error: function () {
+      alert("Failed to fetch tasks");
+    },
+  });
+}
