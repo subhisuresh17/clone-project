@@ -228,12 +228,7 @@ td:last-child {
 
 }
 
-.info-button:hover{
-    width:35px;
-    height: 35px;
-    box-shadow: 1px 1px 2px 0 rgb(30, 28, 28);
 
-}
 
 /* Modal */
 .modal {
@@ -255,7 +250,7 @@ td:last-child {
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    width: 50%; /* Could be more or less, depending on screen size */
   }
   
   /* Close button */
@@ -287,7 +282,7 @@ td:last-child {
   }
   
   /* Confirm button */
-  button {
+ button {
     background-color: #4CAF50;
     color: white;
     padding: 10px 20px;
@@ -295,10 +290,7 @@ td:last-child {
     cursor: pointer;
     border-radius: 5px;
   }
-  
-  button:hover {
-    background-color: #45a049;
-  }
+
   
   /* Avatar options */
 .avatar-options {
@@ -321,3 +313,6 @@ td:last-child {
   .avatar.active {
     border: 2px solid blue; /* Add border to indicate active image */
   }
+.modal-info{
+    width: 80%;
+}

@@ -22,4 +22,6 @@ public interface UserService {
     long countUsers();
 
     void updateProfilePic(User user, String picUrl);
+
+    void updatePassword(User user,String password);
 }

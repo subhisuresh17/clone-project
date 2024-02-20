@@ -2,6 +2,8 @@ package pl.rengreen.taskmanager.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pl.rengreen.taskmanager.model.Task;
 import pl.rengreen.taskmanager.model.TaskDto;
@@ -24,14 +27,16 @@ import java.util.stream.Collectors;
 
 @Controller
 public class ProfileController {
-
+      @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
     private UserService userService;
     private TaskService taskService;
 
     @Autowired
-    public ProfileController(UserService userService, TaskService taskService) {
+    public ProfileController(UserService userService, TaskService taskService,BCryptPasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.taskService = taskService;
+        this.passwordEncoder=passwordEncoder;
     }
 
     @GetMapping("/profile")
@@ -51,7 +56,6 @@ public class ProfileController {
         taskService.setTaskCompleted(taskId);
         return "redirect:/profile";
     }
-
     @GetMapping("/profile/unmark-done/{taskId}")
     public String setTaskNotCompleted(@PathVariable Long taskId) {
         taskService.setTaskNotCompleted(taskId);
@@ -67,7 +71,7 @@ public class ProfileController {
         return ResponseEntity.ok("Profile picture updated successfully");
     }
 
-    @GetMapping("/profile/profileUrl")
+    @GetMapping("/profileUrl")
     public ResponseEntity<String> profilePictureUrl(Principal principal, Model model) {
         String email = principal.getName();
         User user = userService.getUserByEmail(email);
@@ -75,5 +79,24 @@ public class ProfileController {
         model.addAttribute("photoUrl", photoUrl);
         return ResponseEntity.ok(photoUrl);
     }
-
+    @PostMapping("/profile/changeUserPassword")
+    public String changeUserPassword(@RequestParam("oldPassword") String oldPassword,
+                                     @RequestParam("newPassword") String newPassword,
+                                     @RequestParam("confirmPassword") String confirmPassword,
+                                     Principal principal,
+                                     Model model) {
+        String email = principal.getName();
+        User user = userService.getUserByEmail(email);
+        if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
+            model.addAttribute("error", "Old password is incorrect");
+            return "redirect:/changePassword";
+        }
+        if (!newPassword.equals(confirmPassword)) {
+            model.addAttribute("error", "New password and confirm password do not match");
+            return "redirect:/changePassword"; // Redirect to the change password page with error message
+        }
+        userService.updatePassword(user, passwordEncoder.encode(newPassword));
+        return "redirect:/login?Changed_Password"; 
+    }
+    
 }
