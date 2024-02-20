@@ -85,4 +85,10 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    @Override
+    public void updatePassword(User user, String password) {
+        user.setPassword(password);
+        userRepository.save(user);
+    }
+
 }
