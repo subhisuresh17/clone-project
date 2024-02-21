@@ -79,24 +79,6 @@ public class ProfileController {
         model.addAttribute("photoUrl", photoUrl);
         return ResponseEntity.ok(photoUrl);
     }
-    @PostMapping("/profile/changeUserPassword")
-    public String changeUserPassword(@RequestParam("oldPassword") String oldPassword,
-                                     @RequestParam("newPassword") String newPassword,
-                                     @RequestParam("confirmPassword") String confirmPassword,
-                                     Principal principal,
-                                     Model model) {
-        String email = principal.getName();
-        User user = userService.getUserByEmail(email);
-        if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
-            model.addAttribute("error", "Old password is incorrect");
-            return "redirect:/changePassword";
-        }
-        if (!newPassword.equals(confirmPassword)) {
-            model.addAttribute("error", "New password and confirm password do not match");
-            return "redirect:/changePassword"; // Redirect to the change password page with error message
-        }
-        userService.updatePassword(user, passwordEncoder.encode(newPassword));
-        return "redirect:/login?Changed_Password"; 
-    }
+   
     
 }
