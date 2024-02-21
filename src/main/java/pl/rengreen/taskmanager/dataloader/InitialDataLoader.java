@@ -35,7 +35,6 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
         private String defaultAdminPassword;
         @Value("${default.admin.image}")
         private String defaultAdminImage;
-
         @Autowired
         public InitialDataLoader(UserService userService, TaskService taskService, RoleService roleService) {
                 this.userService = userService;
