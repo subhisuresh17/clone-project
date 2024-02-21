@@ -29,8 +29,8 @@ public class User {
     private String photo;
     @OneToMany(mappedBy = "owner", cascade = CascadeType.PERSIST)
     private List<Task> tasksOwned;
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.PERSIST)
-    private List<Notes> notesOwned;
+    @OneToMany(mappedBy = "note_owner", cascade = CascadeType.PERSIST)
+    private List<Note> notesOwned;
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles;
@@ -76,6 +76,21 @@ public class User {
         this.password = password;
         this.photo = photo;
         this.tasksOwned = tasksOwned;
+        this.roles = roles;
+    }
+
+    public User(Long id,
+            @Email(message = "{user.email.not.valid}") @NotEmpty(message = "{user.email.not.empty}") String email,
+            @NotEmpty(message = "{user.name.not.empty}") String name,
+            @NotEmpty(message = "{user.password.not.empty}") @Length(min = 5, message = "{user.password.length}") String password,
+            String photo, List<Task> tasksOwned, List<Note> notesOwned, List<Role> roles) {
+        this.id = id;
+        this.email = email;
+        this.name = name;
+        this.password = password;
+        this.photo = photo;
+        this.tasksOwned = tasksOwned;
+        this.notesOwned = notesOwned;
         this.roles = roles;
     }
 
@@ -154,5 +169,13 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(id, email, name, password, photo, tasksOwned, roles);
+    }
+
+    public List<Note> getNotesOwned() {
+        return notesOwned;
+    }
+
+    public void setNotesOwned(List<Note> notesOwned) {
+        this.notesOwned = notesOwned;
     }
 }

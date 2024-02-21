@@ -36,10 +36,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         protected void configure(HttpSecurity http) throws Exception {
                 http
                                 .authorizeRequests()
-                                .antMatchers("/register", "/", "/login", "/about", "/css/**", "/webjars/**","/changePassword/changeUserPassword")
+                                .antMatchers("/register", "/", "/login", "/about", "/css/**", "/webjars/**",
+                                                "/changePassword/changeUserPassword", "/notes", "/notes/**")
                                 .permitAll()
 
-                                .antMatchers("/profile/**", "/tasks/**", "/task/**", "/users", "/user/**","/changePassword","/changePassword/**",
+                                .antMatchers("/profile/**", "/tasks/**", "/task/**", "/users", "/user/**",
+                                                "/changePassword", "/changePassword/**",
                                                 "/h2-console/**")
                                 .hasAnyRole("USER, ADMIN")
 
@@ -50,13 +52,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                                 .formLogin()
                                 .loginPage("/login")
                                 .permitAll()
-                                .defaultSuccessUrl("/profile",true)
+                                .defaultSuccessUrl("/profile", true)
 
                                 .and()
                                 .logout()
                                 .logoutSuccessUrl("/login");
 
-                http.csrf().ignoringAntMatchers("/h2-console/**");
+                http.csrf().ignoringAntMatchers("/h2-console/**", "/notes/create");
                 http.headers().frameOptions().sameOrigin();
         }
 

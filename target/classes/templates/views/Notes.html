@@ -1,11 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeLeaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>User Notes</title>
+            <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+
 </head>
 <body>
-    <h1>Notes</h1>
+            <!--/*/ <th:block th:include="fragments/header :: header('about')"></th:block> /*/-->
+
+    <h1>User Notes</h1>
+    <ul>
+        <!-- Iterate over notes and display each note -->
+        <li th:each="note : ${notes}">
+            <strong th:text="${note.title}"></strong> - 
+            <span th:text="${note.description}"></span> - 
+            <span th:text="${note.date}"></span>
+        </li>
+    </ul>
+    <a href="/notes/create">Create New Note</a>
+
 </body>
 </html>
