@@ -14,7 +14,6 @@ import pl.rengreen.taskmanager.model.Task;
 import pl.rengreen.taskmanager.service.RoleService;
 import pl.rengreen.taskmanager.service.TaskService;
 import pl.rengreen.taskmanager.service.UserService;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -36,7 +35,6 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
         private String defaultAdminPassword;
         @Value("${default.admin.image}")
         private String defaultAdminImage;
-
         @Autowired
         public InitialDataLoader(UserService userService, TaskService taskService, RoleService roleService) {
                 this.userService = userService;
