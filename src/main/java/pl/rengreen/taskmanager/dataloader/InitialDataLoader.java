@@ -14,7 +14,6 @@ import pl.rengreen.taskmanager.model.Task;
 import pl.rengreen.taskmanager.service.RoleService;
 import pl.rengreen.taskmanager.service.TaskService;
 import pl.rengreen.taskmanager.service.UserService;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
