@@ -56,18 +56,18 @@ button{
   grid-template-columns: 45% 50%;
   place-items: center;
   gap: 50px;
-  background: rgb(67, 69, 112);
+  background: rgb(255, 255, 255);
   background: radial-gradient(
     circle,
-    rgba(67, 69, 112, 1) 3%,
-    rgba(35, 36, 57, 1) 60%
+    rgb(255, 255, 255) 3%,
+    rgb(255, 255, 255) 60%
   );
   overflow: hidden;
   padding: 130px 80px;
 }
 
 .description {
-  color: #fff;
+  color: #3762b9;
   padding: 0 50px;
 }
 
@@ -252,76 +252,6 @@ input[type="email"]:focus {
   }
 }
 
-/* SECTION - CARD CONTAINER */
-
-.card-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 30px;
-  width: 100%;
-  min-height: 100vh;
-  background: rgb(67, 69, 112);
-  background: radial-gradient(
-    circle,
-    rgba(67, 69, 112, 1) 3%,
-    rgba(35, 36, 57, 1) 60%
-  );
-  overflow: hidden;
-  padding: 90px 50px;
-}
-
-.card {
-  max-width: 300px;
-  aspect-ratio: 3/5;
-  border-radius: 15px;
-  margin: 20px;
-  overflow: hidden;
-  border-top: 1px solid rgba(255, 255, 255, 0.7);
-  border-left: 1px solid rgba(255, 255, 255, 0.7);
-  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.5),
-    inset 0px 2px 2px rgba(255, 255, 255, 0.2);
-  cursor: grab;
-}
-
-.content {
-  position: relative;
-  display: grid;
-  place-items: center;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(10, 1fr);
-  padding: 20px;
-  background: rgba(104, 104, 104, 0.5);
-  user-select: none;
-}
-
-.content::before,
-.content::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  border-radius: inherit;
-  background: conic-gradient(
-    from var(--gradient-angle),
-    rgb(109, 186, 22),
-    rgb(30, 119, 95),
-    rgb(55, 141, 167),
-    rgb(59, 91, 174),
-    rgb(144, 118, 236),
-    rgb(59, 91, 174),
-    rgb(55, 141, 167),
-    rgb(30, 119, 95),
-    rgb(109, 186, 22)
-  );
-  animation: rotation 8s linear infinite;
-}
-
-.content::after {
-  filter: blur(30px);
-}
-
 @keyframes rotation {
   0% {
     --gradient-angle: 0deg;
@@ -331,97 +261,7 @@ input[type="email"]:focus {
   }
 }
 
-.content img {
-  aspect-ratio: 3/2;
-  border-radius: 10px;
-  grid-row: 1 / 5;
-  margin-bottom: 20px;
-  user-select: none;
-  object-fit: cover;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
-}
 
-.content h1 {
-  font-size: 1.2rem;
-  color: #fff;
-  text-align: center;
-  grid-row: 5 / 6;
-}
-
-.content p {
-  font-size: 1rem;
-  font-weight: 400;
-  color: #fff;
-  grid-row: 6 / 9;
-}
-
-.btn-grad {
-  background-image: linear-gradient(
-    to right,
-    #ece9e6 0%,
-    #ffffff 51%,
-    #ece9e6 100%
-  );
-  padding: 10px 16px;
-  color: #000;
-  box-shadow: 0 0 5px #eee;
-  outline: 0;
-  font-size: 1rem;
-  font-weight: 400;
-  grid-row: 9 / 10;
-  cursor: pointer;
-  transition: all 0.5s ease-in;
-}
-
-.btn-grad:is(:hover, :focus-visible) {
-  text-decoration: none;
-}
-
-.control {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  list-style: none;
-  gap: 14px;
-}
-
-.control li {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(to bottom, #559b9a, #3b3d8a);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5),
-    inset 0px 4px 4px rgba(255, 255, 255, 0.2);
-  padding: 16px;
-  border-radius: 50%;
-  cursor: pointer;
-  transform: scale(1);
-}
-
-.control li::before {
-  position: absolute;
-  content: "";
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: linear-gradient(to right, #559b9a, #3b3d8a);
-  border-radius: 50%;
-  z-index: -1;
-  transition: all 0.5s ease-in;
-  opacity: 0;
-}
-
-.control li:hover::before {
-  opacity: 1;
-}
-
-.arrow {
-  font-size: 1.5rem;
-  color: #fff;
-}
 
 @media (max-width: 1215px) {
   .description > p {
@@ -515,5 +355,7 @@ input[type="email"]:focus {
   }
 
 }
-
+.button a{
+  color:#6cc164;
+}
 

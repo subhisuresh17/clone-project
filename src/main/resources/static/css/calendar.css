@@ -7,12 +7,12 @@
 }
 .fc-daygrid-event-harness{
     /* width: 200%; */
-    height: 75px;
+    height: 40px;
     
 }
 .fc-content{
     /* width: 200%; */
-    height: 75px;
+    height: 40px;
     display: flexbox;
     align-items: center;
     justify-content: center;
@@ -22,3 +22,34 @@
     align-items: center;
     justify-content: center;
 }
+/* Custom styles for the calendar */
+
+/* Add padding to calendar container */
+#calendar {
+    padding: 10px;
+    margin-top: 0%;
+}
+
+/* Style header toolbar */
+.fc-header-toolbar {
+    background-color: #007bff; /* Set background color */
+    color: #fff; /* Set text color */
+    padding: 10px; /* Add padding */
+    border-radius: 5px; /* Add border radius */
+    margin-bottom: 20px; /* Add margin bottom */
+}
+
+/* Style navigation buttons */
+.fc-header-toolbar button {
+    background-color: transparent;
+    border: none;
+    color: #fff; /* Set button color */
+    cursor: pointer;
+}
+
+/* Style center title */
+.fc-header-toolbar h2 {
+    margin: 0;
+    font-size: 20px; /* Increase font size */
+}
+

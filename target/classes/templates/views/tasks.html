@@ -18,10 +18,10 @@
 
         <h1 class="my-highest-header card-header">Tasks List
             <span th:unless="${onlyInProgress}">
-                <a href="/tasks/in-progress" class="btn btn-outline-info btn-lg float-right">Hide Completed Tasks</a>
+                <a href="/tasks/in-progress" class="btn btn-outline-info btn-sm float-right">Hide Completed Tasks</a>
             </span>
             <span th:if="${onlyInProgress}">
-                <a href="/tasks" class="btn btn-outline-info btn-lg float-right">Show Completed Tasks</a>
+                <a href="/tasks" class="btn btn-outline-info btn-sm float-right">Show Completed Tasks</a>
             </span>
         </h1>
 

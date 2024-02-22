@@ -8,16 +8,18 @@ body {
 .title {
     color: #333;
     text-align: center;
+    margin-top: 37px;
     margin-bottom: 20px;
 }
 
 .note-form {
-    max-width: 500px;
+    width: 1000px;
     margin: 0 auto;
     background-color: #fff;
     border-radius: 5px;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 500px;
 }
 
 .form-label {
@@ -33,10 +35,12 @@ body {
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
+    /* height: inherit; */
 }
 
 .form-textarea {
     resize: vertical;
+    height: 1000px;
 }
 
 .form-button {
@@ -52,4 +56,11 @@ body {
 
 .form-button:hover {
     background-color: #0056b3;
+}
+#editor-container{
+    height: 305px;
+}
+/* Custom CSS for Quill editor */
+.ql-editor pre > code {
+    background-color: #f0f0f0 !important; /* Set the background color to grey */
 }

@@ -74,3 +74,37 @@
     border-radius: 50%; /* Rounded border */
     margin-right: 10px; /* Margin between icon and text */
 }
+/* Style for dropdown items */
+.navbar-nav .dropdown-menu {
+    background-color: #f8f9fa; /* Background color */
+    border: none;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Box shadow for dropdown */
+}
+
+/* Style for dropdown links */
+.navbar-nav .dropdown-menu .dropdown-item {
+    color: #343a40; /* Text color */
+    padding: 10px 20px; /* Padding */
+}
+
+/* Hover effect on dropdown links */
+.navbar-nav .dropdown-menu .dropdown-item:hover {
+    background-color: #e9ecef; /* Hover background color */
+}
+/* Style for dropdown items */
+.navbar-nav .dropdown-menu {
+    background-color: #f8f9fa; /* Background color */
+    border: none;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Box shadow for dropdown */
+}
+
+/* Style for dropdown links */
+.navbar-nav .dropdown-menu .dropdown-item {
+    color: #343a40; /* Text color */
+    padding: 10px 20px; /* Padding */
+}
+
+/* Hover effect on dropdown links */
+.navbar-nav .dropdown-menu .dropdown-item:hover {
+    background-color: #e9ecef; /* Hover background color */
+}
