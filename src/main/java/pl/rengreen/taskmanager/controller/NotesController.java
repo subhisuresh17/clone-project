@@ -67,34 +67,7 @@ public class NotesController {
         }
     }
 
-    // Controller method to display the form for updating a note
-    @GetMapping("/notes/{id}/edit")
-    public String showEditNoteForm(@PathVariable("id") Long id, Model model) {
-        Optional<Note> noteOptional = noteService.getNoteById(id);
-        if (noteOptional.isPresent()) {
-            model.addAttribute("note", noteOptional.get());
-            return "edit-note";
-        } else {
-            return "error"; // or redirect to a different page
-        }
-    }
-
-    // Controller method to handle the submission of the updated note form
-    @PostMapping("/notes/{id}/edit")
-    public String updateNote(@PathVariable("id") Long id, @ModelAttribute("note") Note updatedNote) {
-        Optional<Note> noteOptional = noteService.getNoteById(id);
-        if (noteOptional.isPresent()) {
-            Note note = noteOptional.get();
-            note.setTitle(updatedNote.getTitle());
-            note.setDescription(updatedNote.getDescription());
-            note.setDate(updatedNote.getDate());
-            noteService.updateNote(note);
-            return "redirect:/notes";
-        } else {
-            return "error"; // or redirect to a different page
-        }
-    }
-
+   
     // Controller method to delete a note
     @PostMapping("/notes/{id}/delete")
     public String deleteNote(@PathVariable("id") Long id) {
