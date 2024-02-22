@@ -1,19 +1,25 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.thymeLeaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Note</title>
+                <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+    <link rel="stylesheet" th:href="@{/css/create_notes.css}">
 </head>
 <body>
-    <h1>Create Note</h1>
+    <header>
+        <!--/*/ <th:block th:include="fragments/header :: header('about')"></th:block> /*/-->
+
+</header>
+    <h1 class="title">Create Note</h1>
     <!-- Form to create a new note -->
-    <form action="/notes/create" method="post" th:object="${note}">
-        <label for="title">Title:</label><br>
-        <input type="text" id="title" name="title" th:field="*{title}" required><br>
-        <label for="description">Description:</label><br>
-        <textarea id="description" name="description" rows="4" cols="50" th:field="*{description}" required></textarea><br>
-        <button type="submit">Create Note</button>
+    <form action="/notes/create" method="post" th:object="${note}" class="note-form">
+        <label for="title" class="form-label">Title:</label><br>
+        <input type="text" id="title" name="title" th:field="*{title}" class="form-input" required><br>
+        <label for="description" class="form-label">Description:</label><br>
+        <textarea id="description" name="description" rows="4" cols="50" th:field="*{description}" class="form-textarea" required></textarea><br>
+        <button type="submit" class="form-button">Create Note</button>
     </form>
 </body>
 </html>
