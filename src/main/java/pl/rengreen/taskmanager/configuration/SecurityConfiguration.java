@@ -1,11 +1,13 @@
 package pl.rengreen.taskmanager.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
 
@@ -36,7 +38,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         protected void configure(HttpSecurity http) throws Exception {
                 http
                                 .authorizeRequests()
-                                .antMatchers("/register", "/", "/login", "/about", "/css/**", "/webjars/**")
+                                .antMatchers("/register", "/", "/login", "/about", "/css/**", "/webjars/**",
+                                                "/forgotPassword/**", "/forgot-password/**", "/reset-password/**")
                                 .permitAll()
 
                                 .antMatchers("/profile/**", "/tasks/**", "/task/**", "/users", "/user/**",
@@ -60,7 +63,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                                 .logout()
                                 .logoutSuccessUrl("/login");
 
-                http.csrf().ignoringAntMatchers("/h2-console/**", "/notes/**");
+                http.csrf().ignoringAntMatchers("/h2-console/**", "/notes/**", "/forgot-password", "/reset-password");
                 http.headers().frameOptions().sameOrigin();
         }
 

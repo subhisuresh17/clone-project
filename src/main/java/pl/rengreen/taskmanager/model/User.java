@@ -27,6 +27,7 @@ public class User {
     private String password;
     @Column(columnDefinition = "VARCHAR(255) DEFAULT 'images/user.png'")
     private String photo;
+    private String resetToken;
     @OneToMany(mappedBy = "owner", cascade = CascadeType.PERSIST)
     private List<Task> tasksOwned;
     @OneToMany(mappedBy = "note_owner", cascade = CascadeType.PERSIST)
@@ -187,5 +188,13 @@ public class User {
 
     public void setNotesOwned(List<Note> notesOwned) {
         this.notesOwned = notesOwned;
+    }
+
+    public String getResetToken() {
+        return resetToken;
+    }
+
+    public void setResetToken(String resetToken) {
+        this.resetToken = resetToken;
     }
 }
