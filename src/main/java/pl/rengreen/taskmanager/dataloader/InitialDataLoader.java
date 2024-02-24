@@ -35,6 +35,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
         private String defaultAdminPassword;
         @Value("${default.admin.image}")
         private String defaultAdminImage;
+
         @Autowired
         public InitialDataLoader(UserService userService, TaskService taskService, RoleService roleService) {
                 this.userService = userService;
@@ -59,8 +60,10 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 
                 // ROLES
                 // --------------------------------------------------------------------------------------------------------
+                roleService.createRole(new Role("SUPERADMIN"));
                 roleService.createRole(new Role("ADMIN"));
                 roleService.createRole(new Role("USER"));
+
                 roleService.findAll().stream().map(role -> "saved role: " + role.getRole()).forEach(logger::info);
 
                 // USERS
@@ -72,7 +75,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
                                 defaultAdminPassword,
                                 defaultAdminImage);
                 userService.createUser(admin);
-                userService.changeRoleToAdmin(admin);
+                userService.changeRoleToSuperAdmin(admin);
 
                 // 2
                 User manager = new User(

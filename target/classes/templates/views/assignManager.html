@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <!--/*/ <th:block th:include="fragments/header :: header('about')"></th:block> /*/-->
+    </header>
+
+    
+<main class="container">
+    <div class="card mb-3">
+
+        <h1 class="my-highest-header card-header">Users List</h1>
+
+        <div class="card card-body">
+            <table class="table table-hover text-left">
+
+                <thead class="table-info">
+                <tr>
+                    <th>Name</th>
+                    <th class="d-none d-lg-table-cell">Email</th>
+                    <th>Current Designation</th>
+                    <th class="d-none d-md-table-cell">Make Manager</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="user:${users}">
+
+                    <!--Photo & name-->
+                    <td>
+                        <img th:src="${user.photo}" alt="user photo"
+                             class="embed-responsive embed-responsive-3by4 d-inline my-photo-miniature"/>
+                        <div th:text="${user.name}" class=" d-inline ml-1"></div>
+                    </td>
+
+                    <!--Email-->
+                    <td th:text="${user.email}" class="d-none d-lg-table-cell"></td>
+
+                    <!--Tasks in  progress-->
+                    <td>
+                        <ol class="pl-3">
+                                <span th:text="Employees"></span>
+                        </ol>
+                    </td>
+                    <!-- <td th:if="${user.getTasksInProgress().size()==0}">0</td> -->
+
+                    <!--Tasks completed-->
+                    <td class="d-none d-md-table-cell">
+                        <a data-toggle="modal" 
+                           data-target="#modal-soft-manager"
+                           th:if="${!user.isAdmin()} and ${!user.isSuperAdmin()}"
+                           th:attr="data-target='#modal-soft-manager'+${user.id}"
+                           th:href="${'/superAdmin/makeManager/' + user.id}"
+                           class="btn btn-outline-primary btn-sm">Make Manager</a>
+                        <a data-toggle="modal" 
+                           data-target="#modal-soft-manager"
+                           th:if="${user.isAdmin()}  and ${!user.isSuperAdmin()}"
+                           th:attr="data-target='#modal-soft-removemanager'+${user.id}"
+                           th:href="${'/superAdmin/removeManager/' + user.id}"
+                           class="btn btn-outline-danger btn-sm">Remove Manager</a>
+                    </td>
+                    
+                    <td th:if="${user.isSuperAdmin()}" class="d-none d-md-table-cell">SUPER ADMIN</td>
+
+                    <!--Delete button-->
+                    <td >
+                        <a data-toggle="modal" data-target="#modal-soft-delete"
+                        th:if="${user.isUser()}"
+                           th:attr="data-target='#modal-soft-delete'+${user.id}"
+                           th:href="${'user/delete/' + user.id}"
+                           class="btn btn-outline-danger btn-sm">Delete
+                        </a>
+                    </td>
+                    <td th:if="${isAdminSigned and user.isAdmin()}"></td>
+
+                    <!--modal for delete confirmation-->
+                    <div class="modal" th:id="modal-soft-delete+${user.id }">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title text-danger">Delete Confirmation</h3>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p th:text="${'Are you sure you want to delete user: &nbsp&nbsp'+user.name+'?'}"></p>
+                                    <small>After this action, the tasks will be retained, but without the owner.</small>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
+                                        Cancel
+                                    </button>
+                                    <a th:href="${'/user/delete/' + user.id}">
+                                        <span class="btn btn-danger">Delete</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end of modal for delete confirmation-->
+
+                    
+                    <!--modal for Assign Manager confirmation-->
+                    <div class="modal" th:id="modal-soft-manager+${user.id }">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title text-primary">Assign Manager Confirmation</h3>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p th:text="${'Are you sure you want to Assign Manager role to: &nbsp&nbsp'+user.name+'?'}"></p>
+                                    <small>After this action, the user will become manager</small>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
+                                        Cancel
+                                    </button>
+                                    <a th:href="${'/superAdmin/makeManager/' + user.id}"/>
+                                    <span class="btn btn-success">Assign Manager</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end of modal for Manager confirmation-->
+
+                       <!--modal for Removing Manager confirmation-->
+                       <div class="modal" th:id="modal-soft-removemanager+${user.id }">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title text-primary">Remove Manager Confirmation</h3>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p th:text="${'Are you sure you want to Assign Manager role to: &nbsp&nbsp'+user.name+'?'}"></p>
+                                    <small>After this action, the user will become manager</small>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
+                                        Cancel
+                                    </button>
+                                    <a th:href="${'/superAdmin/removeManager/' + user.id}"/>
+                                    <span class="btn btn-danger">Remove Manager</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end of modal for Removing  Manager confirmation-->
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+</body>
+</html>

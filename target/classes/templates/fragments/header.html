@@ -38,7 +38,8 @@
                       Workspace
                   </a>
                   <div class="dropdown-menu" aria-labelledby="combinedDropdown">
-                    <a class="dropdown-item" href="/assignment" sec:authorize="hasRole('ROLE_ADMIN')">Assign Tasks</a>
+                    <a class="dropdown-item" href="/assignment" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_SUPERADMIN')">Assign Tasks</a>
+                    <a class="dropdown-item" href="/superAdmin/assignManager" sec:authorize="hasRole('ROLE_SUPERADMIN')">Assign Manager</a>
                       <a class="dropdown-item" href="/tasks">Tasks List</a>
                       <a class="dropdown-item" href="/users">Employees List</a>
                       <a class="dropdown-item" href="/calendar">Calendar</a>

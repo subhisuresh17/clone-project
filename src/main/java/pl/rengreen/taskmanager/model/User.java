@@ -52,6 +52,16 @@ public class User {
         return roles.stream().map(Role::getRole).anyMatch(roleName::equals);
     }
 
+    public boolean isUser() {
+        String roleName = "USER";
+        return roles.stream().map(Role::getRole).anyMatch(roleName::equals);
+    }
+
+    public boolean isSuperAdmin() {
+        String roleName = "SUPERADMIN";
+        return roles.stream().map(Role::getRole).anyMatch(roleName::equals);
+    }
+
     public User() {
     }
 

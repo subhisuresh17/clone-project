@@ -14,6 +14,7 @@ import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService {
+    private static final String SUPER_ADMIN = "SUPERADMIN";
     private static final String ADMIN = "ADMIN";
     private static final String USER = "USER";
 
@@ -42,9 +43,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User changeRoleToSuperAdmin(User user) {
+        Role superAdminRole = roleRepository.findByRole(SUPER_ADMIN);
+        user.setRoles(new ArrayList<>(Collections.singletonList(superAdminRole)));
+        return userRepository.save(user);
+    }
+
+    @Override
     public User changeRoleToAdmin(User user) {
         Role adminRole = roleRepository.findByRole(ADMIN);
         user.setRoles(new ArrayList<>(Collections.singletonList(adminRole)));
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User changeRoleToUser(User user) {
+        Role userRole = roleRepository.findByRole(USER);
+        user.setRoles(new ArrayList<>(Collections.singletonList(userRole)));
         return userRepository.save(user);
     }
 

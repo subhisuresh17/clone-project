@@ -9,6 +9,10 @@ public interface UserService {
 
     User changeRoleToAdmin(User user);
 
+    User changeRoleToSuperAdmin(User user);
+
+    User changeRoleToUser(User user);
+
     List<User> findAll();
 
     User getUserByEmail(String email);
@@ -23,5 +27,5 @@ public interface UserService {
 
     void updateProfilePic(User user, String picUrl);
 
-    void updatePassword(User user,String password);
+    void updatePassword(User user, String password);
 }
