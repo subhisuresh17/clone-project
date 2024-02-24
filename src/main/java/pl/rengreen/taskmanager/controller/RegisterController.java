@@ -41,11 +41,11 @@ public class RegisterController {
 
         if (userService.isUserEmailPresent(user.getEmail())) {
             model.addAttribute("exist", true);
-            return "register";
+            return "forms/register"; // Corrected the return value to match the template name
         }
-        
+
         userService.createUser(user);
         return "views/success";
     }
-  
+
 }

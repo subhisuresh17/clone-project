@@ -17,22 +17,22 @@
       <!--/*/ <th:block th:include="fragments/header :: header('profile')"></th:block> /*/-->
   </header>
 <!-- Sidenav -->
+<!-- Sidebar -->
+<div class="container">
 <div class="sidenav">
   <div class="profile">
-      <img id="profilePic" th:src="${photoUrl}" alt="https://e7.pngegg.com/pngimages/442/477/png-clipart-computer-icons-user-profile-avatar-profile-heroes-profile-thumbnail.png" width="100" height="100" />
+    <img id="profilePic" th:src="${photoUrl}" alt="Profile Picture" width="100" height="100" />
+    <div class="info">
       <div class="name" th:text="${user.name}"></div>
-      <div class="job" th:text="${user.email}"></div>
-      <!-- Change Profile Picture Button -->
+      <div class="email" th:text="${user.email}"></div>
+    </div>
+    <div class="buttons">
       <button onclick="openModal()">Change Profile Picture</button>
-      <!-- <button onclick="openPasswordModal()">Change Password</button> -->
-  </div>
-  <div class="sidenav-url">
-      <div class="url">
-          <a href="#profile" class="active">Profile</a>
-          <hr align="center" />
-      </div>
+      <!-- Add additional buttons as needed -->
+    </div>
   </div>
 </div>
+
 <!-- End -->
 
 <!-- Modal for changing profile picture -->
@@ -57,49 +57,55 @@
 </div>
 
 <!-- End Modal -->
-    <!-- Main -->
-    <div class="main">
-      <h2>IDENTITY</h2>
-      <div class="card">
-        <div class="card-body">
-          <i class="fa fa-pen fa-xs edit"></i>
-          <table>
-            <tbody>
-              <tr>
-                <td>Name</td>
-                <td>:</td>
-                <td th:text="${user.name}"></td>
-              </tr>
-              <tr>
-                <td>Email</td>
-                <td>:</td>
-                <td th:text="${user.email}"></td>
-              </tr>
-              <tr>
-                <td>Company</td>
-                <td>:</td>
-                <td>Torry Harris Integration Solutions</td>
-              </tr>
-              <tr>
-                <td>Total Tasks</td>
-                <td>:</td>
-                <td th:text="${#lists.size(tasksOwned)}"></td>
-              </tr>
-              <tr>
-                <td>Task Completed</td>
-                <td>:</td>
-                <td th:text="${#lists.size(tasksOwned.?[completed])}"></td>
-              </tr>
-              <tr>
-                <td>Task Yet to Complete</td>
-                <td>:</td>
-                <td th:text="${#lists.size(tasksOwned.?[not completed])}"></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+ <!-- Main -->
+ <div class="main-container">
+  <h2>IDENTITY</h2>
+  <div class="card">
+    <div class="card-body">
+      <!-- <i class="fa fa-pen fa-xs edit"></i> -->
+      <table>
+        <tbody>
+          <tr>
+            <td >Name</td>
+            <td>:</td>
+            <td th:text="${user.name}" style="text-align: left;"></td>
+          </tr>
+          <tr>
+            <td style="text-align: left;">Email</td>
+            <td>:</td>
+            <td th:text="${user.email}" style="text-align: left;"></td>
+          </tr>
+          <tr>
+            <td style="text-align: left;">Company</td>
+            <td>:</td>
+            <td style="text-align: left;">Torry Harris Integration Solutions</td>
+          </tr>
+          <tr>
+            <td style="text-align: left;">Total Tasks</td>
+            <td>:</td>
+            <td th:text="${#lists.size(tasksOwned)}" style="text-align: left;"></td>
+          </tr>
+          <tr>
+            <td style="text-align: left;">Task Completed</td>
+            <td>:</td>
+            <td th:text="${#lists.size(tasksOwned.?[completed])}" style="text-align: left;"></td>
+          </tr>
+          <tr>
+            <td style="text-align: left;">Task Yet to Complete</td>
+            <td>:</td>
+            <td th:text="${#lists.size(tasksOwned.?[not completed])}" style="text-align: left;"></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+  </div>
+</div>
+
+</div>
+
+
+</div>
+
     <div class="my-container">
       <h5 class="heading" th:text="${user.name}+' Task List:'">T</h5>
       <table

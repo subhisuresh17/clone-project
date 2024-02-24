@@ -316,3 +316,45 @@ td:last-child {
 .modal-info{
     width: 80%;
 }
+
+/* Main container styles */
+.main-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-body {
+    padding: 20px;
+  }
+  
+  /* Table styles */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  table td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .main-container {
+      padding: 10px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .main-container {
+      max-width: 90%;
+    }
+  }
+

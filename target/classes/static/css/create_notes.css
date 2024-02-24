@@ -58,9 +58,68 @@ body {
     background-color: #0056b3;
 }
 #editor-container{
-    height: 305px;
+    height: 245px;
 }
 /* Custom CSS for Quill editor */
 .ql-editor pre > code {
     background-color: #f0f0f0 !important; /* Set the background color to grey */
 }
+
+/* General styles */
+.title {
+    text-align: center;
+    margin-top: 35px;
+  }
+  
+  .note-form {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .form-label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .form-input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
+  
+  .quill-editor {
+    margin-bottom: 20px;
+  }
+  
+  .form-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 3%;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .note-form {
+      padding: 10px;
+    }
+    #editor-container{
+        height: 210px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .note-form {
+      max-width: 90%;
+    }
+    #editor-container{
+        height: 210px;
+    }
+  }
+  

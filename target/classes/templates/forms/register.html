@@ -13,12 +13,12 @@
   <body>
     <div class="alert alert-info" th:if="${exist}">
       <p class="text text-center">User with this email exists</p>
-    </div>
-    <div class="main-container" style="margin: 10vh auto">
+  </div>
+  <div class="main-container" style="margin: 10vh auto">
       <div id="sign-up" class="left-container sign-up">
-        <h1>So let's sign up</h1>
-        <div style="width: 100%">
-          <form
+          <h1>So let's sign up</h1>
+          <div style="width: 100%">
+            <form
             th:action="@{/register}"
             th:object="${user}"
             method="post"
@@ -80,16 +80,16 @@
               Sign Up
             </button>
           </form>
-        </div>
-        <div class="signin-link-container">
-          <p class="signin-link">
-            ALready have an account? <a href="/login">Click here!</a>
-          </p>
-        </div>
+          </div>
+          <div class="signin-link-container">
+              <p class="signin-link">
+                  Already have an account? <a href="/login">Click here!</a>
+              </p>
+          </div>
       </div>
-
+  
       <div class="right-container"></div>
-    </div>
+  </div>
 
     <!--show password when mouse is over eye icon-->
     <script src="js/main.js"></script>
