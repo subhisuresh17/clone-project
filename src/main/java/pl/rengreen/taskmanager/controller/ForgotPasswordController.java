@@ -50,7 +50,7 @@ public class ForgotPasswordController {
 
     @GetMapping("/forgot-password/invalid-token")
     public String invalidToken() {
-        return "form/forgotPassword";
+        return "redirect:/register/invalid-token";
     }
 
     // Handle the form submission to reset password

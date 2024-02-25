@@ -6,53 +6,120 @@
   </head>
   <link rel="stylesheet" th:href="@{/css/error.css}">
   <body>
-   <div>
-    <h2 class="my-second-header" th:if="${status}">
-        <div class="top-margin">
-          <p>> <span th:text="${status}">ERROR CODE:</span></p>
-          <p>
-            > <span>ERROR DESCRIPTION <span th:if="${error}" th:text="'('+${error}+')'">error ...</span></span>: "<i
-              >Access Denied. You Do Not Have The Permission To Access This Page On
-              This Server
-              <h2 class="my-second-header" th:if="${url}">
-                <b>Page:</b> <span th:text="${url}">Page URL</span>
-              </h2>
-              <h4 th:if="${timestamp}" id="created">
-                <b>Occurred:</b> <span th:text="${timestamp}">Timestamp</span>
-              </h4></i
-            >"
-          </p>
-          <p>
-            > <span>ERROR POSSIBLY CAUSED BY</span>: [<b
-              >execute access forbidden, read access forbidden, write access
-              forbidden, ssl required, ssl 128 required, ip address rejected, client
-              certificate required, site access denied, too many users, invalid
-              configuration, password change, mapper denied access, client
-              certificate revoked, directory listing denied, client access licenses
-              exceeded, client certificate is untrusted or invalid, client
-              certificate has expired or is not yet valid, passport logon failed,
-              source access denied, infinite depth is denied, too many requests from
-              the same client ip</b
-            >...]
-          </p>
-          <p>
-            >
-            <span
-              >SOME PAGES ON THIS SERVER THAT YOU DO HAVE PERMISSION TO ACCESS</span
-            >: [<a href="/">Home Page</a>, <a href="/about">About Us</a>,
-            <a href="/login">login page</a>, <a href="/register">Register Page</a>...]
-          </p>
-          <p>> <span>HAVE A NICE DAY  :-)</span></p>
-        </div>
-    
-        <a
-          class="avatar"
-          href="https://codepen.io/leenalavanya/"
-          title="If you liked this pen, don't forget to heart, share and follow ❤"
-          ><img
-            src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/157344/profile/profile-512.jpg?1535437978"
-        /></a>
-   </div>
+    <div class="container">
+      <div class="error">
+          <h1 th:text="${status}">400</h1>
+          <p th:text="'('+${error}+')'">error</p>
+          <p th:text="${timestamp}"></p>
+          
+        </p>
+      </div>
+      <div class="stack-container">
+          <div class="card-container">
+              <div class="perspec" style="--spreaddist: 125px; --scaledist: .75; --vertdist: -25px;">
+                  <div class="card">
+                      <div class="writing">
+                          <div class="topbar">
+                              <div class="red"></div>
+                              <div class="yellow"></div>
+                              <div class="green"></div>
+                          </div>
+                          <div class="code">
+                              <ul>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="card-container">
+              <div class="perspec" style="--spreaddist: 100px; --scaledist: .8; --vertdist: -20px;">
+                  <div class="card">
+                      <div class="writing">
+                          <div class="topbar">
+                              <div class="red"></div>
+                              <div class="yellow"></div>
+                              <div class="green"></div>
+                          </div>
+                          <div class="code">
+                              <ul>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="card-container">
+              <div class="perspec" style="--spreaddist:75px; --scaledist: .85; --vertdist: -15px;">
+                  <div class="card">
+                      <div class="writing">
+                          <div class="topbar">
+                              <div class="red"></div>
+                              <div class="yellow"></div>
+                              <div class="green"></div>
+                          </div>
+                          <div class="code">
+                              <ul>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="card-container">
+              <div class="perspec" style="--spreaddist: 50px; --scaledist: .9; --vertdist: -10px;">
+                  <div class="card">
+                      <div class="writing">
+                          <div class="topbar">
+                              <div class="red"></div>
+                              <div class="yellow"></div>
+                              <div class="green"></div>
+                          </div>
+                          <div class="code">
+                              <ul>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="card-container">
+              <div class="perspec" style="--spreaddist: 25px; --scaledist: .95; --vertdist: -5px;">
+                  <div class="card">
+                      <div class="writing">
+                          <div class="topbar">
+                              <div class="red"></div>
+                              <div class="yellow"></div>
+                              <div class="green"></div>
+                          </div>
+                          <div class="code">
+                              <ul>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="card-container">
+              <div class="perspec" style="--spreaddist: 0px; --scaledist: 1; --vertdist: 0px;">
+                  <div class="card">
+                      <div class="writing">
+                          <div class="topbar">
+                              <div class="red"></div>
+                              <div class="yellow"></div>
+                              <div class="green"></div>
+                          </div>
+                          <div class="code">
+                              <ul>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+  </div>
     <script th:src="@{/js/error.js}"></script>
   </body>
 </html>
