@@ -29,4 +29,7 @@ public interface UserService {
 
     void updatePassword(User user, String password);
 
+    public User getUserByVerificationToken(String token);
+
+    public boolean isTokenExpired(User user);
 }

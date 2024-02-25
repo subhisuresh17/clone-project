@@ -5,6 +5,8 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -28,6 +30,8 @@ public class User {
     @Column(columnDefinition = "VARCHAR(255) DEFAULT 'images/user.png'")
     private String photo;
     private String resetToken;
+    private String verificationToken;
+    private LocalDateTime tokenExpiryDate;
     @OneToMany(mappedBy = "owner", cascade = CascadeType.PERSIST)
     private List<Task> tasksOwned;
     @OneToMany(mappedBy = "note_owner", cascade = CascadeType.PERSIST)
@@ -162,24 +166,88 @@ public class User {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o)
+    public boolean equals(Object obj) {
+        if (this == obj)
             return true;
-        if (o == null || getClass() != o.getClass())
+        if (obj == null)
             return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id) &&
-                email.equals(user.email) &&
-                name.equals(user.name) &&
-                password.equals(user.password) &&
-                Objects.equals(photo, user.photo) &&
-                Objects.equals(tasksOwned, user.tasksOwned) &&
-                Objects.equals(roles, user.roles);
+        if (getClass() != obj.getClass())
+            return false;
+        User other = (User) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        if (email == null) {
+            if (other.email != null)
+                return false;
+        } else if (!email.equals(other.email))
+            return false;
+        if (name == null) {
+            if (other.name != null)
+                return false;
+        } else if (!name.equals(other.name))
+            return false;
+        if (password == null) {
+            if (other.password != null)
+                return false;
+        } else if (!password.equals(other.password))
+            return false;
+        if (photo == null) {
+            if (other.photo != null)
+                return false;
+        } else if (!photo.equals(other.photo))
+            return false;
+        if (resetToken == null) {
+            if (other.resetToken != null)
+                return false;
+        } else if (!resetToken.equals(other.resetToken))
+            return false;
+        if (verificationToken == null) {
+            if (other.verificationToken != null)
+                return false;
+        } else if (!verificationToken.equals(other.verificationToken))
+            return false;
+        if (tokenExpiryDate == null) {
+            if (other.tokenExpiryDate != null)
+                return false;
+        } else if (!tokenExpiryDate.equals(other.tokenExpiryDate))
+            return false;
+        if (tasksOwned == null) {
+            if (other.tasksOwned != null)
+                return false;
+        } else if (!tasksOwned.equals(other.tasksOwned))
+            return false;
+        if (notesOwned == null) {
+            if (other.notesOwned != null)
+                return false;
+        } else if (!notesOwned.equals(other.notesOwned))
+            return false;
+        if (roles == null) {
+            if (other.roles != null)
+                return false;
+        } else if (!roles.equals(other.roles))
+            return false;
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, email, name, password, photo, tasksOwned, roles);
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + ((email == null) ? 0 : email.hashCode());
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + ((password == null) ? 0 : password.hashCode());
+        result = prime * result + ((photo == null) ? 0 : photo.hashCode());
+        result = prime * result + ((resetToken == null) ? 0 : resetToken.hashCode());
+        result = prime * result + ((verificationToken == null) ? 0 : verificationToken.hashCode());
+        result = prime * result + ((tokenExpiryDate == null) ? 0 : tokenExpiryDate.hashCode());
+        result = prime * result + ((tasksOwned == null) ? 0 : tasksOwned.hashCode());
+        result = prime * result + ((notesOwned == null) ? 0 : notesOwned.hashCode());
+        result = prime * result + ((roles == null) ? 0 : roles.hashCode());
+        return result;
     }
 
     public List<Note> getNotesOwned() {
@@ -197,4 +265,21 @@ public class User {
     public void setResetToken(String resetToken) {
         this.resetToken = resetToken;
     }
+
+    public String getVerificationToken() {
+        return verificationToken;
+    }
+
+    public void setVerificationToken(String verificationToken) {
+        this.verificationToken = verificationToken;
+    }
+
+    public LocalDateTime getTokenExpiryDate() {
+        return tokenExpiryDate;
+    }
+
+    public void setTokenExpiryDate(LocalDateTime tokenExpiryDate) {
+        this.tokenExpiryDate = tokenExpiryDate;
+    }
+
 }

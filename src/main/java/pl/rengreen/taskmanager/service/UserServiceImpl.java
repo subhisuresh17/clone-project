@@ -10,6 +10,7 @@ import pl.rengreen.taskmanager.repository.RoleRepository;
 import pl.rengreen.taskmanager.repository.TaskRepository;
 import pl.rengreen.taskmanager.repository.UserRepository;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
@@ -104,6 +105,14 @@ public class UserServiceImpl implements UserService {
     public void updatePassword(User user, String password) {
         user.setPassword(password);
         userRepository.save(user);
+    }
+
+    public User getUserByVerificationToken(String token) {
+        return userRepository.findByVerificationToken(token);
+    }
+
+    public boolean isTokenExpired(User user) {
+        return user.getTokenExpiryDate().isBefore(LocalDateTime.now());
     }
 
 }
