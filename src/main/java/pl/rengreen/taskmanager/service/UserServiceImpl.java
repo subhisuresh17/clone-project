@@ -43,6 +43,10 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
+    public User saveUser(User user) {
+        return userRepository.save(user);
+    }
+
     @Override
     public User changeRoleToSuperAdmin(User user) {
         Role superAdminRole = roleRepository.findByRole(SUPER_ADMIN);

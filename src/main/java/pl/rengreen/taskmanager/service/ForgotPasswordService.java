@@ -41,8 +41,20 @@ public class ForgotPasswordService {
     private void sendResetEmail(String email, String token) {
         // Construct and send the reset password email with a link containing the token
         String resetLink = "http://localhost:1111/reset-password?token=" + token;
-        String emailContent = "Click the following link to reset your password: " + resetLink;
-        emailService.sendEmail(email, "Password Reset", emailContent);
+
+        String emailSubject = "Password Reset - Pro Collab";
+        String emailContent = "<html><body>" +
+                "<h2>Pro Collab Password Reset</h2>" +
+                "<p>Hello,</p>" +
+                "<p>You recently requested to reset your password for your Pro Collab account.</p>" +
+                "<p>To reset your password, please click the link below:</p>" +
+                "<p><a href=\"" + resetLink + "\">Reset Password</a></p>" +
+                "<p>If you did not request a password reset, please ignore this email.</p>" +
+                "<p>Thank you,</p>" +
+                "<p>Pro Collab Team</p>" +
+                "</body></html>";
+
+        emailService.sendEmail(email, emailSubject, emailContent);
     }
 
     // Verify the reset token

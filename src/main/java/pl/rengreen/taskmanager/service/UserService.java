@@ -7,6 +7,8 @@ import java.util.List;
 public interface UserService {
     User createUser(User user);
 
+    User saveUser(User user);
+
     User changeRoleToAdmin(User user);
 
     User changeRoleToSuperAdmin(User user);

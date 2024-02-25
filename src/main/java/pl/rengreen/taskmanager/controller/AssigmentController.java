@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import pl.rengreen.taskmanager.model.Task;
 import pl.rengreen.taskmanager.model.User;
+import pl.rengreen.taskmanager.service.EmailService;
 import pl.rengreen.taskmanager.service.TaskService;
 import pl.rengreen.taskmanager.service.UserService;
 
@@ -14,11 +15,13 @@ import pl.rengreen.taskmanager.service.UserService;
 public class AssigmentController {
     private UserService userService;
     private TaskService taskService;
+    private EmailService emailService;
 
     @Autowired
-    public AssigmentController(UserService userService, TaskService taskService) {
+    public AssigmentController(UserService userService, TaskService taskService, EmailService emailService) {
         this.userService = userService;
         this.taskService = taskService;
+        this.emailService = emailService;
     }
 
     @GetMapping("/assignment")
@@ -41,6 +44,7 @@ public class AssigmentController {
         Task selectedTask = taskService.getTaskById(taskId);
         User selectedUser = userService.getUserById(userId);
         taskService.assignTaskToUser(selectedTask, selectedUser);
+        emailService.sendTaskMail(selectedUser.getEmail(), selectedTask);
         return "redirect:/assignment/" + userId;
     }
 

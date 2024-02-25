@@ -71,7 +71,7 @@ public class RegisterController {
             // Mark user as verified
             user.setVerificationToken(null);
             user.setTokenExpiryDate(null);
-            userService.createUser(user);
+            userService.saveUser(user);
             return "views/verifiedEmail";
         } else {
             return "redirect:/register/invalid-token"; // Redirect to an error page
