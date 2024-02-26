@@ -108,3 +108,8 @@
 .navbar-nav .dropdown-menu .dropdown-item:hover {
     background-color: #e9ecef; /* Hover background color */
 }
+
+.logo{
+    width:3%;
+    height:3%;
+}

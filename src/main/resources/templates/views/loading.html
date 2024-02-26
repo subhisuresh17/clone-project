@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading...</title>
+    <link rel="stylesheet" th:href="@{/css/loadingAnimation.css}">
+</head>
+<body>
+<div class="cube-wrapper">
+  <div class="cube-folding">
+    <span class="leaf1"></span>
+    <span class="leaf2"></span>
+    <span class="leaf3"></span>
+    <span class="leaf4"></span>
+  </div>
+  <span class="loading" data-name="Loading">Loading</span>
+</div>
+ <script>
+        // Redirect to the profile page after a delay (e.g., 3 seconds)
+        setTimeout(function() {
+            window.location.href = "/profile";
+        }, 3000); // 3000 milliseconds = 3 seconds
+    </script>
+
+</div>
+</body>
+</html>

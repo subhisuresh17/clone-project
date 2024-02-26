@@ -31,7 +31,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 http
                                 .authorizeRequests()
                                 .antMatchers("/register", "/", "/login", "/about", "/css/**", "/webjars/**",
-                                                "/forgotPassword/**", "/forgot-password/**", "/reset-password/**")
+                                                "/forgotPassword/**", "/forgot-password/**", "/reset-password/**",
+                                                "/loading")
                                 .permitAll()
                                 .antMatchers("/profile/**", "/tasks/**", "/task/**", "/users", "/user/**",
                                                 "/changePassword", "/changePassword/**",
@@ -45,7 +46,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                                 .formLogin()
                                 .loginPage("/login")
                                 .permitAll()
-                                .defaultSuccessUrl("/profile", true)
+                                .defaultSuccessUrl("/loading", true)
                                 .and()
                                 .logout()
                                 .logoutSuccessUrl("/login");
