@@ -32,6 +32,9 @@ public class User {
     private String resetToken;
     private String verificationToken;
     private LocalDateTime tokenExpiryDate;
+    @ManyToOne
+    @JoinColumn(name = "company_id", nullable = false)
+    private Company company;
     @OneToMany(mappedBy = "owner", cascade = CascadeType.PERSIST)
     private List<Task> tasksOwned;
     @OneToMany(mappedBy = "note_owner", cascade = CascadeType.PERSIST)
@@ -104,6 +107,27 @@ public class User {
         this.name = name;
         this.password = password;
         this.photo = photo;
+        this.tasksOwned = tasksOwned;
+        this.notesOwned = notesOwned;
+        this.roles = roles;
+    }
+    
+
+    public User(Long id,
+            @Email(message = "{user.email.not.valid}") @NotEmpty(message = "{user.email.not.empty}") String email,
+            @NotEmpty(message = "{user.name.not.empty}") String name,
+            @NotEmpty(message = "{user.password.not.empty}") @Length(min = 5, message = "{user.password.length}") String password,
+            String photo, String resetToken, String verificationToken, LocalDateTime tokenExpiryDate, Company company,
+            List<Task> tasksOwned, List<Note> notesOwned, List<Role> roles) {
+        this.id = id;
+        this.email = email;
+        this.name = name;
+        this.password = password;
+        this.photo = photo;
+        this.resetToken = resetToken;
+        this.verificationToken = verificationToken;
+        this.tokenExpiryDate = tokenExpiryDate;
+        this.company = company;
         this.tasksOwned = tasksOwned;
         this.notesOwned = notesOwned;
         this.roles = roles;
@@ -281,5 +305,15 @@ public class User {
     public void setTokenExpiryDate(LocalDateTime tokenExpiryDate) {
         this.tokenExpiryDate = tokenExpiryDate;
     }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    
 
 }

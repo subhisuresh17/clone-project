@@ -10,12 +10,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import pl.rengreen.taskmanager.model.Company;
 import pl.rengreen.taskmanager.model.User;
+import pl.rengreen.taskmanager.service.CompanyService;
 import pl.rengreen.taskmanager.service.EmailService;
 import pl.rengreen.taskmanager.service.UserService;
 
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 import javax.validation.Valid;
@@ -25,16 +28,21 @@ public class RegisterController {
 
     private UserService userService;
     private EmailService emailService;
+    private CompanyService companyService;
 
     @Autowired
-    public RegisterController(UserService userService, EmailService emailService) {
+    public RegisterController(UserService userService, EmailService emailService,CompanyService companyService) {
         this.userService = userService;
         this.emailService = emailService;
-    }
+        this.companyService=companyService;
+    }   
 
     @GetMapping("/register")
     public String showRegisterForm(Model model) {
         model.addAttribute("user", new User());
+        List<Company> allCompanies=companyService.getAllCompanies();
+        model.addAttribute("companies", allCompanies);
+
         return "forms/register";
     }
 

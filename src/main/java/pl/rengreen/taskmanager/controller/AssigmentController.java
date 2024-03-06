@@ -1,5 +1,8 @@
 package pl.rengreen.taskmanager.controller;
 
+import java.security.Principal;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import pl.rengreen.taskmanager.model.Task;
 import pl.rengreen.taskmanager.model.User;
+import pl.rengreen.taskmanager.service.CompanyService;
 import pl.rengreen.taskmanager.service.EmailService;
 import pl.rengreen.taskmanager.service.TaskService;
 import pl.rengreen.taskmanager.service.UserService;
@@ -16,25 +20,33 @@ public class AssigmentController {
     private UserService userService;
     private TaskService taskService;
     private EmailService emailService;
+    private CompanyService companyService;
 
     @Autowired
-    public AssigmentController(UserService userService, TaskService taskService, EmailService emailService) {
+    public AssigmentController(UserService userService, TaskService taskService, EmailService emailService,CompanyService companyService) {
         this.userService = userService;
         this.taskService = taskService;
         this.emailService = emailService;
+        this.companyService = companyService;
     }
 
     @GetMapping("/assignment")
-    public String showAssigmentForm(Model model) {
-        model.addAttribute("users", userService.findAll());
+    public String showAssigmentForm(Principal principal,Model model) {
+        String email=principal.getName();
+        User user = userService.getUserByEmail(email);
+        List<User> allUsers=companyService.getCompanyUsers(user.getCompany().getId());
+        model.addAttribute("users", allUsers);
         model.addAttribute("freeTasks", taskService.findFreeTasks());
         return "forms/assignment";
     }
 
     @GetMapping("/assignment/{userId}")
-    public String showUserAssigmentForm(@PathVariable Long userId, Model model) {
+    public String showUserAssigmentForm(@PathVariable Long userId, Model model,Principal principal) {
+        String email=principal.getName();
+        User user = userService.getUserByEmail(email);
+        List<User> allUsers=companyService.getCompanyUsers(user.getCompany().getId());
         model.addAttribute("selectedUser", userService.getUserById(userId));
-        model.addAttribute("users", userService.findAll());
+        model.addAttribute("users", allUsers);
         model.addAttribute("freeTasks", taskService.findFreeTasks());
         return "forms/assignment";
     }

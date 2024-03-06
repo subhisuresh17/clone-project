@@ -4,94 +4,52 @@
   xmlns:th="http://www.thymeleaf.org"
   lang="en"
 >
-  <head>
+<head>
     <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
     <title>Register</title>
-  </head>
-  <link rel="stylesheet" th:href="@{/css/login.css}" />
+    <link rel="stylesheet" th:href="@{/css/login.css}" />
+</head>
 
-  <body>
+<body>
     <div class="alert alert-info" th:if="${exist}">
-      <p class="text text-center">User with this email exists</p>
-  </div>
-  <div class="main-container" >
-      <div id="sign-up" class="left-container sign-up">
-          <h1>So let's sign up</h1>
-          <div style="width: 100%">
-            <form
-            th:action="@{/register}"
-            th:object="${user}"
-            method="post"
-            class="signup-form"
-          >
-            <input
-              type="text"
-              id="first-name"
-              th:field="*{name}"
-              placeholder="Full Name"
-            />
-            <div
-              class="text text-danger"
-              th:if="${#fields.hasErrors('name')}"
-              th:errors="*{name}"
-            ></div>
-            <input
-              type="email"
-              th:field="*{email}"
-              id="email"
-              placeholder="E-mail"
-            />
-            <div
-              class="text text-danger"
-              th:if="${#fields.hasErrors('email')}"
-              th:errors="*{email}"
-            ></div>
-            <input
-              type="password"
-              id="password"
-              th:field="*{password}"
-              placeholder="Password"
-            />
-            <div
-              class="text text-danger"
-              th:if="${#fields.hasErrors('password')}"
-              th:errors="*{password}"
-            ></div>
-            <input
-              type="hidden"
-              class="form-control"
-              id="photo"
-              name="photo"
-              th:attr="value = ${'images/user.png'}"
-            />
-            <div class="check">
-              <input type="checkbox" onclick="checkTerms()" id="agree-terms" />
-              <label for="agree-terms"
-                >Agree to
-                <a href="#">Terms &amp; Conditions</a>
-              </label>
+        <p class="text text-center">User with this email exists</p>
+    </div>
+    <div class="main-container">
+        <div id="sign-up" class="left-container sign-up">
+            <h1>So let's sign up</h1>
+            <div style="width: 100%">
+                <form th:action="@{/register}" th:object="${user}" method="post" class="signup-form">
+                    <input type="text" id="first-name" th:field="*{name}" placeholder="Full Name" />
+                    <div class="text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                    <input type="email" th:field="*{email}" id="email" placeholder="E-mail" />
+                    <div class="text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                    <input type="password" id="password" th:field="*{password}" placeholder="Password" />
+                    <div class="text text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+                    <input type="hidden" class="form-control" id="photo" name="photo" th:attr="value = ${'images/user.png'}" />
+                    <!-- Dropdown for selecting company -->
+                    <select id="company" name="company">
+                        <option value="">Select Company</option>
+                        <th:block th:each="company : ${companies}">
+                            <option th:value="${company.id}" th:text="${company.name}"></option>
+                        </th:block>
+                    </select>
+                    <!-- End of dropdown -->
+                    <div class="check">
+                        <input type="checkbox" onclick="checkTerms()" id="agree-terms" />
+                        <label for="agree-terms">Agree to <a href="#">Terms &amp; Conditions</a></label>
+                    </div>
+                    <button type="submit" value="Submit" id="signup_submit" class="button sign-up-btn">Sign Up</button>
+                </form>
             </div>
-            <button
-              type="submit"
-              value="Submit"
-              id="signup_submit"
-              class="button sign-up-btn"
-            >
-              Sign Up
-            </button>
-          </form>
-          </div>
-          <div class="signin-link-container">
-              <p class="signin-link">
-                  Already have an account? <a href="/login">Click here!</a>
-              </p>
-          </div>
-      </div>
-  
-      <div class="right-container"></div>
-  </div>
+            <div class="signin-link-container">
+                <p class="signin-link">Already have an account? <a href="/login">Click here!</a></p>
+            </div>
+        </div>
+
+        <div class="right-container"></div>
+    </div>
 
     <!--show password when mouse is over eye icon-->
     <script src="js/main.js"></script>
-  </body>
+</body>
 </html>
