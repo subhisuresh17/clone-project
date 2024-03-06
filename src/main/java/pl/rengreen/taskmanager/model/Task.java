@@ -30,6 +30,9 @@ public class Task {
     @ManyToOne
     @JoinColumn(name = "OWNER_ID")
     private User owner;
+    @ManyToOne
+    @JoinColumn(name = "created_user_id")
+    private User createdUser;
 
     public long daysLeftUntilDeadline(LocalDate date) {
         return ChronoUnit.DAYS.between(LocalDate.now(), date);
@@ -62,6 +65,20 @@ public class Task {
         this.isCompleted = isCompleted;
         this.creatorName = creatorName;
         this.owner = owner;
+    }
+
+    public Task(Long id, @NotEmpty(message = "{task.name.not.empty}") String name,
+            @NotEmpty(message = "{task.description.not.empty}") @Size(max = 1200, message = "{task.description.size}") String description,
+            @NotNull(message = "{task.date.not.null}") LocalDate date, boolean isCompleted, String creatorName,
+            User owner, User createdUser) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.date = date;
+        this.isCompleted = isCompleted;
+        this.creatorName = creatorName;
+        this.owner = owner;
+        this.createdUser = createdUser;
     }
 
     public Long getId() {
@@ -139,5 +156,13 @@ public class Task {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, description, date, isCompleted, creatorName, owner);
+    }
+
+    public User getCreatedUser() {
+        return createdUser;
+    }
+
+    public void setCreatedUser(User createdUser) {
+        this.createdUser = createdUser;
     }
 }

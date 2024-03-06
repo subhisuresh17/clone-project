@@ -74,13 +74,15 @@ body {
   }
   
   .signup-form input {
-    border-radius: 200px;
+    border-radius: 10px;
     padding: 5px 15px;
     height: 3rem;
     font-size: 1rem;
-    background-color: #ddd;
+    background-color: #fffbfb;
+    
     color: #444;
-    border: none;
+    border: 0.1px solid rgb(206, 204, 204);
+    /* border: none; */
   }
   
   .signup-form input {
@@ -198,4 +200,111 @@ body {
     }
   }
 
- 
+ /* CSS for styling the dropdown */
+#company {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+  color: #555;
+  background-color: #fff;
+  appearance: none; /* Remove default arrow icon */
+  -webkit-appearance: none; /* Remove default arrow icon for WebKit browsers */
+  -moz-appearance: none; /* Remove default arrow icon for Firefox */
+}
+
+/* Style the dropdown arrow */
+#company::after {
+  content: "\25BC"; /* Unicode character for downward arrow */
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none; /* Ensure arrow doesn't interfere with clicking on dropdown */
+}
+
+/* Hover effect for dropdown */
+#company:hover {
+  border-color: #007bff; /* Change border color on hover */
+}
+
+/* Focus effect for dropdown */
+#company:focus {
+  outline: none; /* Remove default focus outline */
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25); /* Add focus border */
+}
+
+/* CSS for styling the dropdown */
+#company {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px; /* Add top margin */
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  font-size: 16px;
+  color: #555;
+  background-color: #fff;
+  appearance: none; /* Remove default arrow icon */
+  -webkit-appearance: none; /* Remove default arrow icon for WebKit browsers */
+  -moz-appearance: none; /* Remove default arrow icon for Firefox */
+  position: relative; /* Position relative for pseudo-element */
+}
+
+/* Style the dropdown arrow */
+#company::after {
+  content: "\25BC"; /* Unicode character for downward arrow */
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none; /* Ensure arrow doesn't interfere with clicking on dropdown */
+}
+
+/* Hover effect for dropdown */
+#company:hover {
+  border-color: #007bff; /* Change border color on hover */
+}
+
+/* Focus effect for dropdown */
+#company:focus {
+  outline: none; /* Remove default focus outline */
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25); /* Add focus border */
+}
+        /* Add your custom styles here */
+        .search-container {
+          position: relative;
+          width: 100%;
+          margin-bottom: 10px;
+      }
+
+      #company-search {
+          width: 100%;
+          padding: 10px;
+          font-size: 16px;
+          border: 1px solid #ccc;
+          border-radius: 10px;
+          box-sizing: border-box;
+      }
+
+      #company-results {
+          position: absolute;
+          width: 100%;
+          max-height: 150px;
+          overflow-y: auto;
+          background-color: #fff;
+          border: 1px solid #ccc;
+          border-top: none;
+          border-radius: 0 0 5px 5px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          z-index: 1;
+      }
+
+      .company-result {
+          padding: 10px;
+          cursor: pointer;
+      }
+
+      .company-result:hover {
+          background-color: #f0f0f0;
+      }
