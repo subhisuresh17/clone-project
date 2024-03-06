@@ -54,9 +54,9 @@ public class TaskController {
         String email = principal.getName();
         User signedUser = userService.getUserByEmail(email);
         boolean isAdminSigned = request.isUserInRole("ROLE_ADMIN");
-        List<User> allUsers=companyService.getCompanyUsers(signedUser.getCompany().getId());
-        List<Task> allTask=companyService.getAllTaskByCompany(signedUser.getCompany().getId());
-        model.addAttribute("tasks",allTask );
+        List<User> allUsers = companyService.getCompanyUsers(signedUser.getCompany().getId());
+        List<Task> allTask = companyService.getAllTaskByCompany(signedUser.getCompany().getId());
+        model.addAttribute("tasks", allTask);
         model.addAttribute("users", allUsers);
         model.addAttribute("signedUser", signedUser);
         model.addAttribute("isAdminSigned", isAdminSigned);
@@ -71,6 +71,7 @@ public class TaskController {
 
         Task task = new Task();
         task.setCreatorName(user.getName());
+        task.setCreatedUser(user);
         if (request.isUserInRole("ROLE_USER")) {
             task.setOwner(user);
         }

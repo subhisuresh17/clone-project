@@ -24,6 +24,8 @@
           <form th:action="@{/task/create}" th:object="${task}" method="post">
             <input type="hidden" th:field="*{creatorName}" />
             <input type="hidden" th:field="*{owner}" />
+            <input type="hidden" th:field="*{createdUser}" />
+
 
             <!--name-->
             <div class="form-group">

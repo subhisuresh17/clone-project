@@ -2,6 +2,9 @@ package pl.rengreen.taskmanager.model;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -12,33 +15,46 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private Long id;
+
     @Email(message = "{user.email.not.valid}")
     @NotEmpty(message = "{user.email.not.empty}")
     @Column(unique = true)
     private String email;
+
     @NotEmpty(message = "{user.name.not.empty}")
     private String name;
+
     @NotEmpty(message = "{user.password.not.empty}")
     @Length(min = 5, message = "{user.password.length}")
     private String password;
+
     @Column(columnDefinition = "VARCHAR(255) DEFAULT 'images/user.png'")
     private String photo;
     private String resetToken;
     private String verificationToken;
     private LocalDateTime tokenExpiryDate;
+
     @ManyToOne
-    @JoinColumn(name = "company_id", nullable = false)
+    @JoinColumn(name = "company_id")
     private Company company;
+
+    // @ManyToOne
+    // @JoinColumn(name = "project_id")
+    // private Project project;
+
     @OneToMany(mappedBy = "owner", cascade = CascadeType.PERSIST)
     private List<Task> tasksOwned;
+
     @OneToMany(mappedBy = "note_owner", cascade = CascadeType.PERSIST)
     private List<Note> notesOwned;
+
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles;
@@ -111,7 +127,6 @@ public class User {
         this.notesOwned = notesOwned;
         this.roles = roles;
     }
-    
 
     public User(Long id,
             @Email(message = "{user.email.not.valid}") @NotEmpty(message = "{user.email.not.empty}") String email,
@@ -313,7 +328,5 @@ public class User {
     public void setCompany(Company company) {
         this.company = company;
     }
-
-    
 
 }

@@ -27,16 +27,16 @@ import java.util.stream.Collectors;
 
 @Controller
 public class ProfileController {
-      @Autowired
+    @Autowired
     private BCryptPasswordEncoder passwordEncoder;
     private UserService userService;
     private TaskService taskService;
 
     @Autowired
-    public ProfileController(UserService userService, TaskService taskService,BCryptPasswordEncoder passwordEncoder) {
+    public ProfileController(UserService userService, TaskService taskService, BCryptPasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.taskService = taskService;
-        this.passwordEncoder=passwordEncoder;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/profile")
@@ -56,6 +56,7 @@ public class ProfileController {
         taskService.setTaskCompleted(taskId);
         return "redirect:/profile";
     }
+
     @GetMapping("/profile/unmark-done/{taskId}")
     public String setTaskNotCompleted(@PathVariable Long taskId) {
         taskService.setTaskNotCompleted(taskId);
@@ -79,6 +80,5 @@ public class ProfileController {
         model.addAttribute("photoUrl", photoUrl);
         return ResponseEntity.ok(photoUrl);
     }
-   
-    
+
 }
