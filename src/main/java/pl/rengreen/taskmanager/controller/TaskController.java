@@ -12,22 +12,26 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import pl.rengreen.taskmanager.model.Task;
 import pl.rengreen.taskmanager.model.User;
+import pl.rengreen.taskmanager.service.CompanyService;
 import pl.rengreen.taskmanager.service.TaskService;
 import pl.rengreen.taskmanager.service.UserService;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class TaskController {
 
     private TaskService taskService;
     private UserService userService;
+    private CompanyService companyService;
 
     @Autowired
-    public TaskController(TaskService taskService, UserService userService) {
+    public TaskController(TaskService taskService, UserService userService, CompanyService companyService) {
         this.taskService = taskService;
         this.userService = userService;
+        this.companyService = companyService;
     }
 
     @GetMapping("/tasks")
@@ -50,9 +54,10 @@ public class TaskController {
         String email = principal.getName();
         User signedUser = userService.getUserByEmail(email);
         boolean isAdminSigned = request.isUserInRole("ROLE_ADMIN");
-
-        model.addAttribute("tasks", taskService.findAll());
-        model.addAttribute("users", userService.findAll());
+        List<User> allUsers=companyService.getCompanyUsers(signedUser.getCompany().getId());
+        List<Task> allTask=companyService.getAllTaskByCompany(signedUser.getCompany().getId());
+        model.addAttribute("tasks",allTask );
+        model.addAttribute("users", allUsers);
         model.addAttribute("signedUser", signedUser);
         model.addAttribute("isAdminSigned", isAdminSigned);
 
