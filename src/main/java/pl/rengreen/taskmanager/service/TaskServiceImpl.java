@@ -90,4 +90,10 @@ public class TaskServiceImpl implements TaskService {
     public long countTasks() {
         return taskRepository.count();
     }
+
+    @Override
+    public long countCompletedTasks() {
+        // TODO Auto-generated method stub
+        return 5;
+    }
 }

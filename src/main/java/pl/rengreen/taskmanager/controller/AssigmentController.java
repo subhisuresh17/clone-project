@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import pl.rengreen.taskmanager.model.Task;
 import pl.rengreen.taskmanager.model.User;
 import pl.rengreen.taskmanager.service.CompanyService;
@@ -17,6 +19,7 @@ import pl.rengreen.taskmanager.service.TaskService;
 import pl.rengreen.taskmanager.service.UserService;
 
 @Controller
+@RequestMapping("/assignment")
 public class AssigmentController {
     private UserService userService;
     private TaskService taskService;
@@ -46,7 +49,7 @@ public class AssigmentController {
         return companyTask;
     }
 
-    @GetMapping("/assignment")
+    @GetMapping
     public String showAssigmentForm(Principal principal, Model model) {
         String email = principal.getName();
         User user = userService.getUserByEmail(email);
@@ -57,7 +60,7 @@ public class AssigmentController {
         return "forms/assignment";
     }
 
-    @GetMapping("/assignment/{userId}")
+    @GetMapping("/{userId}")
     public String showUserAssigmentForm(@PathVariable Long userId, Model model, Principal principal) {
         String email = principal.getName();
         User user = userService.getUserByEmail(email);
@@ -69,7 +72,7 @@ public class AssigmentController {
         return "forms/assignment";
     }
 
-    @GetMapping("/assignment/assign/{userId}/{taskId}")
+    @GetMapping("/assign/{userId}/{taskId}")
     public String assignTaskToUser(@PathVariable Long userId, @PathVariable Long taskId) {
         Task selectedTask = taskService.getTaskById(taskId);
         User selectedUser = userService.getUserById(userId);
@@ -78,7 +81,7 @@ public class AssigmentController {
         return "redirect:/assignment/" + userId;
     }
 
-    @GetMapping("assignment/unassign/{userId}/{taskId}")
+    @GetMapping("unassign/{userId}/{taskId}")
     public String unassignTaskFromUser(@PathVariable Long userId, @PathVariable Long taskId) {
         Task selectedTask = taskService.getTaskById(taskId);
         taskService.unassignTask(selectedTask);

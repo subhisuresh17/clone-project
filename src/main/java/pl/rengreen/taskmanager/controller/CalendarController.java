@@ -33,7 +33,7 @@ public class CalendarController {
         return "views/calendar";
     }
 
-    @GetMapping("/calendartasks")
+    @GetMapping("/calendar/tasks")
     @ResponseBody
     public ResponseEntity<List<TaskDto>> userTasks(Model model, Principal principal) {
         String email = principal.getName();

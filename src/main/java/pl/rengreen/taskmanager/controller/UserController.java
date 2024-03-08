@@ -30,7 +30,6 @@ public class UserController {
         boolean isAdminSigned = request.isUserInRole("ROLE_ADMIN");
         String email=principal.getName();
         User user=userService.getUserByEmail(email);
-
         List<User> allUsers=companyService.getCompanyUsers(user.getCompany().getId());
         model.addAttribute("users", allUsers);
         model.addAttribute("isAdminSigned", isAdminSigned);

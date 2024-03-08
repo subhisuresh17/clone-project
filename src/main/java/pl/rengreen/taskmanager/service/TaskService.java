@@ -30,4 +30,6 @@ public interface TaskService {
     void unassignTask(Task task);
 
     long countTasks();
+
+    long countCompletedTasks();
 }

@@ -44,7 +44,6 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "company_id")
     private Company company;
-
     // @ManyToOne
     // @JoinColumn(name = "project_id")
     // private Project project;

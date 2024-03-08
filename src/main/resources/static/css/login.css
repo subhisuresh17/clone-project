@@ -118,8 +118,12 @@ body {
   
   .signup-form button {
     color: white;
-    background-color: #bf360c;
-    border: none;
+    background: linear-gradient(
+      90deg,
+      rgb(118, 167, 63) 0%,
+      rgb(51, 143, 118) 40%
+  
+    );    border: none;
     padding: 1rem;
     font-family: inherit;
     border-radius: 15px;
@@ -131,7 +135,7 @@ body {
   }
   
   .signup-form button:hover{
-    background-color: #83260a;
+    background-color: #0a8310;
     cursor: pointer;
   }
   

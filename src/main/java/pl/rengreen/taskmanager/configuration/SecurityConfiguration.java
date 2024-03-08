@@ -41,7 +41,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                                 .hasAnyRole("USER, ADMIN,SUPERADMIN")
                                 .antMatchers("/assignment/**")
                                 .hasAnyRole("ADMIN,SUPERADMIN")
-                                .antMatchers("/superadmin/**").hasRole("SUPERADMIN")
+                                .antMatchers("/superAdmin/**","/superadmin").hasRole("SUPERADMIN")
                                 .and()
                                 .formLogin()
                                 .loginPage("/login")
