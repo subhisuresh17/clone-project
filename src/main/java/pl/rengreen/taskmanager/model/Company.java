@@ -25,7 +25,7 @@ public class Company {
     private String name;
     @OneToMany(mappedBy = "company")
     private List<User> users;
-    @OneToMany(mappedBy = "company")
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
     private List<Project> projects;
 
     public Company() {

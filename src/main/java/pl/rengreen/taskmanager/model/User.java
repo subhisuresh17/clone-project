@@ -44,9 +44,9 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "company_id")
     private Company company;
-    // @ManyToOne
-    // @JoinColumn(name = "project_id")
-    // private Project project;
+
+    @ManyToMany(mappedBy = "employees")
+    private List<Project> projects;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.PERSIST)
     private List<Task> tasksOwned;
@@ -116,23 +116,8 @@ public class User {
             @Email(message = "{user.email.not.valid}") @NotEmpty(message = "{user.email.not.empty}") String email,
             @NotEmpty(message = "{user.name.not.empty}") String name,
             @NotEmpty(message = "{user.password.not.empty}") @Length(min = 5, message = "{user.password.length}") String password,
-            String photo, List<Task> tasksOwned, List<Note> notesOwned, List<Role> roles) {
-        this.id = id;
-        this.email = email;
-        this.name = name;
-        this.password = password;
-        this.photo = photo;
-        this.tasksOwned = tasksOwned;
-        this.notesOwned = notesOwned;
-        this.roles = roles;
-    }
-
-    public User(Long id,
-            @Email(message = "{user.email.not.valid}") @NotEmpty(message = "{user.email.not.empty}") String email,
-            @NotEmpty(message = "{user.name.not.empty}") String name,
-            @NotEmpty(message = "{user.password.not.empty}") @Length(min = 5, message = "{user.password.length}") String password,
             String photo, String resetToken, String verificationToken, LocalDateTime tokenExpiryDate, Company company,
-            List<Task> tasksOwned, List<Note> notesOwned, List<Role> roles) {
+            List<Project> projects, List<Task> tasksOwned, List<Note> notesOwned, List<Role> roles) {
         this.id = id;
         this.email = email;
         this.name = name;
@@ -142,6 +127,7 @@ public class User {
         this.verificationToken = verificationToken;
         this.tokenExpiryDate = tokenExpiryDate;
         this.company = company;
+        this.projects = projects;
         this.tasksOwned = tasksOwned;
         this.notesOwned = notesOwned;
         this.roles = roles;
@@ -193,6 +179,14 @@ public class User {
 
     public void setTasksOwned(List<Task> tasksOwned) {
         this.tasksOwned = tasksOwned;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
     }
 
     public List<Role> getRoles() {

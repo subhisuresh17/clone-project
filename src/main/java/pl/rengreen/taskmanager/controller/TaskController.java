@@ -8,11 +8,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import pl.rengreen.taskmanager.model.Project;
 import pl.rengreen.taskmanager.model.Task;
 import pl.rengreen.taskmanager.model.User;
 import pl.rengreen.taskmanager.service.CompanyService;
+import pl.rengreen.taskmanager.service.ProjectService;
 import pl.rengreen.taskmanager.service.TaskService;
 import pl.rengreen.taskmanager.service.UserService;
 
@@ -26,12 +29,15 @@ public class TaskController {
     private TaskService taskService;
     private UserService userService;
     private CompanyService companyService;
+    private ProjectService projectService;
 
     @Autowired
-    public TaskController(TaskService taskService, UserService userService, CompanyService companyService) {
+    public TaskController(TaskService taskService, UserService userService, CompanyService companyService,
+            ProjectService projectService) {
         this.taskService = taskService;
         this.userService = userService;
         this.companyService = companyService;
+        this.projectService = projectService;
     }
 
     @GetMapping("/tasks")
@@ -79,11 +85,59 @@ public class TaskController {
         return "forms/task-new";
     }
 
+    @GetMapping("/task/create/{projectId}")
+    public String createTaskForProject(@PathVariable long projectId, Model model, Principal principal,
+            SecurityContextHolderAwareRequestWrapper request) {
+        String email = principal.getName();
+        User user = userService.getUserByEmail(email);
+
+        Task task = new Task();
+        task.setCreatorName(user.getName());
+        task.setCreatedUser(user);
+        if (request.isUserInRole("ROLE_USER")) {
+            task.setOwner(user);
+        }
+        model.addAttribute("task", task);
+        return "forms/task-new";
+    }
+
+    @PostMapping("/task/create/{projectId}")
+    public String createTaskForProject(@PathVariable long projectId,
+            @Valid Task task,
+            BindingResult bindingResult,
+            Model model,
+            Principal principal,
+            SecurityContextHolderAwareRequestWrapper request) {
+        if (bindingResult.hasErrors()) {
+            return "forms/task-new";
+        }
+
+        String email = principal.getName();
+        User user = userService.getUserByEmail(email);
+
+        // Set creator, owner, and created user
+        task.setCreatorName(user.getName());
+        task.setCreatedUser(user);
+        if (request.isUserInRole("ROLE_USER")) {
+            task.setOwner(user);
+        }
+
+        // Set the project for the task
+        Project project = projectService.getProjectById(projectId);
+        task.setProject(project);
+
+        // Save the task
+        taskService.createTask(task);
+
+        return "redirect:/tasks";
+    }
+
     @PostMapping("/task/create")
     public String createTask(@Valid Task task, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "forms/task-new";
         }
+
         taskService.createTask(task);
 
         return "redirect:/tasks";

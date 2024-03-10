@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Project Employees</title>
+    <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/projectEmployees.css}">
+</head>
+<body>
+<header>
+    <!--/*/ <th:block th:include="fragments/header :: header('assign-tasks')"></th:block> /*/-->
+</header>
+<div class="container">
+    <div class="employee-list">
+        <h1>Employee List of Project</h1>
+        <div class="add-employee-section">
+            <h2>Add Employee to Project</h2>
+            <form id="addEmployeeForm" class="employee-form">
+                <select name="userId" id="userId">
+                    <!-- Populate with available users -->
+                    <option th:each="user : ${availableUsers}" th:value="${user.id}" th:text="${user.name}"></option>
+                </select>
+                <button class="btn" type="button" onclick="addEmployeeToProject()">Add Employee</button>
+            </form>
+        </div>
+    </div>
+    
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="employee : ${project.employees}">
+                <td th:text="${employee.name}"></td>
+                <td>
+                    <button class="btn" type="button" th:onclick="'removeEmployeeFromProject(\'' + ${employee.id} + '\')'">Delete</button>
+                                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Add Employee button -->
+
+<!-- JavaScript function to handle adding employee to project -->
+<script th:inline="javascript">
+    var projectId = /*[[${projectId}]]*/ null; // Access projectId passed from controller
+
+    function addEmployeeToProject() {
+        var form = document.getElementById('addEmployeeForm');
+        var userId = form.userId.value;
+
+        fetch('/projects/' + projectId + '/employees/' + userId, {
+            method: 'PUT'
+        })
+        .then(response => {
+            if (response.ok) {
+                location.reload(); // Reload the page after successful addition
+            } else {
+                alert('Failed to add employee to project.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Failed to add employee to project.');
+        });
+    }
+
+    // JavaScript function to handle removing employee from project
+    function removeEmployeeFromProject(employeeId) {
+        if (confirm('Are you sure you want to remove this employee from the project?')) {
+            fetch('/projects/' + projectId + '/employees/' + employeeId, {
+                method: 'DELETE'
+            })
+            .then(response => {
+                if (response.ok) {
+                    location.reload(); // Reload the page after successful removal
+                } else {
+                    alert('Failed to remove employee from project.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to remove employee from project.');
+            });
+        }
+    }
+
+</script>
+</body>
+</html>

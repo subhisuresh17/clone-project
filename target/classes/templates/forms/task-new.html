@@ -21,11 +21,10 @@
         </h1>
 
         <div class="card card-body">
-          <form th:action="@{/task/create}" th:object="${task}" method="post">
+          <form th:action="@{${projectId != null} ? '/task/create/' + ${projectId} : '/task/create'}" th:object="${task}" method="post">
             <input type="hidden" th:field="*{creatorName}" />
             <input type="hidden" th:field="*{owner}" />
             <input type="hidden" th:field="*{createdUser}" />
-
 
             <!--name-->
             <div class="form-group">

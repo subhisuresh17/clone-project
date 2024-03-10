@@ -33,6 +33,9 @@ public class Task {
     @ManyToOne
     @JoinColumn(name = "created_user_id")
     private User createdUser;
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    private Project project;
 
     public long daysLeftUntilDeadline(LocalDate date) {
         return ChronoUnit.DAYS.between(LocalDate.now(), date);
@@ -79,6 +82,29 @@ public class Task {
         this.creatorName = creatorName;
         this.owner = owner;
         this.createdUser = createdUser;
+    }
+
+    public Task(Long id, @NotEmpty(message = "{task.name.not.empty}") String name,
+            @NotEmpty(message = "{task.description.not.empty}") @Size(max = 1200, message = "{task.description.size}") String description,
+            @NotNull(message = "{task.date.not.null}") LocalDate date, boolean isCompleted, String creatorName,
+            User owner, User createdUser, Project project) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.date = date;
+        this.isCompleted = isCompleted;
+        this.creatorName = creatorName;
+        this.owner = owner;
+        this.createdUser = createdUser;
+        this.project = project;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 
     public Long getId() {

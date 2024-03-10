@@ -1,56 +1,76 @@
 package pl.rengreen.taskmanager.model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "project_id")
     private Long id;
 
     private String name;
-    private String creator_name;
+    private String description;
+    @ManyToOne
+    @JoinColumn(name = "creator_id")
+    private User creator;
     private LocalDate dueDate;
-
     @ManyToOne
     @JoinColumn(name = "company_id")
     private Company company;
 
-    // @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval =
-    // true)
-    // private List<User> users = new ArrayList<>();
+    @ManyToMany
+    @JoinTable(name = "project_employee", joinColumns = @JoinColumn(name = "project_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private List<User> employees;
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    private List<Task> tasks;
 
     public Project() {
     }
 
-    public Project(Long id, String name, String creator_name, LocalDate dueDate, Company company) {
+    public Project(Long id, String name, String description, User creator, LocalDate dueDate, Company company,
+            List<User> employees, List<Task> tasks) {
         this.id = id;
         this.name = name;
-        this.creator_name = creator_name;
+        this.description = description;
+        this.creator = creator;
         this.dueDate = dueDate;
         this.company = company;
+        this.employees = employees;
+        this.tasks = tasks;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void setId(Long id) {
@@ -65,12 +85,12 @@ public class Project {
         this.name = name;
     }
 
-    public String getCreator_name() {
-        return creator_name;
+    public User getCreator() {
+        return creator;
     }
 
-    public void setCreator_name(String creator_name) {
-        this.creator_name = creator_name;
+    public void setCreator(User creator) {
+        this.creator = creator;
     }
 
     public LocalDate getDueDate() {
@@ -89,12 +109,12 @@ public class Project {
         this.company = company;
     }
 
-    // public List<User> getUsers() {
-    // return users;
-    // }
+    public List<User> getEmployees() {
+        return employees;
+    }
 
-    // public void setUsers(List<User> users) {
-    // this.users = users;
-    // }
+    public void setEmployees(List<User> employees) {
+        this.employees = employees;
+    }
 
 }

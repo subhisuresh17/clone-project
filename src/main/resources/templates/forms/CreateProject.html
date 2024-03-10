@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New Project</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/createProject.css}">
+    <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+</head>
+<body>
+<header>
+    <!--/*/ <th:block th:include="fragments/header :: header('assign-tasks')"></th:block> /*/-->
+</header>
+<div class="container">
+    <h1>Create New Project</h1>
+
+    <!-- Form for adding a new project -->
+    <form id="projectForm">
+        <label for="name">Project Name:</label>
+        <input type="text" id="name" name="name" required>
+    
+        <label for="description">Project Description:</label>
+        <textarea id="description" name="description" rows="4" required></textarea>
+    
+        <label for="dueDate">Due Date:</label>
+        <input type="date" id="dueDate" name="dueDate" required>
+    
+        <button type="button" onclick="addProject()">Add Project</button>
+    </form>
+    
+</div>
+
+<script>
+    function addProject() {
+        var form = document.getElementById('projectForm');
+        var formData = new FormData(form);
+        var jsonObject = {};
+
+        // Convert FormData to JSON object
+        formData.forEach(function (value, key) {
+            jsonObject[key] = value;
+        });
+
+        // Make a POST request with JSON payload
+        fetch('/projects/createProject', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(jsonObject)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            // Redirect to project list page
+            window.location.href = "/projects/projectList";
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            // Show error message
+        });
+    }
+</script>
+</body>
+</html>

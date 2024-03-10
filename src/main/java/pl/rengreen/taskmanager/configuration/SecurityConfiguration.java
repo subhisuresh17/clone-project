@@ -32,16 +32,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                                 .authorizeRequests()
                                 .antMatchers("/register", "/", "/login", "/about", "/css/**", "/webjars/**",
                                                 "/forgotPassword/**", "/forgot-password/**", "/reset-password/**",
-                                                "/loading","/company/**")
+                                                "/loading", "/company/**")
                                 .permitAll()
                                 .antMatchers("/profile/**", "/tasks/**", "/task/**", "/users", "/user/**",
                                                 "/changePassword", "/changePassword/**",
                                                 "/h2-console/**", "/notes", "/notes/**",
-                                                "/changePassword/changeUserPassword")
+                                                "/changePassword/changeUserPassword", "/projects/**", "/dashboard/**")
                                 .hasAnyRole("USER, ADMIN,SUPERADMIN")
                                 .antMatchers("/assignment/**")
                                 .hasAnyRole("ADMIN,SUPERADMIN")
-                                .antMatchers("/superAdmin/**","/superadmin").hasRole("SUPERADMIN")
+                                .antMatchers("/superAdmin/**", "/superadmin").hasRole("SUPERADMIN")
                                 .and()
                                 .formLogin()
                                 .loginPage("/login")
@@ -51,7 +51,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                                 .logout()
                                 .logoutSuccessUrl("/login");
 
-                http.csrf().ignoringAntMatchers("/h2-console/**", "/notes/**", "/forgot-password", "/reset-password","/company/**");
+                http.csrf().ignoringAntMatchers("/h2-console/**", "/notes/**", "/forgot-password", "/reset-password",
+                                "/company/**", "/projects/**");
                 http.headers().frameOptions().sameOrigin();
         }
 
