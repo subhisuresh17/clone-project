@@ -24,4 +24,5 @@ public interface ProjectService {
     List<User> getAllProjectEmployees(Long projectId);
 
     List<Project> findByCompanyId(Long companyId);
+
 }

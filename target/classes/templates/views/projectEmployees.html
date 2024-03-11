@@ -13,37 +13,41 @@
 <div class="container">
     <div class="employee-list">
         <h1>Employee List of Project</h1>
-        <div class="add-employee-section">
-            <h2>Add Employee to Project</h2>
-            <form id="addEmployeeForm" class="employee-form">
-                <select name="userId" id="userId">
-                    <!-- Populate with available users -->
-                    <option th:each="user : ${availableUsers}" th:value="${user.id}" th:text="${user.name}"></option>
-                </select>
-                <button class="btn" type="button" onclick="addEmployeeToProject()">Add Employee</button>
-            </form>
+        
+        <!-- Conditionally show the "Add Employee" section for admin users -->
+        <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+            <div class="add-employee-section">
+                <h2>Add Employee to Project</h2>
+                <form id="addEmployeeForm" class="employee-form">
+                    <select name="userId" id="userId">
+                        <!-- Populate with available users -->
+                        <option th:each="user : ${availableUsers}" th:value="${user.id}" th:text="${user.name}"></option>
+                    </select>
+                    <button class="btn" type="button" onclick="addEmployeeToProject()">Add Employee</button>
+                </form>
+            </div>
         </div>
     </div>
     
-        <table>
-            <thead>
+    <table>
+        <thead>
             <tr>
                 <th>Name</th>
-                <th>Action</th>
+                <!-- Conditionally render the action column heading -->
+                <th th:if="${#authentication.principal.username == project.creator.email}">Action</th>
             </tr>
-            </thead>
-            <tbody>
+        </thead>
+        <tbody>
             <tr th:each="employee : ${project.employees}">
                 <td th:text="${employee.name}"></td>
                 <td>
-                    <button class="btn" type="button" th:onclick="'removeEmployeeFromProject(\'' + ${employee.id} + '\')'">Delete</button>
-                                </td>
+                    <!-- Conditionally render the delete button for the project creator -->
+                    <button th:if="${#authentication.principal.username == project.creator.email}" class="btn" type="button" th:onclick="'removeEmployeeFromProject(\'' + ${employee.id} + '\')'">Delete</button>
+                </td>
             </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <!-- Add Employee button -->
+        </tbody>
+    </table>
+</div>
 
 <!-- JavaScript function to handle adding employee to project -->
 <script th:inline="javascript">

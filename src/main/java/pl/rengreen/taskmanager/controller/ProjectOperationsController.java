@@ -46,9 +46,14 @@ public class ProjectOperationsController {
         String email = principal.getName();
         User user = userService.getUserByEmail(email);
         List<Project> projects = projectService.findByCompanyId(user.getCompany().getId());
+        List<Project> userProjects = userService.getUserProjects(user);
         model.addAttribute("projects", projects);
+        model.addAttribute("userProjects", userProjects);
         return "views/projects";
     }
+  
+    
+
 
     @GetMapping("/{projectId}")
     public String showProjectDetails(Model model, @PathVariable Long projectId, Principal principal) {
@@ -91,6 +96,14 @@ public class ProjectOperationsController {
         Project project = projectService.getProjectById(projectId);
         model.addAttribute("project", project);
         return "views/projectTasks";
+    }
+    @GetMapping("/yourProjects")
+    public String  getYourProjects(Model model, Principal principal){
+        String email=principal.getName();
+        User user=userService.getUserByEmail(email);
+        List<Project> usersProjectList=user.getProjects();
+        model.addAttribute("projects",usersProjectList);
+        return"views/yourProjects";
     }
 
 }

@@ -1,5 +1,6 @@
 package pl.rengreen.taskmanager.service;
 
+import pl.rengreen.taskmanager.model.Project;
 import pl.rengreen.taskmanager.model.User;
 
 import java.util.List;
@@ -34,4 +35,7 @@ public interface UserService {
     public User getUserByVerificationToken(String token);
 
     public boolean isTokenExpired(User user);
+
+    public List<Project> getUserProjects(User user) ;
+
 }

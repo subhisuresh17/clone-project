@@ -30,7 +30,7 @@
                   <div class="dropdown-menu" aria-labelledby="createDropdown">
                       <a class="dropdown-item" href="/task/create">Task</a>
                       <a class="dropdown-item" href="/notes/create">Notes</a>
-                      <a class="dropdown-item" href="/projects/createProject">Project</a>
+                      <a class="dropdown-item" href="/projects/createProject"  sec:authorize="hasRole('ROLE_ADMIN')">Project</a>
                   </div>
               </li>
 
@@ -47,6 +47,8 @@
                       <a class="dropdown-item" href="/calendar">Calendar</a>
                       <a class="dropdown-item" href="/projects/projectList">Project List</a>
                       <a class="dropdown-item" href="/notes">Notes List</a>
+                      <a class="dropdown-item" href="/projects/yourProjects">Your Projects</a>
+
                   </div>
               </li>
               <!-- Profile -->

@@ -3,6 +3,8 @@ package pl.rengreen.taskmanager.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import pl.rengreen.taskmanager.model.Project;
 import pl.rengreen.taskmanager.model.Role;
 import pl.rengreen.taskmanager.model.Task;
 import pl.rengreen.taskmanager.model.User;
@@ -118,5 +120,9 @@ public class UserServiceImpl implements UserService {
     public boolean isTokenExpired(User user) {
         return user.getTokenExpiryDate().isBefore(LocalDateTime.now());
     }
-
+   public List<Project> getUserProjects(User user) {
+        // Implementation of fetching projects associated with a user
+        // For example, if the user has a list of projects, you can return that list
+        return user.getProjects();
+    }
 }

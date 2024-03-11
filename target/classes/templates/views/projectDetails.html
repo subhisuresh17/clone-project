@@ -1,30 +1,32 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Project Details</title>
-  <link rel="stylesheet" type="text/css" th:href="@{/css/projectDetails.css}">
-      <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
-
+    <meta charset="UTF-8">
+    <title>Project Details</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/projectDetails.css}">
+    <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
 </head>
 <body>
-    <header>
-        <!--/*/ <th:block th:include="fragments/header :: header('assign-tasks')"></th:block> /*/-->
-    </header>
+<header>
+    <!--/*/ <th:block th:include="fragments/header :: header('assign-tasks')"></th:block> /*/-->
+</header>
 <div class="container">
-  <div class="project-details">
-    <h1>Project Details</h1>
-    <h2 th:text="${project.name}"></h2>
-    <p th:text="${project.description}"></p>
-    <p>Project Manager: <span th:text="${project.creator.name}"></span></p>
-    <p>Due Date: <span th:text="${project.dueDate}"></span></p>
-  </div>
+    <div class="project-details">
+        <h1>Project Details</h1>
+        <h2 th:text="${project.name}"></h2>
+        <p th:text="${project.description}"></p>
+        <p>Project Manager: <span th:text="${project.creator.name}"></span></p>
+        <p>Due Date: <span th:text="${project.dueDate}"></span></p>
+    </div>
 
-  <div class="actions">
-    <a th:href="@{'/projects/employees/' + ${project.id}}" class="btn">View Employee List</a>
-    <a th:href="@{'/task/create/' + ${project.id}}" class="btn">Create Task</a>
-    <a th:href="@{'/projects/tasks/' + ${project.id}}" class="btn">View Project Tasks</a>
-  </div>
+    <div class="actions">
+        <a th:href="@{'/projects/employees/' + ${project.id}}" class="btn">View Employee List</a>
+        
+        <!-- Conditionally show the "Create Task" button for admin users -->
+        <a th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" th:href="@{'/task/create/' + ${project.id}}" class="btn">Create Task</a>
+        
+        <a th:href="@{'/projects/tasks/' + ${project.id}}" class="btn">View Project Tasks</a>
+    </div>
 </div>
 </body>
 </html>

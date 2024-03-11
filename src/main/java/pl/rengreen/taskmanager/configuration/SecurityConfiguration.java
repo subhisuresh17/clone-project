@@ -30,6 +30,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         protected void configure(HttpSecurity http) throws Exception {
                 http
                                 .authorizeRequests()
+                                .                                antMatchers("/projects/createProject").hasRole("ADMIN")
                                 .antMatchers("/register", "/", "/login", "/about", "/css/**", "/webjars/**",
                                                 "/forgotPassword/**", "/forgot-password/**", "/reset-password/**",
                                                 "/loading", "/company/**")
