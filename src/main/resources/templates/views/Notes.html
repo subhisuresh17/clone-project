@@ -16,6 +16,9 @@
 <h1 class="title">User Notes</h1>
 <div class="create-note-container">
     <a href="/notes/create" class="create-note-btn">Create New Note</a>
+    <div th:if="${#lists.isEmpty(notes)}"  class="empty-notes-message">
+        <p>No notes found.</p>
+    </div>
 </div>
 <div class="notes-container">
     <!-- Iterate over notes and display each note as a card -->

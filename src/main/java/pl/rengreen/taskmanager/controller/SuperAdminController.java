@@ -1,5 +1,8 @@
 package pl.rengreen.taskmanager.controller;
 
+import java.security.Principal;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestWrapper;
@@ -10,22 +13,28 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import pl.rengreen.taskmanager.model.User;
+import pl.rengreen.taskmanager.service.CompanyService;
 import pl.rengreen.taskmanager.service.UserService;
 
 @Controller
 public class SuperAdminController {
 
     private UserService userService;
+    private CompanyService companyService;
 
     @Autowired
-    public SuperAdminController(UserService userService) {
+    public SuperAdminController(UserService userService, CompanyService companyService) {
         this.userService = userService;
+        this.companyService = companyService;
     }
 
     @GetMapping("/superAdmin/assignManager")
-    public String assignManager(Model model, SecurityContextHolderAwareRequestWrapper request) {
+    public String assignManager(Principal principal, Model model, SecurityContextHolderAwareRequestWrapper request) {
         boolean isAdminSigned = request.isUserInRole("ROLE_ADMIN");
-        model.addAttribute("users", userService.findAll());
+        String email = principal.getName();
+        User user = userService.getUserByEmail(email);
+        List<User> allUsers = companyService.getCompanyUsers(user.getCompany().getId());
+        model.addAttribute("users", allUsers);
         model.addAttribute("isAdminSigned", isAdminSigned);
 
         return "views/assignManager";

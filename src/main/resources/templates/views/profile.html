@@ -12,6 +12,8 @@
     <title>Profile</title>
   </head>
   <link rel="stylesheet" th:href="@{/css/profile.css}" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.13.2/cloudinary-core.min.js"></script>
+
   <body>
     <header>
       <!--/*/ <th:block th:include="fragments/header :: header('profile')"></th:block> /*/-->
@@ -39,7 +41,10 @@
 <div id="avatarModal" class="modal">
   <div class="modal-content">
     <span class="close" onclick="closeModal()">&times;</span>
-    <!-- Avatar options -->
+    <p>Select the avatar or choose from local storage</p>
+    <input type="file" id="fileInput" accept="image/*">
+    <button onclick="uploadImage()">Upload Image</button>
+    <img id="previewImage" src="#" alt="Preview Image" style="display: none;">    <!-- Avatar options -->
     <div class="avatar-options">
       <img class="avatar" name="picUrl" style="height: 100px;" src="/images/avatars/avatar1.jpg" alt="Avatar 1" onclick="selectAvatar('/images/avatars/avatar1.jpg')">
       <img class="avatar" name="picUrl" style="height: 100px;" src="/images/avatars/avatar2.jpg" alt="Avatar 1" onclick="selectAvatar('/images/avatars/avatar2.jpg')">
@@ -55,7 +60,6 @@
     <button onclick="confirmAvatar()">Confirm</button>
   </div>
 </div>
-
 <!-- End Modal -->
  <!-- Main -->
  <div class="main-container">

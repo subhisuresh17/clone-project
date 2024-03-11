@@ -300,3 +300,13 @@ body {
     max-height: 400px; /* Set a maximum height for the modal content */
     overflow-y: auto; /* Enable vertical scrolling if content overflows */
 }
+
+.empty-notes-message {
+    text-align: center;
+    margin-top: 200px;
+}
+
+.empty-notes-message p {
+    font-size: 24px; /* Adjust the font size as needed */
+    color:grey;
+}

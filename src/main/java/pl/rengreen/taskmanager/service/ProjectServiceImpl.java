@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 
 import javassist.NotFoundException;
@@ -90,6 +91,18 @@ public class ProjectServiceImpl implements ProjectService {
         return projectRepository.findByCompanyId(companyId);
     }
 
- 
+    @Override
+    public boolean isUserPresentInProject(Project project, User user) {
+        // TODO Auto-generated method stub
+        if (project == null) {
+            return true;
+        }
+        Project project2 = projectRepository.findById(project.getId()).get();
+        List<User> users = project2.getEmployees();
+        if (users.contains(user)) {
+            return true;
+        }
+        return false;
+    }
 
 }

@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import pl.rengreen.taskmanager.model.Project;
 import pl.rengreen.taskmanager.model.Task;
 import pl.rengreen.taskmanager.model.User;
 import pl.rengreen.taskmanager.service.CompanyService;
 import pl.rengreen.taskmanager.service.EmailService;
+import pl.rengreen.taskmanager.service.ProjectService;
 import pl.rengreen.taskmanager.service.TaskService;
 import pl.rengreen.taskmanager.service.UserService;
 
@@ -25,14 +27,16 @@ public class AssigmentController {
     private TaskService taskService;
     private EmailService emailService;
     private CompanyService companyService;
+    private ProjectService projectService;
 
     @Autowired
     public AssigmentController(UserService userService, TaskService taskService, EmailService emailService,
-            CompanyService companyService) {
+            CompanyService companyService, ProjectService projectService) {
         this.userService = userService;
         this.taskService = taskService;
         this.emailService = emailService;
         this.companyService = companyService;
+        this.projectService = projectService;
     }
 
     public List<Task> freeTasks(Principal principal) {
@@ -43,7 +47,10 @@ public class AssigmentController {
         long company_id = user.getCompany().getId();
         for (Task t : task) {
             if (companyService.isUserPresentInCompany(t.getCreatedUser(), company_id)) {
-                companyTask.add(t);
+                Project project = t.getProject();
+                if (projectService.isUserPresentInProject(project, user)) {
+                    companyTask.add(t);
+                }
             }
         }
         return companyTask;

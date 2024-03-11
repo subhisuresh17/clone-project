@@ -25,4 +25,6 @@ public interface ProjectService {
 
     List<Project> findByCompanyId(Long companyId);
 
+    boolean isUserPresentInProject(Project project, User user);
+
 }
