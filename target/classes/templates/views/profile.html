@@ -13,7 +13,21 @@
   </head>
   <link rel="stylesheet" th:href="@{/css/profile.css}" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.13.2/cloudinary-core.min.js"></script>
-
+  <style>
+    #preview {
+      width: 100px; /* Adjust the width as needed */
+      height: 100px; /* Adjust the height as needed */
+      overflow: hidden; /* Hide any overflow */
+      margin: 0 auto; /* Center the image horizontally */
+    }
+    
+    #preview img {
+      width: 100%; /* Make the image fill the container */
+      height: 100%; /* Make the image fill the container */
+      object-fit: cover; /* Ensure the image covers the entire container */
+    }
+    
+  </style>
   <body>
     <header>
       <!--/*/ <th:block th:include="fragments/header :: header('profile')"></th:block> /*/-->
@@ -43,8 +57,11 @@
     <span class="close" onclick="closeModal()">&times;</span>
     <p>Select the avatar or choose from local storage</p>
     <input type="file" id="fileInput" accept="image/*">
-    <button onclick="uploadImage()">Upload Image</button>
-    <img id="previewImage" src="#" alt="Preview Image" style="display: none;">    <!-- Avatar options -->
+    <button onclick="uploadImage()">Upload</button>
+    <div id="preview">
+      <!-- Preview image will be displayed here -->
+      <img id="previewImage" style="max-width: 100px; max-height: 100px;" />
+    </div>     <!-- Avatar options -->
     <div class="avatar-options">
       <img class="avatar" name="picUrl" style="height: 100px;" src="/images/avatars/avatar1.jpg" alt="Avatar 1" onclick="selectAvatar('/images/avatars/avatar1.jpg')">
       <img class="avatar" name="picUrl" style="height: 100px;" src="/images/avatars/avatar2.jpg" alt="Avatar 1" onclick="selectAvatar('/images/avatars/avatar2.jpg')">

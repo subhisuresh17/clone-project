@@ -150,11 +150,6 @@ function closeModal() {
   var modal = document.getElementById("avatarModal");
   modal.style.display = "none";
 }
-const cloudinary = cloudinary.Cloudinary.config({
-  cloudName: "dgmaiid9c",
-  apiKey: "214859887372126",
-  apiSecret: "htsY9BPAEB_DPjDr8zg7tK91Xcs",
-});
 
 var selectedAvatarUrl = "";
 
@@ -189,28 +184,6 @@ function updateProfilePic(picUrl) {
       console.error(xhr.responseText);
       // Handle error, such as displaying an error message
     },
-  });
-}
-
-function handleFileUpload(event) {
-  const file = event.target.files[0];
-  const formData = new FormData();
-  formData.append("file", file);
-  formData.append("upload_preset", "your_upload_preset"); // Replace with your Cloudinary preset
-
-  cloudinary.uploader.upload(formData, (error, result) => {
-    if (error) {
-      console.error(error);
-      // Handle upload error
-      return;
-    }
-
-    // Upload successful, get the image URL from the result
-    const imageUrl = result.secure_url;
-    selectedAvatarUrl = imageUrl;
-
-    // Update the profile picture preview with the uploaded image URL
-    document.getElementById("profilePic").src = imageUrl;
   });
 }
 
@@ -268,17 +241,8 @@ function showModal(button) {
   });
 }
 
-// Replace these values with your Cloudinary credentials
-const cloudName = "dgmaiid9c";
-const apiKey = "214859887372126";
-const apiSecret = "htsY9BPAEB_DPjDr8zg7tK91Xcs";
-const uploadPreset = "ykzpka7w";
-
-cloudinary.Cloudinary.config({
-  cloud_name: cloudName,
-  api_key: apiKey,
-  api_secret: apiSecret,
-});
+const cloudName = "dgmaiid9c"; // Replace with your Cloudinary cloud name
+const unsignedUploadPreset = "wmm3vnwb"; // Replace with your Cloudinary unsigned upload preset
 
 function uploadImage() {
   const fileInput = document.getElementById("fileInput");
@@ -287,21 +251,18 @@ function uploadImage() {
 
   const formData = new FormData();
   formData.append("file", file);
-  formData.append("upload_preset", uploadPreset);
+  formData.append("upload_preset", unsignedUploadPreset);
 
-  fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+  fetch(`https://api.cloudinary.com/v1_1/${cloudName}/upload`, {
     method: "POST",
     body: formData,
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       const imageUrl = data.secure_url;
-      const previewImage = document.getElementById("previewImage");
-      previewImage.src = imageUrl;
-      previewImage.style.display = "block";
+      const preview = document.getElementById("preview");
+      selectedAvatarUrl = imageUrl;
+      preview.innerHTML = `<img src="${imageUrl}" alt="Uploaded Image" id="uploadedImage">`;
     })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
+    .catch((error) => console.error("Error uploading image:", error));
 }
