@@ -39,7 +39,7 @@ public class AssigmentController {
         this.projectService = projectService;
     }
 
-    public List<Task> freeTasks(Principal principal) {
+    public List<Task> freeTasks(Principal principal, long userId) {
         String email = principal.getName();
         User user = userService.getUserByEmail(email);
         List<Task> task = taskService.findFreeTasks();
@@ -48,7 +48,9 @@ public class AssigmentController {
         for (Task t : task) {
             if (companyService.isUserPresentInCompany(t.getCreatedUser(), company_id)) {
                 Project project = t.getProject();
-                if (projectService.isUserPresentInProject(project, user)) {
+                User employee = userService.getUserById(userId);
+                if (projectService.isUserPresentInProject(project, employee)
+                        && projectService.isUserPresentInProject(project, user)) {
                     companyTask.add(t);
                 }
             }
@@ -61,9 +63,7 @@ public class AssigmentController {
         String email = principal.getName();
         User user = userService.getUserByEmail(email);
         List<User> allUsers = companyService.getCompanyUsers(user.getCompany().getId());
-        List<Task> freeTasks = freeTasks(principal);
         model.addAttribute("users", allUsers);
-        model.addAttribute("freeTasks", freeTasks);
         return "forms/assignment";
     }
 
@@ -72,11 +72,11 @@ public class AssigmentController {
         String email = principal.getName();
         User user = userService.getUserByEmail(email);
         List<User> allUsers = companyService.getCompanyUsers(user.getCompany().getId());
-        List<Task> freeTasks = freeTasks(principal);
+        List<Task> freeTasks = freeTasks(principal, userId);
         model.addAttribute("selectedUser", userService.getUserById(userId));
         model.addAttribute("users", allUsers);
         model.addAttribute("freeTasks", freeTasks);
-        return "forms/assignment";
+        return "forms/assignTask";
     }
 
     @GetMapping("/assign/{userId}/{taskId}")

@@ -19,35 +19,35 @@
           <ul class="navbar-nav mr-auto">
               <!-- Home -->
               <li th:class="${activeTab == 'home'}? 'active nav-item mr-4' : 'nav-item mr-4'">
-                  <a class="nav-link" href="/dashboard">Dashboard</a>
+                  <a class="nav-link" href="/dashboard"  sec:authorize="!hasRole('ROLE_PROADMIN')">Dashboard</a>
               </li>
 
               <!-- Create New -->
-              <li class="nav-item dropdown">
+              <li sec:authorize="!hasRole('ROLE_PROADMIN')" class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="createDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Create
                   </a>
                   <div class="dropdown-menu" aria-labelledby="createDropdown">
-                      <a class="dropdown-item" href="/task/create" >Task</a>
-                      <a class="dropdown-item" href="/notes/create">Notes</a>
+                      <a class="dropdown-item" href="/task/create"  sec:authorize="!hasRole('ROLE_PROADMIN')" >Task</a>
+                      <a class="dropdown-item" href="/notes/create"  sec:authorize="!hasRole('ROLE_PROADMIN')">Notes</a>
                       <a class="dropdown-item" href="/projects/createProject"  sec:authorize="hasRole('ROLE_ADMIN')">Project</a>
                   </div>
               </li>
 
               <!-- Combined Dropdown -->
-              <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="combinedDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <li sec:authorize="!hasRole('ROLE_PROADMIN')" class="nav-item dropdown">
+                  <a  class="nav-link dropdown-toggle" href="#" id="combinedDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Workspace
                   </a>
                   <div class="dropdown-menu" aria-labelledby="combinedDropdown">
                     <a class="dropdown-item" href="/assignment" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_SUPERADMIN')">Assign Tasks</a>
                     <a class="dropdown-item" href="/superAdmin/assignManager" sec:authorize="hasRole('ROLE_SUPERADMIN')">Assign Manager</a>
-                      <a class="dropdown-item" href="/tasks">Tasks List</a>
-                      <a class="dropdown-item" href="/users">Employees List</a>
-                      <a class="dropdown-item" href="/calendar">Calendar</a>
-                      <a class="dropdown-item" href="/projects/projectList">Project List</a>
-                      <a class="dropdown-item" href="/notes">Notes List</a>
-                      <a class="dropdown-item" href="/projects/yourProjects" sec:authorize="!hasRole('ROLE_SUPERADMIN')">Your Projects</a>
+                      <a class="dropdown-item" href="/tasks" sec:authorize="!hasRole('ROLE_PROADMIN')">Tasks List</a>
+                      <a class="dropdown-item" href="/users" sec:authorize="!hasRole('ROLE_PROADMIN')">Employees List</a>
+                      <a class="dropdown-item" href="/calendar" sec:authorize="!hasRole('ROLE_PROADMIN')">Calendar</a>
+                      <a class="dropdown-item" href="/projects/projectList" sec:authorize="!hasRole('ROLE_PROADMIN')">Project List</a>
+                      <a class="dropdown-item" href="/notes" sec:authorize="!hasRole('ROLE_PROADMIN')">Notes List</a>
+                      <a class="dropdown-item" href="/projects/yourProjects" sec:authorize="!hasRole('ROLE_SUPERADMIN') and !hasRole('ROLE_PROADMIN')" >Your Projects</a>
 
                   </div>
               </li>
@@ -55,6 +55,12 @@
               <li th:class="${activeTab == 'profile'}? 'active nav-item mr-4' : 'nav-item mr-4'" sec:authorize="isAuthenticated()">
                   <a class="nav-link" href="/profile">Your Profile</a>
               </li>
+              <li th:class="${activeTab == 'company'}? 'active nav-item mr-4' : 'nav-item mr-4'" sec:authorize="isAuthenticated()">
+                <a class="nav-link" href="/company/addCompany"  sec:authorize="hasRole('ROLE_PROADMIN')">ADD Company</a>
+            </li>
+            <li th:class="${activeTab == 'company-list'}? 'active nav-item mr-4' : 'nav-item mr-4'" sec:authorize="isAuthenticated()">
+                <a class="nav-link" href="/company/showCompanies"  sec:authorize="hasRole('ROLE_PROADMIN')">Company List</a>
+            </li>
               <!-- About -->
               <li th:class="${activeTab == 'about'}? 'active nav-item mr-4' : 'nav-item mr-4'">
                   <a class="nav-link" href="/about">About</a>

@@ -17,6 +17,7 @@ import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService {
+    private static final String PRO_ADMIN = "PROADMIN";
     private static final String SUPER_ADMIN = "SUPERADMIN";
     private static final String ADMIN = "ADMIN";
     private static final String USER = "USER";
@@ -46,6 +47,13 @@ public class UserServiceImpl implements UserService {
     }
 
     public User saveUser(User user) {
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User changeRoleToProAdmin(User user) {
+        Role proAdminRole = roleRepository.findByRole(PRO_ADMIN);
+        user.setRoles(new ArrayList<>(Collections.singletonList(proAdminRole)));
         return userRepository.save(user);
     }
 
@@ -120,9 +128,11 @@ public class UserServiceImpl implements UserService {
     public boolean isTokenExpired(User user) {
         return user.getTokenExpiryDate().isBefore(LocalDateTime.now());
     }
-   public List<Project> getUserProjects(User user) {
+
+    public List<Project> getUserProjects(User user) {
         // Implementation of fetching projects associated with a user
         // For example, if the user has a list of projects, you can return that list
         return user.getProjects();
     }
+
 }

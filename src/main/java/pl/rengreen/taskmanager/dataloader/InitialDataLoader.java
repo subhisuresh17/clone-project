@@ -60,6 +60,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 
                 // ROLES
                 // --------------------------------------------------------------------------------------------------------
+                roleService.createRole(new Role("PROADMIN"));
                 roleService.createRole(new Role("SUPERADMIN"));
                 roleService.createRole(new Role("ADMIN"));
                 roleService.createRole(new Role("USER"));
@@ -69,6 +70,13 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
                 // USERS
                 // --------------------------------------------------------------------------------------------------------
                 // 1
+                User proAdmin = new User(
+                                "proadmin@mail.com",
+                                "ProAdmin",
+                                "112233",
+                                "images/admin.png");
+                userService.createUser(proAdmin);
+                userService.changeRoleToProAdmin(proAdmin);
                 User admin = new User(
                                 defaultAdminMail,
                                 defaultAdminName,

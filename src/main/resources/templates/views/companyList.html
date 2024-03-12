@@ -1,15 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeLeaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+            <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+            <link rel="stylesheet" th:href="@{/css/companyList.css}">
+
 </head>
+
 <body>
+    <header>
+        <!--/*/ <th:block th:include="fragments/header :: header('company-list')"></th:block> /*/-->
+        <h1>Company List</h1>
+    </header>
+  
     <div>
-        <ul th:each="company:${companies}">
-            <li th:text="${company.name}"></li>
-        </ul>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>Country</th>
+                    <th>Phone Number</th>
+                    <th>Email</th>
+                    <th>Create</th>
+                    <th>View </th>
+                    <!-- Add more parameters here -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="company : ${companies}">
+                    <td th:text="${company.name}"></td>
+                    <td th:text="${company.address}"></td>
+                    <td th:text="${company.city}"></td>
+                    <td th:text="${company.country}"></td>
+                    <td th:text="${company.phoneNumber}"></td>
+                    <td th:text="${company.email}"></td>
+                    <!-- Add more parameters here -->
+                    <td>
+                        <a th:href="@{'/proAdmin/createSuperAdmin/' + ${company.id}}" class="create-superadmin-button">Create Super Admin</a>
+                    </td>
+                    <td>
+                        <a th:href="@{'/proAdmin/viewSuperAdmins/' + ${company.id}}" class="create-superadmin-button">View Super Admin</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </body>
 </html>

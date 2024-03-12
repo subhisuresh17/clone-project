@@ -30,16 +30,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         protected void configure(HttpSecurity http) throws Exception {
                 http
                                 .authorizeRequests()
-                                .                                antMatchers("/projects/createProject").hasRole("ADMIN")
+                                .antMatchers("/projects/createProject").hasRole("ADMIN")
                                 .antMatchers("/register", "/", "/login", "/about", "/css/**", "/webjars/**",
                                                 "/forgotPassword/**", "/forgot-password/**", "/reset-password/**",
-                                                "/loading", "/company/**")
+                                                "/loading")
                                 .permitAll()
+                                .antMatchers("/company/**").hasAnyRole("PROADMIN")
                                 .antMatchers("/profile/**", "/tasks/**", "/task/**", "/users", "/user/**",
                                                 "/changePassword", "/changePassword/**",
                                                 "/h2-console/**", "/notes", "/notes/**",
                                                 "/changePassword/changeUserPassword", "/projects/**", "/dashboard/**")
-                                .hasAnyRole("USER, ADMIN,SUPERADMIN")
+                                .hasAnyRole("USER, ADMIN,SUPERADMIN,PROADMIN")
                                 .antMatchers("/assignment/**")
                                 .hasAnyRole("ADMIN,SUPERADMIN")
                                 .antMatchers("/superAdmin/**", "/superadmin").hasRole("SUPERADMIN")

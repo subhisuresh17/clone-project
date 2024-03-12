@@ -29,9 +29,7 @@ public class CompanyController {
     }
 
     @PostMapping("/company/addCompany")
-    public String addCompanyToDatabase(@RequestParam("name") String name) {
-        Company company = new Company();
-        company.setName(name);
+    public String addCompanyToDatabase(@ModelAttribute("company") Company company) {
         companyService.addCompany(company);
         return "redirect:/company/showCompanies";
     }

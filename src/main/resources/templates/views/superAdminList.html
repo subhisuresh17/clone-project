@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+            <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+            <link rel="stylesheet" th:href="@{/css/companyList.css}">
+
+</head>
+
+<body>
+    <header>
+        <!--/*/ <th:block th:include="fragments/header :: header('company-list')"></th:block> /*/-->
+        <h1>Company List</h1>
+    </header>
+  
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    
+                    <th>Email</th>
+                
+                    <!-- Add more parameters here -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="superAdmin : ${superAdmins}">
+                    <td th:text="${superAdmin.name}"></td>
+                    <td th:text="${superAdmin.email}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

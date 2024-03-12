@@ -14,6 +14,8 @@ public interface UserService {
 
     User changeRoleToSuperAdmin(User user);
 
+    User changeRoleToProAdmin(User user);
+
     User changeRoleToUser(User user);
 
     List<User> findAll();
@@ -36,6 +38,6 @@ public interface UserService {
 
     public boolean isTokenExpired(User user);
 
-    public List<Project> getUserProjects(User user) ;
+    public List<Project> getUserProjects(User user);
 
 }
