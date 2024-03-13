@@ -43,7 +43,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                                 .hasAnyRole("USER, ADMIN,SUPERADMIN,PROADMIN")
                                 .antMatchers("/assignment/**")
                                 .hasAnyRole("ADMIN,SUPERADMIN")
-                                .antMatchers("/superAdmin/**", "/superadmin").hasRole("SUPERADMIN")
+                                .antMatchers("/superAdmin/**", "/superadmin").hasAnyRole("SUPERADMIN","PROADMIN")
                                 .and()
                                 .formLogin()
                                 .loginPage("/login")

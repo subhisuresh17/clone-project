@@ -28,6 +28,11 @@ public class ForgotPasswordController {
         forgotPasswordService.initiatePasswordReset(email);
         return "redirect:/forgot-password-success";
     }
+    @PostMapping("/forgot-password/superAdmin/createSuperAdminPassword")
+    public String createSuperAdmin(@RequestParam("email") String email) {
+        forgotPasswordService.initiateSuperAdmin(email);
+        return "redirect:/superAdmin/superAdminCredentials";
+    }
 
     @GetMapping("/forgot-password-success")
     public String viewPasswordSuccess() {

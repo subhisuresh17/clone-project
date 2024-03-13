@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.cloudinary.http44.api.Response;
 
 import pl.rengreen.taskmanager.model.Role;
 import pl.rengreen.taskmanager.model.User;

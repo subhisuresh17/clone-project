@@ -53,5 +53,9 @@ public class SuperAdminController {
         userService.changeRoleToUser(user);
         return "redirect:/superAdmin/assignManager";
     }
+    @GetMapping("/superAdmin/superAdminCredentials")
+    public String sentCredentials(){
+        return "views/SuperAdminCredentials";
+    }
 
 }
