@@ -13,8 +13,11 @@
     </header>
     <div class="containers">
 
-        <form class="form" th:action="@{/proAdmin/createSuperAdmin}" method="post" th:object="${SuperAdmin}">
+        <form class="form" th:action="@{/proAdmin/createSuperAdmin/${company}}" method="post" th:object="${SuperAdmin}">
             <h1>Create Super Admin</h1>
+            <div th:if="${userExists}">
+                <p>User with this email already exists in the company.</p>
+            </div>
 
             <input type="hidden" name="company" th:value="${company}">
 
@@ -29,6 +32,7 @@
             
             <button type="submit">Create Super admin</button>
         </form>
+        
        </div>
 </body>
 </html>

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import pl.rengreen.taskmanager.model.Project;
+import pl.rengreen.taskmanager.model.Role;
 import pl.rengreen.taskmanager.model.Task;
 import pl.rengreen.taskmanager.model.User;
 import pl.rengreen.taskmanager.service.CompanyService;
@@ -63,7 +64,15 @@ public class AssigmentController {
         String email = principal.getName();
         User user = userService.getUserByEmail(email);
         List<User> allUsers = companyService.getCompanyUsers(user.getCompany().getId());
-        model.addAttribute("users", allUsers);
+        List<User> ourUsers = new ArrayList<>();
+        for (User u : allUsers) {
+            for (Role role : u.getRoles()) {
+                if (!role.getRole().equals("SUPERADMIN")) {
+                    ourUsers.add(u);
+                }
+            }
+        }
+        model.addAttribute("users", ourUsers);
         return "forms/assignment";
     }
 

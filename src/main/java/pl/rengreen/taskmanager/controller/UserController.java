@@ -1,6 +1,7 @@
 package pl.rengreen.taskmanager.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import pl.rengreen.taskmanager.model.Role;
 import pl.rengreen.taskmanager.model.User;
 import pl.rengreen.taskmanager.service.CompanyService;
 import pl.rengreen.taskmanager.service.UserService;
@@ -19,19 +21,28 @@ public class UserController {
 
     private UserService userService;
     private CompanyService companyService;
+
     @Autowired
-    public UserController(UserService userService,CompanyService companyService) {
+    public UserController(UserService userService, CompanyService companyService) {
         this.userService = userService;
-        this.companyService=companyService;
+        this.companyService = companyService;
     }
 
     @GetMapping("/users")
-    public String listUsers(Principal principal,Model model, SecurityContextHolderAwareRequestWrapper request) {
+    public String listUsers(Principal principal, Model model, SecurityContextHolderAwareRequestWrapper request) {
         boolean isAdminSigned = request.isUserInRole("ROLE_ADMIN");
-        String email=principal.getName();
-        User user=userService.getUserByEmail(email);
-        List<User> allUsers=companyService.getCompanyUsers(user.getCompany().getId());
-        model.addAttribute("users", allUsers);
+        String email = principal.getName();
+        User user = userService.getUserByEmail(email);
+        List<User> allUsers = companyService.getCompanyUsers(user.getCompany().getId());
+        List<User> ourUsers = new ArrayList<>();
+        for (User u : allUsers) {
+            for (Role role : u.getRoles()) {
+                if (!role.getRole().equals("SUPERADMIN")) {
+                    ourUsers.add(u);
+                }
+            }
+        }
+        model.addAttribute("users", ourUsers);
         model.addAttribute("isAdminSigned", isAdminSigned);
         return "views/users";
     }

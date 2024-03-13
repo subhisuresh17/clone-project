@@ -35,15 +35,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                                                 "/forgotPassword/**", "/forgot-password/**", "/reset-password/**",
                                                 "/loading")
                                 .permitAll()
-                                .antMatchers("/company/**").hasAnyRole("PROADMIN")
-                                .antMatchers("/profile/**", "/tasks/**", "/task/**", "/users", "/user/**",
-                                                "/changePassword", "/changePassword/**",
-                                                "/h2-console/**", "/notes", "/notes/**",
-                                                "/changePassword/changeUserPassword", "/projects/**", "/dashboard/**")
+                                .antMatchers("/company/**", "/proAdmin/**").hasAnyRole("PROADMIN")
+                                .antMatchers("/tasks/**", "/task/**", "/users", "/user/**",
+                                                "/projects/**", "/dashboard/**", "/notes", "/notes/**")
+                                .hasAnyRole("USER", "ADMIN", "SUPERADMIN")
+                                .antMatchers("/changePassword", "/changePassword/**",
+                                                "/h2-console/**", "/profile/**",
+                                                "/changePassword/changeUserPassword")
                                 .hasAnyRole("USER, ADMIN,SUPERADMIN,PROADMIN")
                                 .antMatchers("/assignment/**")
                                 .hasAnyRole("ADMIN,SUPERADMIN")
-                                .antMatchers("/superAdmin/**", "/superadmin").hasAnyRole("SUPERADMIN","PROADMIN")
+                                .antMatchers("/superAdmin/**", "/superadmin").hasRole("SUPERADMIN")
                                 .and()
                                 .formLogin()
                                 .loginPage("/login")

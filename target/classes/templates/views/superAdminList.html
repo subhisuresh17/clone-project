@@ -34,7 +34,7 @@
                     <td th:text="${superAdmin.name}"></td>
                     <td th:text="${superAdmin.email}"></td>
                     <td>
-                        <form th:action="@{/forgot-password/superAdmin/createSuperAdminPassword}" method="post">
+                        <form th:action="@{/proAdmin/superAdmin/createSuperAdminPassword}" method="post">
                             <input name="email"  type="hidden" th:value="${superAdmin.email}"/>
                             <button>Send Credentials</button>
                         </form>
