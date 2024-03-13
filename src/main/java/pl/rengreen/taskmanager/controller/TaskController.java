@@ -62,6 +62,12 @@ public class TaskController {
         boolean isAdminSigned = request.isUserInRole("ROLE_ADMIN");
         List<User> allUsers = companyService.getCompanyUsers(signedUser.getCompany().getId());
         List<Task> allTask = companyService.getAllTaskByCompany(signedUser.getCompany().getId());
+        List<Project> usersProjects = userService.getUserProjects(signedUser);
+        for (Task t : allTask) {
+            if (t.getProject() != null && !usersProjects.contains(t.getProject())) {
+                allTask.remove(t);
+            }
+        }
         model.addAttribute("tasks", allTask);
         model.addAttribute("users", allUsers);
         model.addAttribute("signedUser", signedUser);
