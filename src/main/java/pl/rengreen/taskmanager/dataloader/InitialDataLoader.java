@@ -8,9 +8,12 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
+
+import pl.rengreen.taskmanager.model.Company;
 import pl.rengreen.taskmanager.model.Role;
 import pl.rengreen.taskmanager.model.User;
 import pl.rengreen.taskmanager.model.Task;
+import pl.rengreen.taskmanager.service.CompanyService;
 import pl.rengreen.taskmanager.service.RoleService;
 import pl.rengreen.taskmanager.service.TaskService;
 import pl.rengreen.taskmanager.service.UserService;
@@ -22,6 +25,7 @@ import java.time.format.DateTimeFormatter;
 public class InitialDataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
         private UserService userService;
+        private CompanyService companyService;
         private TaskService taskService;
         private RoleService roleService;
         private final Logger logger = LoggerFactory.getLogger(InitialDataLoader.class);
@@ -37,10 +41,11 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
         private String defaultAdminImage;
 
         @Autowired
-        public InitialDataLoader(UserService userService, TaskService taskService, RoleService roleService) {
+        public InitialDataLoader(CompanyService companyService,UserService userService, TaskService taskService, RoleService roleService) {
                 this.userService = userService;
                 this.taskService = taskService;
                 this.roleService = roleService;
+                this.companyService=companyService;
         }
 
         private boolean dataAlreadyLoaded() {
@@ -70,64 +75,167 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
                 // USERS
                 // --------------------------------------------------------------------------------------------------------
                 // 1
+                Company company = new Company(
+    "Pro Collab",
+    "Global Tech Village",
+    "Bangalore",
+    "India",
+    "+91-8923478123",
+    "procollab@support.com"
+);
+                Company company1 = new Company(
+                                        "ABC Corp",
+                                        "123 Main Street",
+                                        "New York",
+                                        "USA",
+                                        "+1-123-456-7890",
+                                        "abc@example.com"
+                                        );
+
+                                        Company company2 = new Company(
+                                                "XYZ Ltd",
+                                                "456 Elm Street",
+                                                "Los Angeles",
+                                                "USA",
+                                                "+1-987-654-3210",
+                                                "xyz@example.com"
+                                            );
+                                            Company company3 = new Company(
+    "Acme Inc",
+    "789 Oak Avenue",
+    "Chicago",
+    "USA",
+    "+1-456-789-0123",
+    "acme@example.com"
+);
+Company company4 = new Company(
+    "Swift Solutions",
+    "101 Maple Drive",
+    "San Francisco",
+    "USA",
+    "+1-234-567-8901",
+    "swift@example.com"
+);
+                companyService.addCompany(company);
+                companyService.addCompany(company1);
+                companyService.addCompany(company2);
+                companyService.addCompany(company3);
+                companyService.addCompany(company4);
+
                 User proAdmin = new User(
                                 "proadmin@mail.com",
                                 "ProAdmin",
                                 "112233",
-                                "images/admin.png");
+                                "images/admin.png",company);
                 userService.createUser(proAdmin);
+                proAdmin.setCompany(company);
                 userService.changeRoleToProAdmin(proAdmin);
                 User admin = new User(
                                 defaultAdminMail,
                                 defaultAdminName,
                                 defaultAdminPassword,
-                                defaultAdminImage);
+                                defaultAdminImage,company1);
+                                admin.setCompany(company1);
                 userService.createUser(admin);
-                userService.changeRoleToSuperAdmin(admin);
-
+                userService.changeRoleToSuperAdmin(admin
+                );
+                
                 // 2
                 User manager = new User(
                                 "manager@mail.com",
                                 "Manager",
                                 "112233",
-                                "images/admin.png");
-                userService.createUser(manager);
-                userService.changeRoleToAdmin(manager);
+                                "images/admin.png",company1);
+                                manager.setCompany(company1);
 
+                                userService.createUser(manager);
+                userService.changeRoleToAdmin(manager);
                 // 3
-                userService.createUser(new User(
+                User user1=new User(
                                 "mark@mail.com",
                                 "Mark",
                                 "112233",
-                                "images/mark.jpg"));
+                                "images/mark.jpg",company1);
+                                user1.setCompany(company1);
+                                userService.createUser(user1);
+
 
                 // 4
-                userService.createUser(new User(
+                User user2=new User(
                                 "ann@mail.com",
                                 "Ann",
                                 "112233",
-                                "images/ann.jpg"));
+                                "images/ann.jpg",company1);
+                                user2.setCompany(company1);
+                                userService.createUser(user2);
+
 
                 // 5
-                userService.createUser(new User(
+                User user3=new User(
                                 "ralf@mail.com",
                                 "Ralf",
                                 "112233",
-                                "images/ralf.jpg"));
+                                "images/ralf.jpg",company1);
+                                user3.setCompany(company1);
+                                userService.createUser(user3);
+
 
                 // 6
-                userService.createUser(new User(
+                User user4=new User(
                                 "kate@mail.com",
                                 "Kate",
                                 "112233",
-                                "images/kate.jpg"));
+                                "images/kate.jpg",company1);
+                                user4.setCompany(company1);
+                                userService.createUser(user4);
+
 
                 // 7
-                userService.createUser(new User(
+                User user5=new User(
                                 "tom@mail.com",
                                 "Tom",
                                 "112233",
-                                "images/tom.jpg"));
+                                "images/tom.jpg",company1);
+                                user5.setCompany(company1);
+                                userService.createUser(user5);
+
+
+                                User shravan = new User(
+                                        "shravan@mail.com",
+                                        "Shravan Janwade",
+                                        "112233",
+                                        "images/admin.png",company2);
+                                        shravan.setCompany(company2);
+                                        userService.createUser(shravan);
+                        userService.changeRoleToAdmin(shravan);
+
+                        User user6=new User(
+                                                "rohit@mail.com",
+                                                "Rohit Biradar",
+                                                "112233",
+                                                "images/tom.jpg",company2);
+                                                user6.setCompany(company2);
+
+                                                userService.createUser(user6);
+
+
+                                                User user7=new User(
+                                                        "rahul@mail.com",
+                                                        "Rahul Kurtadkar",
+                                                        "112233",
+                                                        "images/tom.jpg",company2);
+                                                        user7.setCompany(company2);
+                                                        userService.createUser(user7);
+
+
+                                                        User user8=new User(
+                                                                "ritesh@mail.com",
+                                                                "Ritesh Rao",
+                                                                "112233",
+                                                                "images/tom.jpg",company2);
+                                                                user8.setCompany(company2);
+                                                                userService.createUser(user8);
+
 
                 userService.findAll().stream()
                                 .map(u -> "saved user: " + u.getName())
