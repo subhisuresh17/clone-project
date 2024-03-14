@@ -91,11 +91,12 @@ public class User {
     public User(@Email @NotEmpty String email,
             @NotEmpty String name,
             @NotEmpty @Length(min = 5) String password,
-            String photo) {
+            String photo,Company Company) {
         this.email = email;
         this.name = name;
         this.password = password;
         this.photo = photo;
+        this.company=company;
     }
 
     public User(@Email @NotEmpty String email,
