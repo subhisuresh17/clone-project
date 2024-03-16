@@ -27,4 +27,6 @@ public interface ProjectService {
 
     boolean isUserPresentInProject(Project project, User user);
 
+    long countCompletedProjects(User user);
+
 }

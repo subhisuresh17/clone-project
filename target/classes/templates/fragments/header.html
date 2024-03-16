@@ -59,7 +59,7 @@
                 <a class="nav-link" href="/company/addCompany"  sec:authorize="hasRole('ROLE_PROADMIN')">ADD Company</a>
             </li>
             <li th:class="${activeTab == 'company-list'}? 'active nav-item mr-4' : 'nav-item mr-4'" sec:authorize="isAuthenticated()">
-                <a class="nav-link" href="/company/showCompanies"  sec:authorize="hasRole('ROLE_PROADMIN')">Company List</a>
+                <a class="nav-link" href="/company/showCompanies"  sec:authorize="hasRole('ROLE_PROADMIN')" style="margin-right: 70px;">Company List</a>
             </li>
               <!-- About -->
               <li th:class="${activeTab == 'about'}? 'active nav-item mr-4' : 'nav-item mr-4'" style="margin-left: -70px;">

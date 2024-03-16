@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.css">
     <link rel="stylesheet" href="css/dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
     <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
 
 </head>
@@ -15,37 +17,21 @@
     <header>
         <!--/*/ <th:block th:include="fragments/header :: header('calendar')"></th:block> /*/-->
     </header>
+  
     <div class="container">
         <h1>Dashboard</h1>
         <div class="kanban-board">
             <div class="column">
-                <div class="column-header">Progress</div>
-                <div class="tasks" id="progress-chart">
-                    <!-- Chart.js will create progress chart here -->
-                </div>
-                <div class="tasks" id="progress-text">
-                    <!-- Progress text will be displayed here -->
-                    <ul>
-                        <li>Progress: <span id="progress-value"></span></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="column">
-                <div class="column-header">Remaining</div>
-                <div class="tasks" id="remaining-chart">
-                    <!-- Chart.js will create remaining tasks chart here -->
-                </div>
-                <div class="tasks" id="remaining-text">
-                    <!-- Remaining tasks text will be displayed here -->
-                    <ul>
-                        <li>Remaining Tasks: <span id="remaining-tasks-value"></span></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="column">
-                <div class="column-header">Completed</div>
-                <div class="tasks" id="completed-chart">
-                    <!-- Chart.js will create completed tasks chart here -->
+                <div class="column-header">Task Board</div>
+                <div class="chart-container">
+                    <!-- Pie Chart -->
+                    <canvas id="pieChart"></canvas>
+                    <div class="tasks" id="progress-text">
+                        <!-- Progress text will be displayed here -->
+                        <ul>
+                            <li>Progress: <span id="progress-value"></span></li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="tasks" id="completed-text">
                     <!-- Completed tasks text will be displayed here -->
@@ -55,10 +41,96 @@
                     </ul>
                 </div>
             </div>
+            <div class="column">
+                <div class="column-header" th:text="${user.name}+ '\'s '+Dashboard"></div>
+                <div class="tasks" id="completed-chart">
+                    <p th:text="'Name: ' + ${user.name}"></p>
+                    <img class="dashboard-image" th:src="${user.photo}"/>
+                    <p th:text="'Email: ' + ${user.email}"></p>
+                    <p th:if="${user.projects != null}"  th:text="'Total Projects: ' + ${#lists.size(user.projects)}" ></p>
+                    <p th:if="${user.tasksOwned != null}"  th:text="'Total Tasks: ' + ${#lists.size(user.tasksOwned)}"></p>
+                    <p th:if="${user.notesOwned != null}"  th:text="'Total Notes: ' + ${#lists.size(user.notesOwned)}"></p>
+                </div>
+              
+            </div>
+            <div class="column">
+                <div class="column-header">Project Chart</div>
+                <div class="chart-container">
+                    <!-- Bar Chart -->
+                    <canvas id="barChart"></canvas>
+                </div>
+                <div class="tasks" id="completed-text">
+                    <!-- Completed tasks text will be displayed here -->
+                    <ul>
+                        <li>Total Projects: <span th:text="${#lists.size(user.projects)}" id="total-tasks-value"></span></li>
+                        <li>Completed Projects: <span th:text="${#lists.size(user.projects.?[completed])}" id="completed-tasks-value"></span></li>
+                        <li>Completed Projects: <span th:text="${#lists.size(user.projects.?[!completed])}" id="completed-tasks-value"></span></li>
+                    </ul>
+                </div>
+            </div>
+         
+           
         </div>
     </div>
- 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <div class="container">
+        <div class="kanban-board">
+            <div class="column">
+                <div class="column-header">Employees In Every Project</div>
+                <div class="chart-container" id="line-chart">
+                    <!-- Line Chart -->
+                    <canvas id="lineChart"></canvas>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="main-container">
+        <div class="container1">
+            <h2>User Tasks</h2>
+            <div class="button-container">
+                <button class="button" onclick="showAllTasks()">All Tasks</button>
+                <button class="button" onclick="showCompletedTasks()">Completed</button>
+                <button class="button" onclick="showIncompleteTasks()">Not Completed</button>
+            </div>
+    
+            <div class="task-container" id="taskContainer">
+                <!-- Task items will be dynamically added here using JavaScript -->
+            </div>
+        </div>
+        <div class="container1 Main-Project-Container">
+            <h2>User Project</h2>
+            <div class="button-container">
+                <button class="button" onclick="showAllProjects()">All Projects</button>
+                <button class="button" onclick="showCompletedProjects()">Completed</button>
+                <button class="button" onclick="showIncompleteProjects()">Not Completed</button>
+            </div>
+        
+            <div class="project-container" id="projectContainer">
+                <!-- Project items will be dynamically added here using JavaScript -->
+            </div>
+
+            <div class="container-users" id="employeeContainer" >
+                <h2 class="mem" style="display: inline;">Project Members <p id="project-title"></p></h2>
+                <h3 class="selection" id="selection">No Project Selected</h3>
+                <div class="employee-container" id="employeeContainerInner">
+                    <!-- Employee items will be dynamically added here using JavaScript -->
+                </div>
+            </div>
+        </div>
+        
+      
+        
+        
+    </div>
+    <div class="container2">
+        <h2>Team Members</h2>
+        <div class="member-container" id="memberContainer">
+            <!-- Team member items will be dynamically added here using JavaScript -->
+        </div>
+    </div>
+    
     <script src="js/dashboard.js"></script>
 </body>
 </html>

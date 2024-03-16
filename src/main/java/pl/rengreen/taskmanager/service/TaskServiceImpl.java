@@ -93,7 +93,6 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public long countCompletedTasks() {
-        // TODO Auto-generated method stub
-        return 5;
+        return taskRepository.countByIsCompleted(true);
     }
 }

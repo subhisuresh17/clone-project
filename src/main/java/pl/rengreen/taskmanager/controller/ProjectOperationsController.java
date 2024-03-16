@@ -51,9 +51,18 @@ public class ProjectOperationsController {
         model.addAttribute("userProjects", userProjects);
         return "views/projects";
     }
-  
-    
 
+    @PostMapping("/markComplete/{projectId}")
+    public String markComplete(@PathVariable("projectId") long projectId) {
+        Project project = projectService.getProjectById(projectId);
+
+        // Toggle project completion status
+        boolean isCompleted = project.isCompleted();
+        project.setCompleted(!isCompleted);
+        projectService.updateProject(project); // Assuming you have an update method in service
+
+        return "redirect:/projects/" + projectId;
+    }
 
     @GetMapping("/{projectId}")
     public String showProjectDetails(Model model, @PathVariable Long projectId, Principal principal) {
@@ -97,13 +106,14 @@ public class ProjectOperationsController {
         model.addAttribute("project", project);
         return "views/projectTasks";
     }
+
     @GetMapping("/yourProjects")
-    public String  getYourProjects(Model model, Principal principal){
-        String email=principal.getName();
-        User user=userService.getUserByEmail(email);
-        List<Project> usersProjectList=user.getProjects();
-        model.addAttribute("projects",usersProjectList);
-        return"views/yourProjects";
+    public String getYourProjects(Model model, Principal principal) {
+        String email = principal.getName();
+        User user = userService.getUserByEmail(email);
+        List<Project> usersProjectList = user.getProjects();
+        model.addAttribute("projects", usersProjectList);
+        return "views/yourProjects";
     }
 
 }

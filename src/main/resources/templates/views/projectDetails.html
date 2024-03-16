@@ -15,8 +15,16 @@
         <h1>Project Details</h1>
         <h2 th:text="${project.name}"></h2>
         <p th:text="${project.description}"></p>
+
         <p>Project Manager: <span th:text="${project.creator.name}"></span></p>
         <p>Due Date: <span th:text="${project.dueDate}"></span></p>
+        <form th:action="@{/projects/markComplete/{projectId}(projectId=${project.id})}" method="post">
+            <label>
+                <input type="checkbox" name="completed" th:checked="${project.completed}" onchange="this.form.submit()">
+                Mark as Completed
+            </label>
+        </form>
+      
     </div>
 
     <div class="actions">
@@ -28,5 +36,7 @@
         <a th:href="@{'/projects/tasks/' + ${project.id}}" class="btn">View Project Tasks</a>
     </div>
 </div>
+
+</script>
 </body>
 </html>

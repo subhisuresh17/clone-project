@@ -27,6 +27,7 @@ public class Project {
     @JoinColumn(name = "creator_id")
     private User creator;
     private LocalDate dueDate;
+    private boolean isCompleted;
     @ManyToOne
     @JoinColumn(name = "company_id")
     private Company company;
@@ -42,7 +43,7 @@ public class Project {
     }
 
     public Project(Long id, String name, String description, User creator, LocalDate dueDate, Company company,
-            List<User> employees, List<Task> tasks) {
+            List<User> employees, List<Task> tasks, boolean isCompleted) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -51,6 +52,7 @@ public class Project {
         this.company = company;
         this.employees = employees;
         this.tasks = tasks;
+        this.isCompleted = isCompleted;
     }
 
     public List<Task> getTasks() {
@@ -115,6 +117,14 @@ public class Project {
 
     public void setEmployees(List<User> employees) {
         this.employees = employees;
+    }
+
+    public boolean isCompleted() {
+        return isCompleted;
+    }
+
+    public void setCompleted(boolean isCompleted) {
+        this.isCompleted = isCompleted;
     }
 
 }

@@ -105,4 +105,8 @@ public class ProjectServiceImpl implements ProjectService {
         return false;
     }
 
+    @Override
+    public long countCompletedProjects(User user) {
+        return projectRepository.countByCreatorAndIsCompletedTrue(user);
+    }
 }

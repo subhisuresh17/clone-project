@@ -8,7 +8,7 @@ body {
     margin: 0 auto;
     padding: 20px;
 }
- 
+
 .kanban-board {
     display: flex;
 }
@@ -52,3 +52,327 @@ body {
     background-color: #f0f0f0;
 }
  
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+.container1 {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.task-list {
+    list-style-type: none;
+    padding: 0;
+}
+.task-item {
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+.project-list {
+    list-style-type: none;
+    padding: 0;
+}
+.project-item {
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+.user-list {
+    list-style-type: none;
+    padding: 0;
+}
+.user-item {
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.container1 {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.task-list, .project-list, .user-list {
+    list-style-type: none;
+    padding: 0;
+}
+.task-item, .project-item, .user-item {
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.container1 {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border:1px black solid;
+}
+.container1 {
+    margin-right: 20px;
+    width: 50%;
+    /* margin-left: -20px; */
+    height: 350px;
+    /* Adjust as needed */
+}
+
+.Main-Project-Container{
+    height: 650px;
+    width:50%;
+    border:1px solid black;
+    display: inline;
+    margin-left: -10px;
+}
+.task-container {
+    max-height: 300px; /* Set a fixed height for the container */
+    overflow-y: auto; /* Enable vertical scrolling if content exceeds container height */
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+.button-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.button:hover {
+    background-color: #0056b3;
+}
+.task-item {
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+.task-container {
+    max-height: 300px; /* Set a fixed height for the container */
+    overflow-y: auto; /* Enable vertical scrolling if content exceeds container height */
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+.button-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.button:hover {
+    background-color: #0056b3;
+}
+.task-item {
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+.project-container {
+    max-height: 300px; /* Set a fixed height for the container */
+    overflow-y: auto; /* Enable vertical scrolling if content exceeds container height */
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+.button-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.button:hover {
+    background-color: #0056b3;
+}
+.project-item {
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+.main-container {
+    display: flex;
+}
+
+
+.task-container{
+    height: 200px;
+}
+.project-container{
+    height: 200px;
+}
+/* Style for the member container */
+#memberContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 10px;
+    max-height: 300px; /* Set a fixed height */
+     /* Add scrolling for overflow */
+  }
+  
+#employeeContainerInner{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 10px;
+    max-height: 300px; /* Set a fixed height */
+    /* overflow-ey: auto; Add scrolling for overflow */
+}
+  /* Style for each member box */
+  .memberBox {
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    width: 300px;
+  }
+  
+  /* Style for member name */
+  .memberName {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  /* Style for member email */
+  .memberEmail {
+    color: #666;
+    font-size: 0.9em;
+  }
+  
+  /* Hover effect */
+  .memberBox:hover {
+    background-color: #eaeaea;
+    cursor: pointer;
+  }
+  
+  .container2 {
+    max-width: 700px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border:1px black solid;
+    margin-right: 10px;
+    /* width: 49%; */
+    /* display: inline; */
+    margin-left: 10px;
+    height: 270px;
+    width: 750px;
+    max-height: 300px; /* Set a fixed height */
+    overflow-y: auto;
+    margin-top: -290px;
+}
+
+.container-users{
+    width: 700px;
+    /* margin: 20px auto; */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border:1px black solid;
+    margin-right: 20px;
+    margin-top:45px;
+  
+    /* margin-left: -10px; */
+    height: 250px;
+    /* max-height: 300px; Set a fixed height */
+    overflow-y: auto;
+}
+.selection{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 55px;
+    color: grey;
+}
+/* .employee-container{
+    width:650px;
+    margin-top:10px;
+} */
+.member-item{
+    margin-top:10px;
+    background-color: #f1e9e9;
+
+}
+/* Other styles for button-container, task-container, project-container */
+.container1{
+    margin-left: 10px;
+}
+.project-item:hover{
+    cursor: pointer;
+    background-color: rgb(231, 227, 227);
+}
+.active{
+    background-color:red;
+}
+.mem{
+    display: inline;
+}
+.mem h3{
+    display: inline;
+}
+#project-title{
+    display: inline;
+}
+
+#barChart{
+    height: 300px;
+    /* width: 100px; */
+}
+
+#lineChart{
+    height: 100px;
+}
+
+.dashboard-image{
+    height: 300px;
+    width: 250px;
+}
