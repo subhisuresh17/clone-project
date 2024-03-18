@@ -65,6 +65,9 @@
               <li th:class="${activeTab == 'about'}? 'active nav-item mr-4' : 'nav-item mr-4'" style="margin-left: -70px;">
                   <a class="nav-link" href="/about">About</a>
               </li>
+              <li th:class="${activeTab == 'chat'}? 'active nav-item mr-4' : 'nav-item mr-4'">
+                <a class="nav-link" href="/chat/messages">Chat</a>
+            </li>
           </ul>
 
           <ul class="navbar-nav profile-nav">

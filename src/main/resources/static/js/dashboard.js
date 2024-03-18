@@ -304,16 +304,25 @@ fetch("/dashboard/allData")
       },
     });
 
-    // Create Bar Chart
     new Chart(document.getElementById("barChart"), {
       type: "bar",
       data: {
         labels: ["Total Projects", "Completed Projects", "Remaining Projects"],
         datasets: [
           {
-            label: "Projects",
-            data: [totalProjects, completedProjects, remainingProjects],
-            backgroundColor: ["#36a2eb", "#ff6384", "#ffcd56"],
+            label: "Total Projects",
+            data: [totalProjects, 0, 0],
+            backgroundColor: "#36a2eb",
+          },
+          {
+            label: "Completed Projects",
+            data: [0, completedProjects, 0],
+            backgroundColor: "#ff6384",
+          },
+          {
+            label: "Remaining Projects",
+            data: [0, 0, remainingProjects],
+            backgroundColor: "#ffcd56",
           },
         ],
       },

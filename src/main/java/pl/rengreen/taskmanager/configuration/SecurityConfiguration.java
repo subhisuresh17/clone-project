@@ -33,7 +33,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                                 .antMatchers("/projects/createProject").hasRole("ADMIN")
                                 .antMatchers("/register", "/", "/login", "/about", "/css/**", "/webjars/**",
                                                 "/forgotPassword/**", "/forgot-password/**", "/reset-password/**",
-                                                "/loading")
+                                                "/loading", "/websocket")
                                 .permitAll()
                                 .antMatchers("/company/**", "/proAdmin/**").hasAnyRole("PROADMIN")
                                 .antMatchers("/tasks/**", "/task/**", "/users", "/user/**",
@@ -56,7 +56,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                                 .logoutSuccessUrl("/login");
 
                 http.csrf().ignoringAntMatchers("/h2-console/**", "/notes/**", "/forgot-password", "/reset-password",
-                                "/company/**", "/projects/**", "/dashboard/**");
+                                "/company/**", "/projects/**", "/dashboard/**", "/websocket");
                 http.headers().frameOptions().sameOrigin();
         }
 
