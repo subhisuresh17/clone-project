@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -84,6 +85,12 @@ public class ChatViewController {
         return map;
     }
 
+    @GetMapping("/senderName/{senderId}")
+    @ResponseBody
+    public ResponseEntity<String> viewName(@PathVariable("senderId") long senderId) {
+        User user = userService.getUserById(senderId);
+        return ResponseEntity.ok(user.getName());
+    }
     // @MessageMapping("/chat.sendMessage")
     // @SendTo("/topic/public")
     // public ChatMessage sendMessages(@Payload ChatMessage chatMessage) {

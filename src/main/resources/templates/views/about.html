@@ -3,44 +3,172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
     <title>About Us</title>
+        <link rel="stylesheet" th:href="@{/css/about.css}">
         <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
-    <link rel="stylesheet" th:href="@{/css/about.css}">
+ 
 </head>
 <body>
-    <header>
-        <!--/*/ <th:block th:include="fragments/header :: header('about')"></th:block> /*/-->
-    </header>
-    <h1>About us</h1>
-    <main>
-        <section class="about-section">
-            <h2>Our Mission</h2>
-            <p>We aim to provide the best project management solution for teams of all sizes, helping them to streamline their workflow and achieve their goals efficiently.</p>
-        </section>
-        <section class="about-section">
-            <h2>Our Team</h2>
-            <div class="team-members">
-                <div class="team-member">
-                    <p>John Doe</p>
-                </div>
-                <div class="team-member">
-                    <p>Jane Smith</p>
-                </div>
-                <div class="team-member">
-                    <p>Michael Johnson</p>
-                </div>
-                <div class="team-member">
-                    <p>Sarah Williams</p>
+   
+                      <!--/*/ <th:block th:include="fragments/header :: header('about')"></th:block> /*/-->
+   
+    <!-- Header -->
+ 
+    <!-- My Likes Grid Section -->
+    <section id="myLikes " class="about" >
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>What We Offer</h2>
+                    <hr class="star-primary">
                 </div>
             </div>
-        </section>
-        <section class="about-section">
-            <h2>Contact Us</h2>
-            <p>If you have any questions or feedback, feel free to reach out to us at <a href="mailto:info@projectmanagementapp.com">info@projectmanagementapp.com</a>.</p>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 Project Management App</p>
-    </footer>
+            <div class="row">
+                <div class="col-sm-4 portfolio-item">
+                    <a href="#" class="portfolio-link text-center" data-toggle="modal">
+                        <img class="calendar feature" src="/images/about/calendar.png"/>
+                    </a>
+                    <article class="portfolio-item-One">
+                        <header>
+                            <h3>Calendar</h3>
+                        </header>
+                        <p>
+                           Stay on top of deadlines and appointments with our seamless calendar integration. Sync your tasks and events across all your devices for ultimate convenience.
+                        </p>
+                    </article>                    
+                </div>
+                <div class="col-sm-4 portfolio-item">
+                    <a href="#" class="portfolio-link text-center" data-toggle="modal">
+                        <img class="kanban feature" src="/images/about/kanban.png"/>
+                    </a>
+                    <article class="portfolio-item-Two">
+                        <header>
+                            <h3>Kanban</h3>
+                        </header>
+                        <p>
+                            Visualize your workflow and track the progress of tasks from start to finish with our intuitive Kanban boards. Customize your boards to fit your unique workflow and collaborate with ease.
+                        </p>
+                    </article>                    
+                </div>
+                <div class="col-sm-4 portfolio-item">
+                    <a href="#" class="portfolio-link text-center" data-toggle="modal">
+                        <img class="dashboard feature" src="/images/about/dashboard.png"/>
+ 
+                    </a>
+                    <article class="portfolio-item-Three">
+                        <header>
+                            <h3>Dashboard</h3>
+                        </header>
+                        <p>
+                            The dashboard provides users with a centralized hub where you can gain an overview of all ongoing tasks, projects, and deadlines at a glance.
+                        </p>
+                    </article>                    
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+ 
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">            
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>About Us</h2>
+                    <hr class="star-primary">
+                </div>
+            </div>
+            <div class="row">
+                <p>
+                   
+Welcome to Pro Collab, where we're redefining collaboration and productivity. Our mission is clear: to empower teams of all sizes to reach their goals effortlessly. With a suite of powerful tools tailored to your needs, we simplify workflows and enhance communication, ensuring your success in today's dynamic business landscape. What sets us apart? At Pro Collab, reliability, flexibility, and innovation are at the core of everything we do. Built on cutting-edge technology and backed by a team of experts, our platform prioritizes security and data privacy, guaranteeing your information is always safe. And with regular updates, we're committed to evolving alongside your team, meeting your needs every step of the way. Choose [Project Name] and experience a new era of collaboration.Backed by cutting-edge technology and unwavering dedication, Pro Collab is your key to unlocking productivity and achieving your goals with ease. Join us today and experience the future of collaboration firsthand.
+                </p>
+                       
+                   
+                   
+                   
+                   
+                </div>              
+            <!-- </div>
+            <div class="text-center btn-style double-line">
+                <div class="btn-styleLine">
+                    <a href="#" class="btn btn-lg btn-outline">
+                        <i class="fa fa-fw fa-download"></i> Download Resume
+                    </a>
+                </div>
+            </div> -->
+               
+    </section>
+ 
+    <!-- Contact Section -->
+    <section id="contact">
+ 
+        <h1 class="section-header">Contact</h1>
+       
+        <div class="contact-wrapper">
+       
+        <!-- Left contact page -->
+         
+          <form id="contact-form" class="form-horizontal" role="form">
+             
+            <div class="form-group">
+              <div class="col-sm-12">
+                <input type="text" class="form-control" id="name" placeholder="NAME" name="name" value="" required>
+              </div>
+            </div>
+     
+            <div class="form-group">
+              <div class="col-sm-12">
+                <input type="email" class="form-control" id="email" placeholder="EMAIL" name="email" value="" required>
+              </div>
+            </div>
+     
+            <textarea class="form-control" rows="10" placeholder="MESSAGE" name="message" required></textarea>
+           
+            <button class="btn btn-primary send-button" id="submit" type="submit" value="SEND">
+              <div class="alt-send-button">
+                <i class="fa fa-paper-plane"></i><span class="send-text">SEND</span>
+              </div>
+           
+            </button>
+           
+          </form>
+         
+        <!-- Left contact page -->
+         
+            <div class="direct-contact-container">
+     
+              <ul class="contact-list">
+                <li class="list-item"><i class="fa fa-map-marker fa-2x"><span class="contact-text place">Banglore, Karnataka</span></i></li>
+               
+                <li class="list-item"><i class="fa fa-phone fa-2x"><span class="contact-text phone"><a href="tel:1-212-555-5555" title="Give me a call">(212) 555-2368</a></span></i></li>
+               
+                <li class="list-item"><i class="fa fa-envelope fa-2x"><span class="contact-text gmail"><a href="mailto:#" title="Send me an email">procollab@support.com</a></span></i></li>
+               
+              </ul>
+     
+              <hr>
+              <div class="social-media-container">
+                <ul class="social-media-list">
+                  <li><a  href="#"><img class="avatarImg" src="images/avatars/avatar1.jpg" alt="Teammate 1"></a></li>
+                  <li><a  href="#"><img class="avatarImg" src="images/avatars/avatar2.jpg" alt="Teammate 2"></a></li>
+                  <li><a  href="#"><img class="avatarImg" src="images/avatars/avatar3.jpg" alt="Teammate 3"></a></li>
+                  <li><a  href="#"><img class="avatarImg" src="images/avatars/avatar6.webp" alt="Teammate 4"></a></li>
+                  <!-- Add more team members as needed -->
+                </ul>
+              </div>
+             
+              <hr>
+     
+              <div class="copyright">&copy; Pro Collab</div>
+     
+            </div>
+         
+        </div>
+       
+      </section>  
+ 
+ 
 </body>
 </html>

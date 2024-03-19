@@ -1,6 +1,8 @@
 let stompClient = null;
 let recipientId;
 let senderId;
+let senderName;
+let recipientName;
 // Connect to WebSocket endpoint
 function connect() {
   const socket = new SockJS("/ws");
@@ -19,11 +21,25 @@ function showMessage(message) {
   const chatHistoryElement = document.getElementById("chatHistory");
   const messageElement = document.createElement("div");
   messageElement.classList.add("chat-message"); // Add the chat message class
-  const senderName = message.sender;
-  const messageContent = message.content;
-  const formattedTimestamp = new Date(message.timestamp).toLocaleString(); // Format timestamp
-  messageElement.innerHTML = `<strong>${senderName}</strong>: ${messageContent} <span class="timestamp">(${formattedTimestamp})</span>`;
-  chatHistoryElement.appendChild(messageElement);
+  let senderId = message.sender;
+
+  fetch(`/chat/senderName/${senderId}`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.text(); // Since the response is a plain string, use response.text() to read it
+    })
+    .then((data) => {
+      const senderName = data;
+      const messageContent = message.content;
+      const formattedTimestamp = new Date(message.timestamp).toLocaleString(); // Format timestamp
+      messageElement.innerHTML = `<strong>${senderName} (${formattedTimestamp}):</strong> ${messageContent}`;
+      chatHistoryElement.appendChild(messageElement);
+    })
+    .catch((error) => {
+      console.error("Error fetching sender name:", error);
+    });
 }
 
 // Function to handle incoming messages received from WebSocket
@@ -58,10 +74,12 @@ function sendMessage() {
 }
 // Function to fetch chat history for a specific user
 // Function to fetch chat history for a specific user
-function fetchChatHistory(userId, loggedId) {
+function fetchChatHistory(userId, loggedId, sName, rName) {
   // Make an AJAX request to fetch chat history for the specified user
   recipientId = userId;
   senderId = loggedId;
+  senderName = sName;
+  recipientName = rName;
   fetch(`/chat/messages/${recipientId}`)
     .then((response) => response.json())
     .then((data) => {

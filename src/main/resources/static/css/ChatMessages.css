@@ -199,8 +199,18 @@
 }
 .chat-container{
   width: 100%;
+  margin-top:20px;
 }
 #chatHistory{
   width:80%;
   margin-left: 300px;
+  margin-top:20px;
+}
+#messageInput{
+  margin-bottom: 20px;
+  width:500px;
+}
+
+.sendButton{
+  margin-bottom: 20px;
 }

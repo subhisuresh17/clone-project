@@ -1,0 +1,62 @@
+.sidebar {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #a5a2a2;
+    padding-top: 20px;
+}
+
+/* Style the sidebar links */
+.sidebar a {
+    padding: 10px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+}
+
+/* On mouse-over */
+.sidebar a:hover {
+    background-color: #555;
+}
+.sidebar {
+    width: 200px;
+    background-color: #f4f4f4;
+    padding: 20px;
+  }
+  
+  .sidebar h2 {
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
+  
+  #employeeList {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  #employeeList li {
+    margin-bottom: 10px;
+  }
+  
+  #employeeList li a {
+    display: block;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.3s ease;
+  }
+  
+  #employeeList li a:hover {
+    background-color: #ddd;
+  }
+  #localVideoContainer{
+    margin-left: 300px;
+  }
+  #remoteVideoContainer{
+    margin-left: 300px;
+
+  }

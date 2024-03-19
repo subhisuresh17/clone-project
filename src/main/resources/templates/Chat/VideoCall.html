@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Calling</title>
+    <link rel="stylesheet" th:href="@{/css/videoCall.css}">
+            <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+
+</head>
+<body>
+    <header>
+        <!--/*/ <th:block th:include="fragments/header :: header('video')"></th:block> /*/-->
+    </header>
+    <h1>Video Calling</h1>
+    <div class="sidebar">
+        <h2>Employees</h2>
+        <ul id="employeeList">
+            <li th:if="${user.id!=signedIn.id}"  th:each="user : ${Users}">
+                <a th:text="${user.name}" th:onclick="'startVideoCall(' + ${user.id} + ')'" href="javascript:void(0)">Start Video Call</a>
+            </li>
+        </ul>
+    </div>
+    <div id="localVideoContainer">
+        <h2>You</h2>
+        <video id="localVideo" autoplay muted></video>
+    </div>
+    <div id="remoteVideoContainer">
+        <h2>Remote User</h2>
+        <video id="remoteVideo" autoplay></video>
+    </div>
+    <script th:src="@{/js/videoCall.js}"></script>
+</body>
+</html>

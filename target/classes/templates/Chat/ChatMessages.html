@@ -12,13 +12,13 @@
 </head>
 <body>
     <header>
-        <!--/*/ <th:block th:include="fragments/header :: header('assign-tasks')"></th:block> /*/-->
+        <!--/*/ <th:block th:include="fragments/header :: header('chat')"></th:block> /*/-->
     </header>
     <div class="sidebar">
         <h2>Employees</h2>
         <ul id="employeeList">
             <li th:if="${user.id!=signedIn.id}"  th:each="user : ${Users}">
-                <a  th:onclick="'fetchChatHistory(' + ${user.id} + ', ' + ${signedIn.id} + ')'" th:text="${user.name}"></a>
+                <a  th:onclick="'fetchChatHistory(' + ${user.id} + ', ' + ${signedIn.id} + ',)'" th:text="${user.name}"></a>
             </li>
         </ul>
     </div>
@@ -29,7 +29,7 @@
         </div>
         <div class="message-input">
             <input type="text" id="messageInput" placeholder="Type a message...">
-            <button onclick="sendMessage()">Send</button>
+            <button class="sendButton" onclick="sendMessage()">Send</button>
         </div>
     </div>
 
