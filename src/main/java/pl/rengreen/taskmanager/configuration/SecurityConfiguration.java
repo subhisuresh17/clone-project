@@ -35,6 +35,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                                                 "/forgotPassword/**", "/forgot-password/**", "/reset-password/**",
                                                 "/loading", "/websocket")
                                 .permitAll()
+                                .antMatchers("/project/projectTasks/**").hasAnyRole("ADMIN", "USER", "SUPERADMIN")
                                 .antMatchers("/company/**", "/proAdmin/**").hasAnyRole("PROADMIN")
                                 .antMatchers("/tasks/**", "/task/**", "/users", "/user/**",
                                                 "/projects/**", "/dashboard/**", "/notes", "/notes/**")

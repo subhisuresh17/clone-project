@@ -1,5 +1,6 @@
 package pl.rengreen.taskmanager.controller;
 
+import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestWrapper;
 import org.springframework.stereotype.Controller;
@@ -185,6 +186,14 @@ public class TaskController {
     public String setTaskNotCompleted(@PathVariable Long id) {
         taskService.setTaskNotCompleted(id);
         return "redirect:/tasks";
+    }
+
+    @GetMapping("/projects/projectTasks/{projectId}/taskDetails/{taskId}")
+    public String taskDetails(@PathVariable("projectId") long projectId, @PathVariable("taskId") long taskId,
+            Model model) {
+        Task task = taskService.getTaskById(taskId);
+        model.addAttribute("Task", task);
+        return "views/taskDetails";
     }
 
 }
