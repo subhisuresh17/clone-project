@@ -42,7 +42,7 @@
                   <div class="dropdown-menu" aria-labelledby="combinedDropdown">
                     <a class="dropdown-item" href="/assignment" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_SUPERADMIN')">Assign Tasks</a>
                     <a class="dropdown-item" href="/superAdmin/assignManager" sec:authorize="hasRole('ROLE_SUPERADMIN')">Assign Manager</a>
-                      <a class="dropdown-item" href="/tasks" sec:authorize="hasRole('ROLE_ADMIN')">Tasks List</a>
+                      <a class="dropdown-item" href="/tasks" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_SUPERADMIN')">Tasks List</a>
                       <a class="dropdown-item" href="/users" sec:authorize="!hasRole('ROLE_PROADMIN')">Employees List</a>
                       <a class="dropdown-item" href="/calendar" sec:authorize="!hasRole('ROLE_PROADMIN')">Calendar</a>
                       <a class="dropdown-item" href="/projects/projectList" sec:authorize="!hasRole('ROLE_PROADMIN')">Project List</a>
