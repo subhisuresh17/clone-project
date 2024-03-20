@@ -18,7 +18,7 @@
         <!--/*/ <th:block th:include="fragments/header :: header('calendar')"></th:block> /*/-->
     </header>
   
-    <div class="container">
+    <div class="container" id="main-Container">
         <h1>Dashboard</h1>
         <div class="kanban-board">
             <div class="column">
@@ -72,13 +72,21 @@
            
         </div>
     </div>
-    <div class="container">
-        <div class="kanban-board">
-            <div class="column">
+    <div class="container" id="line-Chart">
+        <div class="kanban-board" id="taskColumn">
+            <div class="column" >
                 <div class="column-header">Employees In Every Project</div>
                 <div class="chart-container" id="line-chart">
-                    <!-- Line Chart -->
                     <canvas id="lineChart"></canvas>
+                </div>
+            </div>
+
+        </div>
+        <div class="kanban-board">
+            <div class="column">
+                <div class="column-header">Tasks In Every Project</div>
+                <div class="chart-container" id="line-chart">
+                    <canvas id="lineChartTasks"></canvas>
                 </div>
             </div>
 

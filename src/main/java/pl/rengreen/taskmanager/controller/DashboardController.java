@@ -91,11 +91,14 @@ public class DashboardController {
 
         // Count total users in every project
         Map<String, Integer> usersInProjects = new HashMap<>();
+        Map<String,Integer> tasksInProjects=new HashMap<>();
         List<Project> projects = user.getProjects();
         for (Project project : projects) {
             String projectId = project.getName();
             int totalUsersInProject = projectService.getAllProjectEmployees(project.getId()).size();
+            int tasksInProject=project.getTasks().size();
             usersInProjects.put(projectId, totalUsersInProject);
+            tasksInProjects.put(projectId,tasksInProject);
         }
 
         dashboardData.put("totalTasks", totalTasks);
@@ -106,6 +109,7 @@ public class DashboardController {
         dashboardData.put("completedProjects", completedProjects);
         dashboardData.put("remainingProjects", remainingProjects);
         dashboardData.put("usersInProjects", usersInProjects);
+        dashboardData.put("tasksInProjects", tasksInProjects);
 
         return dashboardData;
     }

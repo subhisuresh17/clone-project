@@ -283,6 +283,7 @@ fetch("/dashboard/allData")
     const totalTasks = data.totalTasks;
     const taskProgress = data.taskProgress;
     const completedProjects = data.completedProjects;
+    const tasksInProject=data.tasksInProjects;
 
     // Create Pie Chart
     new Chart(document.getElementById("pieChart"), {
@@ -366,4 +367,39 @@ fetch("/dashboard/allData")
         },
       },
     });
+    const projectLabelsTasks = Object.keys(tasksInProject).map((name) => `${name}`);
+    const projectDataTasks = Object.values(tasksInProject);
+    new Chart(document.getElementById("lineChartTasks"), {
+      type: "line",
+      data: {
+        labels: projectLabelsTasks,
+        datasets: [
+          {
+            label: "Users in Projects",
+            data: projectDataTasks,
+            borderColor: "#ff6384",
+            fill: false,
+          },
+        ],
+      },
+      options: {
+        title: {
+          display: true,
+          text: "Users in Projects",
+        },
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                min: 0,
+              },
+            },
+          ],
+        },
+      },
+    });
   });
+
+
+
+

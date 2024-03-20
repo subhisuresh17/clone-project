@@ -1,36 +1,39 @@
-# Pro-Collab
-First Add this code into mysql and run the mysql file 
-create database Pro_Collab;
-use Pro_Collab;
-CREATE TABLE role (
-    role_id INT AUTO_INCREMENT PRIMARY KEY,
-    role VARCHAR(255) NOT NULL
-);
-CREATE TABLE user (
-    user_id INT AUTO_INCREMENT PRIMARY KEY,
-    email VARCHAR(255) NOT NULL,
-    name VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    photo VARCHAR(255)
-);
-CREATE TABLE user_role (
-    user_id INT,
-    role_id INT,
-    PRIMARY KEY (user_id, role_id),
-    FOREIGN KEY (user_id) REFERENCES user(user_id),
-    FOREIGN KEY (role_id) REFERENCES role(role_id)
-);
+# Project Title: Employee Management System
 
-CREATE TABLE task (
-    task_id INT AUTO_INCREMENT PRIMARY KEY,
-    creator_name VARCHAR(255) NOT NULL,
-    date DATE NOT NULL,
-    description TEXT NOT NULL,
-    is_completed BOOLEAN NOT NULL,
-    name VARCHAR(255) NOT NULL,
-    owner_id INT,
-    FOREIGN KEY (owner_id) REFERENCES user(user_id)
-);
+## Overview
+The Employee Management System is a web-based application developed using Spring Boot and Angular. It provides a comprehensive platform for managing employees, tasks, projects, and company details within an organization. The system includes features such as user authentication, project management, task assignment, real-time messaging, and video conferencing.
 
+## Key Features
+- **User Authentication:** Secure login and registration system for employees with role-based access control.
+- **Project Management:** Create, edit, and manage projects within the organization.
+- **Task Assignment:** Assign tasks to employees and track their progress.
+- **Real-time Messaging:** Integrated chat system for communication between users.
+- **Video Conferencing:** Enable video calls between employees for remote collaboration.
+- **Data Visualization:** Display graphical representations of employee distribution, project progress, and task completion using charts and graphs.
 
+## Technologies Used
+- **Frontend:** Thymeleaf, HTML5, CSS3, JavaScript
+- **Backend:** Spring Boot, Java, Spring Data JPA, Spring Security
+- **Database:** MySQL, H2 Database (for testing)
+- **Real-time Communication:** WebSockets
+- **Video Conferencing:** WebRTC
+- **Deployment:** Docker, Kubernetes (optional)
 
+## Installation and Usage
+1. Clone the repository: `git clone https://github.com/your-username/employee-management-system.git`
+2. Install dependencies: `npm install` (for frontend) and `mvn clean install` (for backend)
+3. Configure the database connection in `application.properties` file.
+4. Build and run the backend application.
+5. Run the frontend application using `ng serve`.
+6. Access the application at `http://localhost:1111`.
+
+## Contribution Guidelines
+- Fork the repository, create a new branch, and make changes.
+- Commit your changes with descriptive messages.
+- Submit a pull request detailing the changes made.
+
+## License
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+
+## Acknowledgements
+- This project was inspired by [similar projects](#) and aims to provide a user-friendly interface for managing employees and tasks.

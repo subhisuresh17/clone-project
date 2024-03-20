@@ -376,3 +376,26 @@ h1 {
     height: 300px;
     width: 250px;
 }
+.kanban-board{
+    width: 900px;
+}
+#line-Chart{
+    width: 100%;
+    display: flex;
+}
+#main-Container{
+    margin-left: 40px;
+}
+.column{
+    width:600px;
+}
+#taskColumn{
+    margin-left: -80px;
+}
+  /* Add other styling as needed */
+.container2{
+    width:48%;
+}
+#employeeContainer{
+    width: 100%;
+}
