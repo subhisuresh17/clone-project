@@ -27,7 +27,7 @@
                 <td th:text="${task.name}"></td>
                 <td th:text="${task.description}"></td>
                 <td th:text="${task.date}"></td>
-                <td><a th:href="@{/projects/{projectId}/taskDetails/{taskId}(projectId=${project.id},taskId=${task.id})}">Details</a></td>
+                <td><a th:href="@{/projects/projectTasks/{projectId}/taskDetails/{taskId}(projectId=${project.id},taskId=${task.id})}">Details</a></td>
             </tr>
             </tbody>
         </table>
