@@ -21,6 +21,7 @@ import pl.rengreen.taskmanager.service.UserService;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.Iterator;
 import java.util.List;
 
 @Controller
@@ -59,20 +60,24 @@ public class TaskController {
             SecurityContextHolderAwareRequestWrapper request) {
         String email = principal.getName();
         User signedUser = userService.getUserByEmail(email);
-        boolean isAdminSigned = request.isUserInRole("ROLE_ADMIN");
+        boolean isAdminSigned = request.isUserInRole("ROLE_ADMIN") || request.isUserInRole("Role_SUPERADMIN");
         List<User> allUsers = companyService.getCompanyUsers(signedUser.getCompany().getId());
         List<Task> allTask = companyService.getAllTaskByCompany(signedUser.getCompany().getId());
         List<Project> usersProjects = userService.getUserProjects(signedUser);
-        for (Task t : allTask) {
+
+        // Using iterator to avoid ConcurrentModificationException
+        Iterator<Task> taskIterator = allTask.iterator();
+        while (taskIterator.hasNext()) {
+            Task t = taskIterator.next();
             if (t.getProject() != null && !usersProjects.contains(t.getProject())) {
-                allTask.remove(t);
+                taskIterator.remove();
             }
         }
+
         model.addAttribute("tasks", allTask);
         model.addAttribute("users", allUsers);
         model.addAttribute("signedUser", signedUser);
         model.addAttribute("isAdminSigned", isAdminSigned);
-
     }
 
     @GetMapping("/task/create")
