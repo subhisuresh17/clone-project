@@ -14,14 +14,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import pl.rengreen.taskmanager.model.Project;
 import pl.rengreen.taskmanager.model.Task;
+import pl.rengreen.taskmanager.model.TaskHistory;
 import pl.rengreen.taskmanager.model.User;
 import pl.rengreen.taskmanager.service.CompanyService;
 import pl.rengreen.taskmanager.service.ProjectService;
+import pl.rengreen.taskmanager.service.TaskHistoryService;
 import pl.rengreen.taskmanager.service.TaskService;
 import pl.rengreen.taskmanager.service.UserService;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -32,14 +37,16 @@ public class TaskController {
     private UserService userService;
     private CompanyService companyService;
     private ProjectService projectService;
+    private TaskHistoryService taskHistoryService;
 
     @Autowired
     public TaskController(TaskService taskService, UserService userService, CompanyService companyService,
-            ProjectService projectService) {
+            ProjectService projectService,TaskHistoryService taskHistoryService) {
         this.taskService = taskService;
         this.userService = userService;
         this.companyService = companyService;
         this.projectService = projectService;
+        this.taskHistoryService=taskHistoryService;
     }
 
     @GetMapping("/tasks")
@@ -192,8 +199,21 @@ public class TaskController {
     public String taskDetails(@PathVariable("projectId") long projectId, @PathVariable("taskId") long taskId,
             Model model) {
         Task task = taskService.getTaskById(taskId);
-        model.addAttribute("Task", task);
+        Project  project = projectService.getProjectById(projectId);
+        List<TaskHistory> taskHistory=taskHistoryService.findByTaskId(taskId);
+        Collections.sort(taskHistory, Comparator.comparing(TaskHistory::getTimestamp).reversed());
+        model.addAttribute("task", task);
+        model.addAttribute("project", project);
+        model.addAttribute("taskHistory",taskHistory);
         return "views/taskDetails";
     }
-
+    
+    @GetMapping("/tasks/yourTasks")
+    public String yourTasks(Model model,Principal principal){
+        String email=principal.getName();
+        User user=userService.getUserByEmail(email);
+        List<Project>  projects=user.getProjects();
+        model.addAttribute("projects", projects);
+        return "views/myTasks";
+    }
 }

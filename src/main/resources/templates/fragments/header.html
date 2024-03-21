@@ -48,6 +48,7 @@
                       <a class="dropdown-item" href="/projects/projectList" sec:authorize="!hasRole('ROLE_PROADMIN')">Project List</a>
                       <a class="dropdown-item" href="/notes" sec:authorize="!hasRole('ROLE_PROADMIN')">Notes List</a>
                       <a class="dropdown-item" href="/projects/yourProjects" sec:authorize="!hasRole('ROLE_SUPERADMIN') and !hasRole('ROLE_PROADMIN')" >Your Projects</a>
+                      <a class="dropdown-item" href="/tasks/yourTasks" sec:authorize="!hasRole('ROLE_SUPERADMIN') and !hasRole('ROLE_PROADMIN')" >Your Tasks</a>
 
                   </div>
               </li>

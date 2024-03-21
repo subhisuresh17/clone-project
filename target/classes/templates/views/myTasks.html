@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Project Tasks</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/projectTasks.css}">
+        <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+
+</head>
+<body>
+<header>
+    <!--/*/ <th:block th:include="fragments/header :: header('assign-tasks')"></th:block> /*/-->
+</header>
+<div class="container">
+    <div class="task-list">
+        <h1>Tasks of User</h1>
+        <!-- Check if projects is not null -->
+        <th:block th:if="${projects != null}">
+            <!-- Iterate over each project -->
+            <div th:each="project : ${projects}">
+                <h2 th:text="${project.name}"></h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Date</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Iterate over each task in the project -->
+                        <tr th:each="task : ${project.tasks}">
+                            <td th:text="${task.name}"></td>
+                            <td th:text="${task.description}"></td>
+                            <td th:text="${task.date}"></td>
+                            <!-- Use the correct URL syntax for task details -->
+                            <td>
+                                <a th:href="@{'/projects/projectTasks/' + ${project.id} + '/taskDetails/' + ${task.id}}">
+                                    Details
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </th:block>
+    </div>
+</div>
+</body>
+</html>

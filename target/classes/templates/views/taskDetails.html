@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pro Collab</title>
+    <title>Task Details</title>
+    <link rel="stylesheet" th:href="@{/css/taskThread.css}">
                 <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
 
 </head>
@@ -11,8 +11,36 @@
     <header>
         <!--/*/ <th:block th:include="fragments/header :: header('about')"></th:block> /*/-->
     </header>
-
-    <h1>Task Details</h1>
-    <h1 th:text="${Task.name}"></h1>
+    <div class="container">
+        <h1 class="heading">Task Details</h1>
+        <div class="task-info">
+            <h2>Task Information</h2>
+            <p><strong>Task Name:</strong> <span th:text="${task.name}"></span></p>
+            <p><strong>Description:</strong> <span th:text="${task.description}"></span></p>
+            <p><strong>Due Date:</strong> <span th:text="${task.date}"></span></p>
+            <p><strong>Current Status:</strong> <span th:text="${task.action}"></span></p>
+        </div>
+        <div class="task-history">
+            <h2>Task History</h2>
+            <table class="history-table">
+                <thead>
+                    <tr>
+                        <th>Action</th>
+                        <th>User</th>
+                        <th>Timestamp</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="history : ${taskHistory}">
+                        <td th:if="${history.user != null}" th:text="${history.user.name}"></td>
+                        <td th:if="${history.user == null}" >Not  Assigned Yet</td>
+                        <td th:text="${history.action}"></td>
+                        <td th:text="${history.timestamp}"></td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
 </body>
 </html>

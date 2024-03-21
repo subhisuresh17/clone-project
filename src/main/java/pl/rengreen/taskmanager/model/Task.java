@@ -27,6 +27,7 @@ public class Task {
     private LocalDate date;
     private boolean isCompleted;
     private String creatorName;
+    private String action;
     @ManyToOne
     @JoinColumn(name = "OWNER_ID")
     private User owner;
@@ -190,5 +191,13 @@ public class Task {
 
     public void setCreatedUser(User createdUser) {
         this.createdUser = createdUser;
+    }
+
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
     }
 }
