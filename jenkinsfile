@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/your-username/your-repo.git' // Replace with your Git repository URL
+            }
+        }
+
+        stage('Build WAR') {
+            steps {
+                script {
+                    // Use Maven to build the WAR file
+                    sh 'mvn clean package'
+                }
+                archiveArtifacts artifacts: '**/target/*.war', fingerprint: true
+            }
+        }
+
+        stage('Deploy to Tomcat') {
+            steps {
+                // Deploy WAR file to Tomcat using the Deploy to Container plugin
+                deploy adapters: [tomcat8(credentialsId: 'tomcat-credentials-id', url: 'http://tomcat-host:8080/manager/text', path: '/myapp', war: '**/*.war')]
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Deployment successful!'
+        }
+        failure {
+            echo 'Deployment failed!'
+        }
+    }
+}
